@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa Ridge High School NJROTC - Grizzly Company</title>
+    <style>
+        :root {
+            --navy-main: #002147;
+            --navy-dark: #001530;
+            --slate-bg: #f1f5f9;
+            --slate-card: #ffffff;
+            --border-color: #cbd5e1;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --accent-blue: #1e3a8a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--slate-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Top Header Lockup */
+        header {
+            background-color: var(--navy-dark);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid var(--navy-main);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .header-logo {
+            height: 75px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-title h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .header-title p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .instructor-contacts {
+            text-align: right;
+            font-size: 0.85rem;
+            border-left: 2px solid #334155;
+            padding-left: 1.5rem;
+        }
+
+        .instructor-contacts strong {
+            display: block;
+            color: #e2e8f0;
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-contacts a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        .instructor-contacts a:hover {
+            text-decoration: underline;
+        }
+
+        /* Layout Structure */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        section {
+            background: var(--slate-card);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--navy-main);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            color: var(--navy-main);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Leadership Roster Grid */
+        .roster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .roster-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+        }
+
+        .roster-card .role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--navy-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .roster-card .name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 0.2rem;
+        }
+
+        /* Color Guard Highlight Section */
+        .colorguard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .cg-card {
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+        }
+
+        .cg-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cg-card .caption {
+            padding: 0.85rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: #f8fafc;
+        }
+
+        /* Raiders Competition Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border: 1px solid var(--border-color);
+            background: #ffffff;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .desc {
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            background: #f8fafc;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Study Guide Dual Columns */
+        .study-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .study-container {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .instructor-contacts {
+                text-align: center;
+                border-left: none;
+                border-top: 1px solid #334155;
+                padding-left: 0;
+                padding-top: 1rem;
+            }
+        }
+
+        .study-block {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+        }
+
+        .study-block h3 {
+            font-size: 1.05rem;
+            color: var(--navy-main);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .study-list {
+            list-style-type: decimal;
+            padding-left: 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        .study-list li {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .values-list {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 0.85rem;
+        }
+
+        .values-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .values-list strong {
+            color: var(--navy-main);
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            background-color: var(--navy-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            border-top: 4px solid var(--navy-main);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo-group">
+                <img src="Untitled design (18).jpg" alt="Navy JROTC Seal" class="header-logo">
+                <img src="Add a heading (16).png" alt="Mesa Ridge Grizzly Bear Logo" class="header-logo">
+                <div class="header-title">
+                    <h1>Mesa Ridge High School</h1>
+                    <p>NJROTC Grizzly Company — Colorado Springs, CO</p>
+                </div>
+            </div>
+            <div class="instructor-contacts">
+                <strong>Naval Science Instructors</strong>
+                <p>SNSI LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org">tidwellc@wsd3.org</a></p>
+                <p>NSI SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org">pearsonandrew5@wsd3.org</a></p>
+                <p style="margin-top: 0.25rem; color: #cbd5e1;">Rooms 112 & 114</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Cadet Leadership Roster -->
+        <section>
+            <div class="section-header">
+                <h2>Cadet Leadership & Staff</h2>
+            </div>
+            <div class="roster-grid">
+                <div class="roster-card">
+                    <div class="role">Company Commander (CO)</div>
+                    <div class="name">LCDR Tristan Biber</div>
+                </div>
+                <div class="roster-card">
+                    <div class="role">Executive Officer (XO)</div>
+                    <div class="name">Lt. Ontivaros</div>
+                </div>
+                <div class="roster-card">
+                    <div class="role">Operations Officer (OPS)</div>
+                    <div class="name">LTJG Jordan Amposen-Johnson</div>
+                </div>
+                <div class="roster-card">
+                    <div class="role">Administrative Officer (ADMIN)</div>
+                    <div class="name">ENS Bailey</div>
+                </div>
+                <div class="roster-card">
+                    <div class="role">Supply Officer (SUPPLY)</div>
+                    <div class="name">ENS Ward</div>
+                </div>
+                <div class="roster-card">
+                    <div class="role">Command Master Chief (CMC)</div>
+                    <div class="name">SCPO Sofia Childers</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Guard Feature Section -->
+        <section>
+            <div class="section-header">
+                <h2>Grizzly Company Color Guard</h2>
+            </div>
+            <div class="colorguard-grid">
+                <div class="cg-card">
+                    <img src="_DSC2807.jpg" alt="Color Guard National Colors Detail">
+                    <div class="caption">National Colors detail in formation prior to athletic presentation.</div>
+                </div>
+                <div class="cg-card">
+                    <img src="_DSC2827.jpg" alt="Color Guard Presentation Detail">
+                    <div class="caption">Color Guard team in Service Khaki uniform configuration.</div>
+                </div>
+                <div class="cg-card">
+                    <img src="_DSC2789.jpg" alt="Full Color Guard Detail on Field">
+                    <div class="caption">Full 4-person detail presenting colors on the stadium field.</div>
+                </div>
+                <div class="cg-card">
+                    <img src="_DSC2823.jpg" alt="Color Guard Tunnel Walkout">
+                    <div class="caption">Color Guard detail entering the arena for ceremonial presentation.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Raiders 2nd Competition Gallery (Fort Carson) -->
+        <section>
+            <div class="section-header">
+                <h2>2026–2027 Raiders Season — Kit Carson Competition</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">2nd Raiders Competition of the Season at Fort Carson Army Base (Home of the 4th Infantry Division)</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="IMG_2813.HEIC" alt="Raiders Tire Flip Event">
+                    <div class="desc">Kit Carson Competition — Heavy tire flip team event at Fort Carson.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2777.HEIC" alt="Raiders Obstacle Course">
+                    <div class="desc">Kit Carson Competition — Cadets executing obstacle course movement.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2787.HEIC" alt="Physical Fitness Event">
+                    <div class="desc">Kit Carson Competition — Team endurance and conditioning discipline.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2831.HEIC" alt="Team Movement Course">
+                    <div class="desc">Kit Carson Competition — Tactical team movement and sprint phase.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2894.PNG" alt="Wall Climb Event">
+                    <div class="desc">Kit Carson Competition — High wall obstacle vertical scaling event.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2900.PNG" alt="Physical Training Grid">
+                    <div class="desc">Kit Carson Competition — Cadets executing functional workout set.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2912.PNG" alt="Team Logistics Carry">
+                    <div class="desc">Kit Carson Competition — Heavy equipment haul course at Fort Carson.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2916.PNG" alt="Raiders Team Formation">
+                    <div class="desc">Kit Carson Competition — Grizzly Company Raiders team at 4th ID Base.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_2918.PNG" alt="Endurance Run Event">
+                    <div class="desc">Kit Carson Competition — Final team endurance run finish line push.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_5851.JPG" alt="Raiders Field Drill">
+                    <div class="desc">Grizzly Company Raiders unit preparation and staging.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_5858.JPG" alt="Team Conditioning">
+                    <div class="desc">Cadet physical conditioning and strength progression drills.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_6577.JPG" alt="Cadet Fitness Testing">
+                    <div class="desc">Raiders athletic standard qualification and evaluation.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_6587.JPG" alt="Obstacle Course Training">
+                    <div class="desc">Agility and balance course completion during physical training.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_6589.JPG" alt="Team Cohesion Exercise">
+                    <div class="desc">Grizzly Company Raiders squad coordination and team building.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG_6596.JPG" alt="Event Debrief">
+                    <div class="desc">Raiders team post-competition evaluation and de-briefing.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="_DSC2173.jpg" alt="Company Staging">
+                    <div class="desc">Mesa Ridge NJROTC cadets staged for athletic movement.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="_DSC2181.jpg" alt="Individual Physical Training">
+                    <div class="desc">Cadet executing pull-ups during Raider team qualification.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cadet Knowledge & Study Resources -->
+        <section>
+            <div class="section-header">
+                <h2>Cadet Study & Reference Resources</h2>
+            </div>
+            <div class="study-container">
+                <div class="study-block">
+                    <h3>11 General Orders to the Cover</h3>
+                    <ol class="study-list">
+                        <li>To take charge of this post and all government property in view.</li>
+                        <li>To walk my post in a military manner, keeping always on the alert, and observing everything that takes place within sight or hearing.</li>
+                        <li>To report all violations of orders I am instructed to enforce.</li>
+                        <li>To repeat all calls from posts more distant from the guardhouse than my own.</li>
+                        <li>To quit my post only when properly relieved.</li>
+                        <li>To receive, obey, and pass on to the sentry who relieves me all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and Officers and Petty Officers of the Watch only.</li>
+                        <li>To talk to no one except in the line of duty.</li>
+                        <li>To give the alarm in case of fire or disorder.</li>
+                        <li>To call the Officer of the Deck in any case not covered by instructions.</li>
+                        <li>To salute all officers and all colors and standards not cased.</li>
+                        <li>To be especially watchful at night, and during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.</li>
+                    </ol>
+                </div>
+
+                <div class="study-block">
+                    <h3>Navy Core Values</h3>
+                    <ul class="values-list">
+                        <li>
+                            <strong>Honor</strong>
+                            I am accountable for my personal and professional behavior. I will be mindful of the privilege I have to serve my fellow cadets and community.
+                        </li>
+                        <li>
+                            <strong>Courage</strong>
+                            Courage is the value that gives me the moral and mental strength to do what is right, even in the face of personal or professional adversity.
+                        </li>
+                        <li>
+                            <strong>Commitment</strong>
+                            The day-to-day duty of every cadet in Grizzly Company to work together as a team to improve ourselves, our unit, and our school.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Mesa Ridge High School NJROTC — Grizzly Company. All rights reserved.</p>
+        <p style="margin-top: 0.3rem;">District 3 | Colorado Springs, CO</p>
+    </footer>
+
+</body>
+</html>

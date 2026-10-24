@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesa Ridge High School NJROTC - Grizzly Company</title>
+    <title>MRHS NJROTC - Grizzly Company</title>
+    
+    <!-- Tab Icon / Favicon -->
+    <link rel="icon" type="image/png" href="./bear%20(1).png">
+    <link rel="apple-touch-icon" href="./bear%20(1).png">
+
     <style>
         :root {
             --navy-main: #002147;
@@ -567,15 +572,12 @@
 
     <script>
         function switchTab(tabId) {
-            // Hide all tab contents
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // Deactivate all nav buttons
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Show selected tab and activate button
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }

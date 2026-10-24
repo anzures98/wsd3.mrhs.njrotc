@@ -29,7 +29,7 @@
             line-height: 1.5;
         }
 
-        /* Top Header Lockup */
+        /* Header */
         header {
             background-color: var(--navy-dark);
             color: white;
@@ -89,18 +89,59 @@
             text-decoration: none;
         }
 
-        .instructor-contacts a:hover {
-            text-decoration: underline;
+        /* Navigation Bar */
+        nav {
+            background-color: var(--navy-main);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* Layout Structure */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2px;
+        }
+
+        .nav-btn {
+            background-color: var(--navy-main);
+            color: #cbd5e1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #0d3663;
+            color: white;
+        }
+
+        .nav-btn.active {
+            background-color: var(--slate-bg);
+            color: var(--navy-main);
+            border-top: 3px solid #60a5fa;
+            font-weight: 700;
+        }
+
+        /* Main Content & Tab Views */
         main {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         section {
@@ -122,17 +163,17 @@
             letter-spacing: 0.03em;
         }
 
-        /* Leadership Roster Grid */
+        /* Grids & Cards */
         .roster-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1rem;
         }
 
         .roster-card {
             background: #f8fafc;
             border: 1px solid var(--border-color);
-            padding: 1rem;
+            padding: 1.25rem;
         }
 
         .roster-card .role {
@@ -144,64 +185,36 @@
         }
 
         .roster-card .name {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-dark);
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
         }
 
-        /* Color Guard Highlight Section */
-        .colorguard-grid {
+        .colorguard-grid, .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.25rem;
         }
 
-        .cg-card {
+        .card-img {
             border: 1px solid var(--border-color);
             background: #ffffff;
         }
 
-        .cg-card img {
+        .card-img img {
             width: 100%;
-            height: 280px;
+            height: 250px;
             object-fit: cover;
             display: block;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .cg-card .caption {
+        .card-img .caption {
             padding: 0.85rem;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            background: #f8fafc;
-        }
-
-        /* Raiders Competition Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            border: 1px solid var(--border-color);
-            background: #ffffff;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item .desc {
-            padding: 0.75rem;
-            font-size: 0.8rem;
             color: var(--text-dark);
             background: #f8fafc;
-            border-top: 1px solid var(--border-color);
         }
 
         /* Study Guide Dual Columns */
@@ -225,6 +238,13 @@
                 border-top: 1px solid #334155;
                 padding-left: 0;
                 padding-top: 1rem;
+            }
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            .nav-btn {
+                flex: 1 1 45%;
+                text-align: center;
             }
         }
 
@@ -251,17 +271,15 @@
 
         .study-list li {
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
         }
 
         .values-list {
             list-style-type: none;
-            padding-left: 0;
-            font-size: 0.85rem;
         }
 
         .values-list li {
             margin-bottom: 0.75rem;
+            font-size: 0.85rem;
         }
 
         .values-list strong {
@@ -284,7 +302,7 @@
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Header Lockup -->
     <header>
         <div class="header-container">
             <div class="logo-group">
@@ -304,185 +322,242 @@
         </div>
     </header>
 
+    <!-- Page Navigation -->
+    <nav>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="switchTab('coc')">Chain of Command</button>
+            <button class="nav-btn" onclick="switchTab('teams')">Teams & Units</button>
+            <button class="nav-btn" onclick="switchTab('gallery')">Media & Gallery</button>
+            <button class="nav-btn" onclick="switchTab('study')">Cadet Study Guide</button>
+        </div>
+    </nav>
+
     <main>
-        <!-- Cadet Leadership Roster -->
-        <section>
-            <div class="section-header">
-                <h2>Cadet Leadership & Staff</h2>
-            </div>
-            <div class="roster-grid">
-                <div class="roster-card">
-                    <div class="role">Company Commander (CO)</div>
-                    <div class="name">LCDR Tristan Biber</div>
+        <!-- PAGE 1: CHAIN OF COMMAND -->
+        <div id="coc" class="tab-content active">
+            <section>
+                <div class="section-header">
+                    <h2>Cadet Chain of Command & Staff</h2>
                 </div>
-                <div class="roster-card">
-                    <div class="role">Executive Officer (XO)</div>
-                    <div class="name">Lt. Ontivaros</div>
+                <div class="roster-grid">
+                    <div class="roster-card">
+                        <div class="role">Company Commander (CO)</div>
+                        <div class="name">LCDR Tristan Biber</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Executive Officer (XO)</div>
+                        <div class="name">Lt. Ontivaros</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Operations Officer (OPS)</div>
+                        <div class="name">LTJG Jordan Amposen-Johnson</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Administrative Officer (ADMIN)</div>
+                        <div class="name">ENS Bailey</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Supply Officer (SUPPLY)</div>
+                        <div class="name">ENS Ward</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Command Master Chief (CMC)</div>
+                        <div class="name">SCPO Sofia Childers</div>
+                    </div>
                 </div>
-                <div class="roster-card">
-                    <div class="role">Operations Officer (OPS)</div>
-                    <div class="name">LTJG Jordan Amposen-Johnson</div>
-                </div>
-                <div class="roster-card">
-                    <div class="role">Administrative Officer (ADMIN)</div>
-                    <div class="name">ENS Bailey</div>
-                </div>
-                <div class="roster-card">
-                    <div class="role">Supply Officer (SUPPLY)</div>
-                    <div class="name">ENS Ward</div>
-                </div>
-                <div class="roster-card">
-                    <div class="role">Command Master Chief (CMC)</div>
-                    <div class="name">SCPO Sofia Childers</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Color Guard Feature Section -->
-        <section>
-            <div class="section-header">
-                <h2>Grizzly Company Color Guard</h2>
-            </div>
-            <div class="colorguard-grid">
-                <div class="cg-card">
-                    <img src="./_DSC2807.jpg" alt="Color Guard National Colors Detail">
-                    <div class="caption">National Colors detail in formation prior to athletic presentation.</div>
+            <section>
+                <div class="section-header">
+                    <h2>Naval Science Instructors</h2>
                 </div>
-                <div class="cg-card">
-                    <img src="./_DSC2827.jpg" alt="Color Guard Presentation Detail">
-                    <div class="caption">Color Guard team in Service Khaki uniform configuration.</div>
+                <div class="roster-grid">
+                    <div class="roster-card">
+                        <div class="role">Senior Naval Science Instructor (SNSI)</div>
+                        <div class="name">LCDR Tidwell</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">tidwellc@wsd3.org | Room 112</p>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Naval Science Instructor (NSI)</div>
+                        <div class="name">SCPO Pearson</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">pearsonandrew5@wsd3.org | Room 114</p>
+                    </div>
                 </div>
-                <div class="cg-card">
-                    <img src="./_DSC2789.jpg" alt="Full Color Guard Detail on Field">
-                    <div class="caption">Full 4-person detail presenting colors on the stadium field.</div>
-                </div>
-                <div class="cg-card">
-                    <img src="./_DSC2823.jpg" alt="Color Guard Tunnel Walkout">
-                    <div class="caption">Color Guard detail entering the arena for ceremonial presentation.</div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- Raiders 2nd Competition Gallery (Fort Carson) -->
-        <section>
-            <div class="section-header">
-                <h2>2026–2027 Raiders Season — Kit Carson Competition</h2>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">2nd Raiders Competition of the Season at Fort Carson Army Base (Home of the 4th Infantry Division)</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="./IMG_2813.PNG" alt="Raiders Tire Flip Event">
-                    <div class="desc">Kit Carson Competition — Heavy tire flip team event at Fort Carson.</div>
+        <!-- PAGE 2: TEAMS & UNITS -->
+        <div id="teams" class="tab-content">
+            <section>
+                <div class="section-header">
+                    <h2>Grizzly Company Color Guard</h2>
                 </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2777.PNG" alt="Raiders Obstacle Course">
-                    <div class="desc">Kit Carson Competition — Cadets executing obstacle course movement.</div>
+                <div class="colorguard-grid">
+                    <div class="card-img">
+                        <img src="./_DSC2807.jpg" alt="Color Guard National Colors Detail">
+                        <div class="caption">National Colors detail in formation prior to presentation.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./_DSC2827.jpg" alt="Color Guard Presentation Detail">
+                        <div class="caption">Color Guard team in Service Khaki uniform configuration.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./_DSC2789.jpg" alt="Full Color Guard Detail on Field">
+                        <div class="caption">Full 4-person detail presenting colors on the stadium field.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./_DSC2823.jpg" alt="Color Guard Tunnel Walkout">
+                        <div class="caption">Color Guard detail entering the arena for ceremonial presentation.</div>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2787.PNG" alt="Physical Fitness Event">
-                    <div class="desc">Kit Carson Competition — Team endurance and conditioning discipline.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2831.PNG" alt="Team Movement Course">
-                    <div class="desc">Kit Carson Competition — Tactical team movement and sprint phase.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2894.PNG" alt="Wall Climb Event">
-                    <div class="desc">Kit Carson Competition — High wall obstacle vertical scaling event.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2900.PNG" alt="Physical Training Grid">
-                    <div class="desc">Kit Carson Competition — Cadets executing functional workout set.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2912.PNG" alt="Team Logistics Carry">
-                    <div class="desc">Kit Carson Competition — Heavy equipment haul course at Fort Carson.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2916.PNG" alt="Raiders Team Formation">
-                    <div class="desc">Kit Carson Competition — Grizzly Company Raiders team at 4th ID Base.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_2918.PNG" alt="Endurance Run Event">
-                    <div class="desc">Kit Carson Competition — Final team endurance run finish line push.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_5851.JPG" alt="Raiders Field Drill">
-                    <div class="desc">Grizzly Company Raiders unit preparation and staging.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_5858.JPG" alt="Team Conditioning">
-                    <div class="desc">Cadet physical conditioning and strength progression drills.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_6577.JPG" alt="Cadet Fitness Testing">
-                    <div class="desc">Raiders athletic standard qualification and evaluation.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_6587.JPG" alt="Obstacle Course Training">
-                    <div class="desc">Agility and balance course completion during physical training.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_6589.JPG" alt="Team Cohesion Exercise">
-                    <div class="desc">Grizzly Company Raiders squad coordination and team building.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./IMG_6596.JPG" alt="Event Debrief">
-                    <div class="desc">Raiders team post-competition evaluation and de-briefing.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./_DSC2173.jpg" alt="Company Staging">
-                    <div class="desc">Mesa Ridge NJROTC cadets staged for athletic movement.</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="./_DSC2181.jpg" alt="Individual Physical Training">
-                    <div class="desc">Cadet executing pull-ups during Raider team qualification.</div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Cadet Knowledge & Study Resources -->
-        <section>
-            <div class="section-header">
-                <h2>Cadet Study & Reference Resources</h2>
-            </div>
-            <div class="study-container">
-                <div class="study-block">
-                    <h3>11 General Orders to the Cover</h3>
-                    <ol class="study-list">
-                        <li>To take charge of this post and all government property in view.</li>
-                        <li>To walk my post in a military manner, keeping always on the alert, and observing everything that takes place within sight or hearing.</li>
-                        <li>To report all violations of orders I am instructed to enforce.</li>
-                        <li>To repeat all calls from posts more distant from the guardhouse than my own.</li>
-                        <li>To quit my post only when properly relieved.</li>
-                        <li>To receive, obey, and pass on to the sentry who relieves me all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and Officers and Petty Officers of the Watch only.</li>
-                        <li>To talk to no one except in the line of duty.</li>
-                        <li>To give the alarm in case of fire or disorder.</li>
-                        <li>To call the Officer of the Deck in any case not covered by instructions.</li>
-                        <li>To salute all officers and all colors and standards not cased.</li>
-                        <li>To be especially watchful at night, and during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.</li>
-                    </ol>
+            <section>
+                <div class="section-header">
+                    <h2>Raiders Athletic & Physical Fitness Team</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Competitive physical fitness, functional strength, and team endurance discipline.</p>
                 </div>
+                <div class="roster-grid">
+                    <div class="roster-card">
+                        <div class="role">Raiders Focus Areas</div>
+                        <div class="name">Tire Flip & Logistics Carry</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Raiders Focus Areas</div>
+                        <div class="name">Obstacle Course & Endurance Sprint</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Raiders Focus Areas</div>
+                        <div class="name">Pull-Ups & Core Conditioning</div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-                <div class="study-block">
-                    <h3>Navy Core Values</h3>
-                    <ul class="values-list">
-                        <li>
-                            <strong>Honor</strong>
-                            I am accountable for my personal and professional behavior. I will be mindful of the privilege I have to serve my fellow cadets and community.
-                        </li>
-                        <li>
-                            <strong>Courage</strong>
-                            Courage is the value that gives me the moral and mental strength to do what is right, even in the face of personal or professional adversity.
-                        </li>
-                        <li>
-                            <strong>Commitment</strong>
-                            The day-to-day duty of every cadet in Grizzly Company to work together as a team to improve ourselves, our unit, and our school.
-                        </li>
-                    </ul>
+        <!-- PAGE 3: IMAGE GALLERY -->
+        <div id="gallery" class="tab-content">
+            <section>
+                <div class="section-header">
+                    <h2>2026–2027 Raiders Season — Kit Carson Competition</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">2nd Raiders Competition of the Season at Fort Carson Army Base (Home of the 4th Infantry Division)</p>
                 </div>
-            </div>
-        </section>
+                <div class="gallery-grid">
+                    <div class="card-img">
+                        <img src="./IMG_2813.PNG" alt="Raiders Tire Flip Event">
+                        <div class="caption">Kit Carson Competition — Heavy tire flip team event at Fort Carson.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2777.PNG" alt="Raiders Obstacle Course">
+                        <div class="caption">Kit Carson Competition — Cadets executing obstacle course movement.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2787.PNG" alt="Physical Fitness Event">
+                        <div class="caption">Kit Carson Competition — Team endurance and conditioning discipline.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2831.PNG" alt="Team Movement Course">
+                        <div class="caption">Kit Carson Competition — Tactical team movement and sprint phase.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2894.PNG" alt="Wall Climb Event">
+                        <div class="caption">Kit Carson Competition — High wall obstacle vertical scaling event.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2900.PNG" alt="Physical Training Grid">
+                        <div class="caption">Kit Carson Competition — Cadets executing functional workout set.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2912.PNG" alt="Team Logistics Carry">
+                        <div class="caption">Kit Carson Competition — Heavy equipment haul course at Fort Carson.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2916.PNG" alt="Raiders Team Formation">
+                        <div class="caption">Kit Carson Competition — Grizzly Company Raiders team at 4th ID Base.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_2918.PNG" alt="Endurance Run Event">
+                        <div class="caption">Kit Carson Competition — Final team endurance run finish line push.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_5851.JPG" alt="Raiders Field Drill">
+                        <div class="caption">Grizzly Company Raiders unit preparation and staging.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_5858.JPG" alt="Team Conditioning">
+                        <div class="caption">Cadet physical conditioning and strength progression drills.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_6577.JPG" alt="Cadet Fitness Testing">
+                        <div class="caption">Raiders athletic standard qualification and evaluation.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_6587.JPG" alt="Obstacle Course Training">
+                        <div class="caption">Agility and balance course completion during physical training.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_6589.JPG" alt="Team Cohesion Exercise">
+                        <div class="caption">Grizzly Company Raiders squad coordination and team building.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./IMG_6596.JPG" alt="Event Debrief">
+                        <div class="caption">Raiders team post-competition evaluation and de-briefing.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./_DSC2173.jpg" alt="Company Staging">
+                        <div class="caption">Mesa Ridge NJROTC cadets staged for athletic movement.</div>
+                    </div>
+                    <div class="card-img">
+                        <img src="./_DSC2181.jpg" alt="Individual Physical Training">
+                        <div class="caption">Cadet executing pull-ups during Raider team qualification.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 4: CADET STUDY GUIDE -->
+        <div id="study" class="tab-content">
+            <section>
+                <div class="section-header">
+                    <h2>Cadet Study & Knowledge Resources</h2>
+                </div>
+                <div class="study-container">
+                    <div class="study-block">
+                        <h3>11 General Orders to the Cover</h3>
+                        <ol class="study-list">
+                            <li>To take charge of this post and all government property in view.</li>
+                            <li>To walk my post in a military manner, keeping always on the alert, and observing everything that takes place within sight or hearing.</li>
+                            <li>To report all violations of orders I am instructed to enforce.</li>
+                            <li>To repeat all calls from posts more distant from the guardhouse than my own.</li>
+                            <li>To quit my post only when properly relieved.</li>
+                            <li>To receive, obey, and pass on to the sentry who relieves me all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and Officers and Petty Officers of the Watch only.</li>
+                            <li>To talk to no one except in the line of duty.</li>
+                            <li>To give the alarm in case of fire or disorder.</li>
+                            <li>To call the Officer of the Deck in any case not covered by instructions.</li>
+                            <li>To salute all officers and all colors and standards not cased.</li>
+                            <li>To be especially watchful at night, and during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.</li>
+                        </ol>
+                    </div>
+
+                    <div class="study-block">
+                        <h3>Navy Core Values</h3>
+                        <ul class="values-list">
+                            <li>
+                                <strong>Honor</strong>
+                                I am accountable for my personal and professional behavior. I will be mindful of the privilege I have to serve my fellow cadets and community.
+                            </li>
+                            <li>
+                                <strong>Courage</strong>
+                                Courage is the value that gives me the moral and mental strength to do what is right, even in the face of personal or professional adversity.
+                            </li>
+                            <li>
+                                <strong>Commitment</strong>
+                                The day-to-day duty of every cadet in Grizzly Company to work together as a team to improve ourselves, our unit, and our school.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -490,5 +565,20 @@
         <p style="margin-top: 0.3rem;">District 3 | Colorado Springs, CO</p>
     </footer>
 
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Deactivate all nav buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab and activate button
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>

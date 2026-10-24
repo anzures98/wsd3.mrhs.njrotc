@@ -19,6 +19,7 @@
             --text-dark: #0f172a;
             --text-muted: #475569;
             --accent-blue: #1e3a8a;
+            --highlight-bg: #f8fafc;
         }
 
         * {
@@ -34,7 +35,7 @@
             line-height: 1.5;
         }
 
-        /* Header */
+        /* Top Header Lockup */
         header {
             background-color: var(--navy-dark);
             color: white;
@@ -94,6 +95,10 @@
             text-decoration: none;
         }
 
+        .instructor-contacts a:hover {
+            text-decoration: underline;
+        }
+
         /* Navigation Bar */
         nav {
             background-color: var(--navy-main);
@@ -105,18 +110,20 @@
             margin: 0 auto;
             display: flex;
             gap: 2px;
+            overflow-x: auto;
         }
 
         .nav-btn {
             background-color: var(--navy-main);
             color: #cbd5e1;
             border: none;
-            padding: 1rem 1.5rem;
-            font-size: 0.9rem;
+            padding: 1rem 1.25rem;
+            font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             cursor: pointer;
+            white-space: nowrap;
             transition: background 0.2s, color 0.2s;
         }
 
@@ -132,7 +139,7 @@
             font-weight: 700;
         }
 
-        /* Main Content & Tab Views */
+        /* Main Content Structure */
         main {
             max-width: 1200px;
             margin: 2rem auto;
@@ -168,7 +175,13 @@
             letter-spacing: 0.03em;
         }
 
-        /* Grids & Cards */
+        .section-header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Grids & Roster Cards */
         .roster-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -176,7 +189,7 @@
         }
 
         .roster-card {
-            background: #f8fafc;
+            background: var(--highlight-bg);
             border: 1px solid var(--border-color);
             padding: 1.25rem;
         }
@@ -196,6 +209,48 @@
             margin-top: 0.25rem;
         }
 
+        /* Tables & Charts */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        .navy-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .navy-table th {
+            background-color: var(--navy-dark);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            border: 1px solid var(--navy-dark);
+        }
+
+        .navy-table td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+
+        .navy-table tbody tr:nth-child(even) {
+            background-color: var(--highlight-bg);
+        }
+
+        .rank-code {
+            font-weight: 700;
+            color: var(--navy-main);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Image Grids */
         .colorguard-grid, .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -209,7 +264,7 @@
 
         .card-img img {
             width: 100%;
-            height: 250px;
+            height: 240px;
             object-fit: cover;
             display: block;
             border-bottom: 1px solid var(--border-color);
@@ -219,7 +274,7 @@
             padding: 0.85rem;
             font-size: 0.85rem;
             color: var(--text-dark);
-            background: #f8fafc;
+            background: var(--highlight-bg);
         }
 
         /* Study Guide Dual Columns */
@@ -244,17 +299,10 @@
                 padding-left: 0;
                 padding-top: 1rem;
             }
-            .nav-container {
-                flex-wrap: wrap;
-            }
-            .nav-btn {
-                flex: 1 1 45%;
-                text-align: center;
-            }
         }
 
         .study-block {
-            background: #f8fafc;
+            background: var(--highlight-bg);
             border: 1px solid var(--border-color);
             padding: 1.25rem;
         }
@@ -327,22 +375,109 @@
         </div>
     </header>
 
-    <!-- Page Navigation -->
+    <!-- Navigation Bar -->
     <nav>
         <div class="nav-container">
-            <button class="nav-btn active" onclick="switchTab('coc')">Chain of Command</button>
+            <button class="nav-btn active" onclick="switchTab('home')">Overview & Plan</button>
+            <button class="nav-btn" onclick="switchTab('coc')">Chain of Command</button>
             <button class="nav-btn" onclick="switchTab('teams')">Teams & Units</button>
             <button class="nav-btn" onclick="switchTab('gallery')">Media & Gallery</button>
-            <button class="nav-btn" onclick="switchTab('study')">Cadet Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('study')">Knowledge Hub & Ranks</button>
         </div>
     </nav>
 
     <main>
-        <!-- PAGE 1: CHAIN OF COMMAND -->
-        <div id="coc" class="tab-content active">
+        <!-- TAB 1: OVERVIEW & PLAN OF THE WEEK -->
+        <div id="home" class="tab-content active">
             <section>
                 <div class="section-header">
-                    <h2>Cadet Chain of Command & Staff</h2>
+                    <h2>Grizzly Company Command Overview</h2>
+                </div>
+                <p style="font-size: 0.95rem; margin-bottom: 1rem;">
+                    Welcome to the official information hub of Mesa Ridge High School NJROTC Grizzly Company. Operating under Navy District 3 in Colorado Springs, Grizzly Company builds leadership, personal accountability, and community service through rigorous naval science education, athletic Raiders competition, and drill discipline.
+                </p>
+                <div class="roster-grid">
+                    <div class="roster-card">
+                        <div class="role">Unit Designation</div>
+                        <div class="name">Grizzly Company</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Location</div>
+                        <div class="name">Colorado Springs, CO</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Parent District</div>
+                        <div class="name">School District 3</div>
+                    </div>
+                    <div class="roster-card">
+                        <div class="role">Instructional Quarters</div>
+                        <div class="name">Rooms 112 & 114</div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2>Weekly Training & Schedule Matrix</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="navy-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Morning Drill Practice</th>
+                                <th>In-Class Schedule / Focus</th>
+                                <th>Uniform / Attire</th>
+                                <th>After-School Training</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Monday</strong></td>
+                                <td><strong>0600 - 0710</strong> (Drill Practice)</td>
+                                <td>Naval Science Curriculum</td>
+                                <td>School Standard Attire</td>
+                                <td>Academic Team & Staff Staging</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tuesday</strong></td>
+                                <td><strong>0600 - 0710</strong> (Drill Practice)</td>
+                                <td>Naval Science & Academics</td>
+                                <td>School Standard Attire</td>
+                                <td>Raiders Practice (3:00–5:00 PM on Black Days)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wednesday</strong></td>
+                                <td><strong>0600 - 0710</strong> (Drill Practice)</td>
+                                <td><strong>In-Class Physical Training (PT)</strong></td>
+                                <td>Navy Blue/Gold PT Gear</td>
+                                <td>Drill Movement & Staff Briefings</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thursday</strong></td>
+                                <td><strong>0600 - 0710</strong> (Drill Practice)</td>
+                                <td><strong>In-Class Physical Training (PT)</strong></td>
+                                <td>Navy Blue/Gold PT Gear</td>
+                                <td>Raiders Practice (3:00–5:00 PM on Black Days)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Friday</strong></td>
+                                <td><strong>0600 - 0710</strong> (Drill Practice)</td>
+                                <td>Leadership Studies & Inspection</td>
+                                <td>Service Khaki / Uniform Inspection</td>
+                                <td>Unit Staging & Logistics Prep</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- TAB 2: CHAIN OF COMMAND -->
+        <div id="coc" class="tab-content">
+            <section>
+                <div class="section-header">
+                    <h2>Cadet Chain of Command & Leadership</h2>
                 </div>
                 <div class="roster-grid">
                     <div class="roster-card">
@@ -391,7 +526,7 @@
             </section>
         </div>
 
-        <!-- PAGE 2: TEAMS & UNITS -->
+        <!-- TAB 3: TEAMS & OPERATIONS -->
         <div id="teams" class="tab-content">
             <section>
                 <div class="section-header">
@@ -419,27 +554,27 @@
 
             <section>
                 <div class="section-header">
-                    <h2>Raiders Athletic & Physical Fitness Team</h2>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Competitive physical fitness, functional strength, and team endurance discipline.</p>
+                    <h2>Raiders Athletic & Fitness Team</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">After-School Training: Every Black Day from 3:00 PM – 5:00 PM (1500–1700)</p>
                 </div>
                 <div class="roster-grid">
                     <div class="roster-card">
-                        <div class="role">Raiders Focus Areas</div>
-                        <div class="name">Tire Flip & Logistics Carry</div>
+                        <div class="role">Raiders Discipline</div>
+                        <div class="name">Tire Flip & Logistics Haul</div>
                     </div>
                     <div class="roster-card">
-                        <div class="role">Raiders Focus Areas</div>
-                        <div class="name">Obstacle Course & Endurance Sprint</div>
+                        <div class="role">Raiders Discipline</div>
+                        <div class="name">Obstacle Course & Sprints</div>
                     </div>
                     <div class="roster-card">
-                        <div class="role">Raiders Focus Areas</div>
-                        <div class="name">Pull-Ups & Core Conditioning</div>
+                        <div class="role">Raiders Discipline</div>
+                        <div class="name">Pull-Ups & Functional Endurance</div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- PAGE 3: IMAGE GALLERY -->
+        <!-- TAB 4: MEDIA GALLERY -->
         <div id="gallery" class="tab-content">
             <section>
                 <div class="section-header">
@@ -519,11 +654,140 @@
             </section>
         </div>
 
-        <!-- PAGE 4: CADET STUDY GUIDE -->
+        <!-- TAB 5: KNOWLEDGE HUB & RANKS CHART -->
         <div id="study" class="tab-content">
+            <!-- CADET ENLISTED RANKS CHART -->
             <section>
                 <div class="section-header">
-                    <h2>Cadet Study & Knowledge Resources</h2>
+                    <h2>Cadet Enlisted Rank Structure Chart</h2>
+                    <p>Pay grades E-1 through E-9, abbreviations, and official collar insignia descriptions.</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="navy-table">
+                        <thead>
+                            <tr>
+                                <th>Pay Grade</th>
+                                <th>Abbr.</th>
+                                <th>Cadet Enlisted Rank Title</th>
+                                <th>Collar Insignia Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="rank-code">E-1</td>
+                                <td class="rank-code">C/SR</td>
+                                <td>Cadet Seaman Recruit</td>
+                                <td>No Collar Insignia</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-2</td>
+                                <td class="rank-code">C/SA</td>
+                                <td>Cadet Seaman Apprentice</td>
+                                <td>2 Silver Diagonal Bars</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-3</td>
+                                <td class="rank-code">C/SN</td>
+                                <td>Cadet Seaman</td>
+                                <td>3 Silver Diagonal Bars</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-4</td>
+                                <td class="rank-code">C/PO3</td>
+                                <td>Cadet Petty Officer Third Class</td>
+                                <td>Eagle perched on 1 Chevron</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-5</td>
+                                <td class="rank-code">C/PO2</td>
+                                <td>Cadet Petty Officer Second Class</td>
+                                <td>Eagle perched on 2 Chevrons</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-6</td>
+                                <td class="rank-code">C/PO1</td>
+                                <td>Cadet Petty Officer First Class</td>
+                                <td>Eagle perched on 3 Chevrons</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-7</td>
+                                <td class="rank-code">C/CPO</td>
+                                <td>Cadet Chief Petty Officer</td>
+                                <td>Fouled Anchor with 1 Silver Star</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-8</td>
+                                <td class="rank-code">C/SCPO</td>
+                                <td>Cadet Senior Chief Petty Officer</td>
+                                <td>Fouled Anchor with 1 Silver Star above Stock</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">E-9</td>
+                                <td class="rank-code">C/MCPO</td>
+                                <td>Cadet Master Chief Petty Officer</td>
+                                <td>Fouled Anchor with 2 Silver Stars above Stock</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CADET OFFICER RANKS CHART -->
+            <section>
+                <div class="section-header">
+                    <h2>Cadet Officer Rank Structure Chart</h2>
+                    <p>Pay grades O-1 through O-5, abbreviations, and official collar insignia descriptions.</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="navy-table">
+                        <thead>
+                            <tr>
+                                <th>Pay Grade</th>
+                                <th>Abbr.</th>
+                                <th>Cadet Officer Rank Title</th>
+                                <th>Collar Insignia Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="rank-code">O-1</td>
+                                <td class="rank-code">C/ENS</td>
+                                <td>Cadet Ensign</td>
+                                <td>1 Gold Bar</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">O-2</td>
+                                <td class="rank-code">C/LTJG</td>
+                                <td>Cadet Lieutenant (Junior Grade)</td>
+                                <td>2 Attached Gold Bars</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">O-3</td>
+                                <td class="rank-code">C/LT</td>
+                                <td>Cadet Lieutenant</td>
+                                <td>3 Attached Gold Bars</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">O-4</td>
+                                <td class="rank-code">C/LCDR</td>
+                                <td>Cadet Lieutenant Commander</td>
+                                <td>4 Attached Gold Bars / Gold Oak Leaf</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-code">O-5</td>
+                                <td class="rank-code">C/CDR</td>
+                                <td>Cadet Commander</td>
+                                <td>5 Attached Gold Bars / Silver Oak Leaf</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- GENERAL ORDERS & CORE VALUES -->
+            <section>
+                <div class="section-header">
+                    <h2>Cadet Core Knowledge & General Orders</h2>
                 </div>
                 <div class="study-container">
                     <div class="study-block">

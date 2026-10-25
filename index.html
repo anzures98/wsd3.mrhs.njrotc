@@ -9,28 +9,38 @@
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @font-face {
+            font-family: 'Protrakt Variable Semi-Bold';
+            src: url('ProtraktGX.woff2') format('woff2'),
+                 url('ProtraktGX.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
-            --bg-body: #f4f6f9;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --navy-main: #0a192f;
-            --navy-light: #1e3a8a;
-            --accent-blue: #2563eb;
-            --accent-hover: #1d4ed8;
+            --navy-dark: #071628;
+            --navy-main: #0a1f3a;
+            --navy-light: #16325c;
+            --navy-hover: #1e4278;
+            --navy-accent: #2c5282;
+            --text-light: #ffffff;
+            --text-muted: #cbd5e1;
+            --border-color: #233854;
+            --bg-body: #050e18;
+            --bg-card: #0a1f3a;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "Protrakt Variable Semi-Bold", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-body);
-            color: var(--text-main);
+            color: var(--text-light);
             line-height: 1.6;
             -webkit-text-size-adjust: 100%;
         }
@@ -39,7 +49,7 @@
         header {
             background-color: var(--navy-main);
             color: #ffffff;
-            border-bottom: 3px solid var(--navy-light);
+            border-bottom: 2px solid var(--border-color);
             padding: 14px 24px;
             display: flex;
             justify-content: space-between;
@@ -77,10 +87,10 @@
 
         .header-titles p {
             font-size: 0.8rem;
-            color: #cbd5e1;
+            color: var(--text-muted);
         }
 
-        /* RESTORED TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
+        /* TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
         .header-right {
             font-size: 0.85rem;
             color: #f8fafc;
@@ -98,7 +108,7 @@
         }
 
         .header-right i {
-            color: #93c5fd;
+            color: #60a5fa;
             font-size: 0.8rem;
         }
 
@@ -108,7 +118,7 @@
         }
 
         .header-right a {
-            color: #93c5fd;
+            color: #60a5fa;
             text-decoration: none;
         }
 
@@ -120,19 +130,18 @@
         .mobile-menu-btn {
             display: none;
             background: var(--navy-light);
-            border: 1px solid #3b82f6;
+            border: 1px solid var(--border-color);
             color: #ffffff;
             font-size: 1.2rem;
             padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
         /* NAVIGATION BAR */
         nav {
-            background-color: #ffffff;
+            background-color: var(--navy-dark);
             border-bottom: 2px solid var(--border-color);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
@@ -156,14 +165,14 @@
         }
 
         .nav-tab:hover {
-            color: var(--navy-main);
-            background-color: #f1f5f9;
+            color: var(--text-light);
+            background-color: rgba(255, 255, 255, 0.04);
         }
 
         .nav-tab.active {
-            color: var(--accent-blue);
-            background-color: #eff6ff;
-            border-bottom-color: var(--accent-blue);
+            color: #ffffff;
+            background-color: var(--navy-light);
+            border-bottom-color: #3b82f6;
         }
 
         /* MAIN CONTENT CONTAINER */
@@ -185,17 +194,16 @@
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 24px;
             margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
             font-size: 1.25rem;
             margin-bottom: 16px;
-            color: var(--navy-main);
-            border-bottom: 2px solid #e2e8f0;
+            color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
             display: flex;
             align-items: center;
@@ -236,27 +244,27 @@
         }
 
         th {
-            background-color: #f8fafc;
-            color: var(--navy-main);
-            font-weight: 700;
+            background-color: var(--navy-light);
+            color: #ffffff;
+            font-weight: 600;
         }
 
         tr:hover {
-            background-color: #f8fafc;
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         /* STATS BADGES */
         .stat-box {
-            background-color: #f8fafc;
+            background-color: var(--navy-light);
             padding: 18px;
-            border-radius: 8px;
+            border-radius: 4px;
             text-align: center;
             border: 1px solid var(--border-color);
         }
 
         .stat-box h3 {
             font-size: 1.8rem;
-            color: var(--navy-main);
+            color: #ffffff;
             margin-bottom: 4px;
         }
 
@@ -270,23 +278,22 @@
 
         /* LEADERSHIP / COC CARDS */
         .coc-card {
-            background-color: #f8fafc;
-            border-radius: 8px;
+            background-color: var(--navy-light);
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             text-align: center;
             padding: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .coc-img-container {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 120px;
             margin: 0 auto 15px auto;
-            border-radius: 50%;
+            border-radius: 4px;
             overflow: hidden;
-            background-color: #e2e8f0;
-            border: 2px solid var(--navy-light);
+            background-color: var(--navy-dark);
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,14 +307,14 @@
 
         .coc-card h3 {
             font-size: 1.1rem;
-            color: var(--navy-main);
+            color: #ffffff;
             margin-bottom: 4px;
         }
 
         .coc-card p.rank-title {
             font-size: 0.85rem;
-            color: var(--accent-blue);
-            font-weight: 700;
+            color: #60a5fa;
+            font-weight: 600;
             margin-bottom: 8px;
         }
 
@@ -324,8 +331,8 @@
         }
 
         .gallery-item {
-            background-color: #f1f5f9;
-            border-radius: 6px;
+            background-color: var(--navy-light);
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             aspect-ratio: 4/3;
@@ -354,7 +361,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: #e2e8f0;
+            background: var(--navy-dark);
             color: var(--text-muted);
             font-size: 0.75rem;
             text-align: center;
@@ -364,7 +371,7 @@
 
         .img-fallback i {
             font-size: 1.5rem;
-            color: #94a3b8;
+            color: var(--border-color);
         }
 
         /* FOOTER */
@@ -373,8 +380,8 @@
             padding: 24px;
             color: var(--text-muted);
             font-size: 0.82rem;
-            border-top: 1px solid var(--border-color);
-            background-color: #ffffff;
+            border-top: 2px solid var(--border-color);
+            background-color: var(--navy-main);
             margin-top: 40px;
         }
 
@@ -426,7 +433,7 @@
 
             .nav-tab.active {
                 border-bottom-color: var(--border-color);
-                border-left-color: var(--accent-blue);
+                border-left-color: #3b82f6;
             }
 
             main {
@@ -465,7 +472,7 @@
             <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- RESTORED TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS -->
+        <!-- TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS -->
         <div class="header-right">
             <div>
                 <i class="fa-solid fa-envelope"></i>
@@ -559,7 +566,7 @@
 
                 <div class="card" style="margin-bottom: 0;">
                     <h2><i class="fa-solid fa-bullseye"></i> Core Principles</h2>
-                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-main);">
+                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-light);">
                         <li><strong>Honor:</strong> Integrity, ethical conduct, and accountability in every action.</li>
                         <li><strong>Courage:</strong> Moral strength to stand up for what is right and face adversity with resilience.</li>
                         <li><strong>Commitment:</strong> Dedication to unit cohesion, academic excellence, and mutual support.</li>
@@ -620,20 +627,20 @@
                 <h2><i class="fa-solid fa-book-open"></i> Naval Science Curriculum</h2>
                 <p style="margin-bottom: 16px; color: var(--text-muted);">The NJROTC curriculum is structured to build progressive leadership, nautical science expertise, and civic responsibility across four academic years:</p>
                 <div class="grid-2">
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 1: Introduction</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 1: Introduction</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Focuses on introduction to the naval service, military law, basic citizenship, leadership foundations, and wellness/fitness conditioning.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 2: Maritime History</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 2: Maritime History</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Covers maritime history, naval heritage, leadership theory, communication skills, and introduction to navigation and seamanship.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 3: Leadership &amp; Strategies</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 3: Leadership &amp; Strategies</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Emphasizes advanced naval leadership, naval operations, meteorology, astronomy, physics, and practical command responsibility.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 4: Senior Management</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 4: Senior Management</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Practical application of cadet corps management, mentorship, financial responsibility, and advanced ethics.</p>
                     </div>
                 </div>
@@ -702,20 +709,20 @@
             <div class="card">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Competitive &amp; Specialized Teams</h2>
                 <div class="grid-2">
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">High-endurance physical conditioning team focusing on obstacle courses, rope bridges, ruck marches, and strength competitions.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Precision presentation of the American and Navy flags at school athletic events, community ceremonies, and official functions.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Exhibition and regulation armed and unarmed drill squads showcasing synchronized movements and military bearing.</p>
                     </div>
-                    <div style="background: #f8fafc; padding: 18px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
+                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
+                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Air rifle safety, precision marksmanship training, and postal rifle competitions governed by strict safety standards.</p>
                     </div>
                 </div>
@@ -733,23 +740,23 @@
                     <div class="gallery-item"><img src="_dsc2789.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2789.png')"></div>
                     <div class="gallery-item"><img src="_dsc2823.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2823.png')"></div>
                     <div class="gallery-item"><img src="_dsc2173.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2173.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2181.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2181.png')"></div>
+                    <div class="gallery-item"><img src="_dsc2181.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2181.png')"></div>
                     <div class="gallery-item"><img src="IMG_0407.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_0407.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2777.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2777.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2787.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2787.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2813.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2813.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2831.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2831.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2777.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2777.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2787.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2787.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2813.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2813.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2831.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2831.png')"></div>
                     <div class="gallery-item"><img src="IMG_2894.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2894.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2900.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2900.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2912.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2912.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2916.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2916.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2918.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2918.PNG')"></div>
+                    <div class="gallery-item"><img src="IMG_2900.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2900.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2912.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2912.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2916.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2916.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2918.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2918.png')"></div>
                     <div class="gallery-item"><img src="IMG_5851.JPG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_5851.JPG')"></div>
                     <div class="gallery-item"><img src="IMG_5858.JPG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_5858.JPG')"></div>
-                    <div class="gallery-item"><img src="IMG_6577.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6577.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6587.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6587.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6589.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6589.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6596.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6596.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6577.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6577.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6587.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6587.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6589.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6589.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6596.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6596.png')"></div>
                 </div>
             </div>
         </div>
@@ -761,9 +768,9 @@
                 <div class="grid-2">
                     <div>
                         <p style="margin-bottom: 14px;"><strong>Mesa Ridge High School NJROTC</strong><br>Grizzly Company Headquarters<br>Rooms 112 &amp; 114<br>Colorado Springs, CO</p>
-                        <p style="margin-bottom: 14px;"><strong>Naval Science Instructors:</strong><br>LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org" style="color:var(--accent-blue);">tidwellc@wsd3.org</a><br>SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org" style="color:var(--accent-blue);">pearsonandrew5@wsd3.org</a></p>
+                        <p style="margin-bottom: 14px;"><strong>Naval Science Instructors:</strong><br>LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org" style="color:#60a5fa;">tidwellc@wsd3.org</a><br>SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org" style="color:#60a5fa;">pearsonandrew5@wsd3.org</a></p>
                     </div>
-                    <div style="background: #f1f5f9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
+                    <div style="background: var(--navy-light); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
                         <iframe 
                             width="100%" 
                             height="100%" 

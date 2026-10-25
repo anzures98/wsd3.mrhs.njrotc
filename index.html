@@ -40,71 +40,71 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* HEADER */
+        /* HEADER - LARGER LOGOS AND TEXT */
         header {
             background-color: var(--navy-main);
             color: #ffffff;
             border-bottom: 2px solid var(--navy-light);
-            padding: 14px 24px;
+            padding: 20px 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
             position: relative;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 18px;
         }
 
         .header-logos {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .header-logos img {
-            width: 44px;
-            height: 44px;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
             border-radius: 0px;
         }
 
         .header-titles h1 {
-            font-size: 1.35rem;
+            font-size: 1.75rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             color: #ffffff;
         }
 
         .header-titles p {
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: #cbd5e1;
         }
 
         /* TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
         .header-right {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: #f8fafc;
             text-align: right;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .header-right div {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 6px;
+            gap: 8px;
         }
 
         .header-right i {
             color: #60a5fa;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .header-right .instructor-name {
@@ -256,6 +256,87 @@
             background-color: var(--light-blue-hover);
         }
 
+        /* EVENTS CARDS GRID (SQUARE/RECTANGLE CARDS WITH ADD TO CALENDAR) */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .event-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 0px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .event-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-info h3 {
+            font-size: 1.1rem;
+            color: var(--navy-main);
+            margin-bottom: 6px;
+        }
+
+        .event-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .add-cal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--navy-main);
+            color: #ffffff;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0px;
+            border: 1px solid var(--navy-main);
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .add-cal-btn:hover {
+            background-color: var(--light-blue-hover);
+            color: var(--navy-main);
+            border-color: var(--accent-blue);
+        }
+
         /* STATS BADGES */
         .stat-box {
             background-color: #ffffff;
@@ -279,24 +360,21 @@
             font-weight: 600;
         }
 
-        /* LEADERSHIP / COC CARDS WITH LARGE PORTRAITS */
-        .coc-card {
-            background-color: #ffffff;
-            border-radius: 0px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            padding: 24px;
+        /* LEADERSHIP / COC WRAPPER (LARGE PORTRAIT + SEPARATE INFO BOX BELOW) */
+        .coc-item-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .coc-img-container {
-            width: 180px;
-            height: 220px;
-            margin: 0 auto 18px auto;
+            width: 100%;
+            height: 280px;
             border-radius: 0px;
             overflow: hidden;
             background-color: var(--navy-main);
             border: 1px solid var(--border-color);
+            border-bottom: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -308,20 +386,29 @@
             object-fit: cover;
         }
 
-        .coc-card h3 {
+        .coc-info-box {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 0px;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .coc-info-box h3 {
             font-size: 1.15rem;
             color: var(--navy-main);
             margin-bottom: 4px;
         }
 
-        .coc-card p.rank-title {
+        .coc-info-box p.rank-title {
             font-size: 0.88rem;
             color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 8px;
         }
 
-        .coc-card p.desc {
+        .coc-info-box p.desc {
             font-size: 0.82rem;
             color: var(--text-muted);
         }
@@ -403,11 +490,20 @@
 
         @media screen and (max-width: 850px) {
             header {
-                padding: 12px 16px;
+                padding: 16px 20px;
+            }
+
+            .header-logos img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .header-titles h1 {
+                font-size: 1.4rem;
             }
 
             .header-right {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
                 text-align: left;
                 width: 100%;
                 margin-top: 6px;
@@ -591,57 +687,68 @@
             </div>
         </div>
 
-        <!-- 2. EVENTS TAB -->
+        <!-- 2. EVENTS TAB (CARDS WITH ADD TO CALENDAR) -->
         <div id="events" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-calendar-days"></i> Upcoming Unit Events</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Event Description</th>
-                                <th>Location / Time</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Nov 12, 2026</strong></td>
-                                <td>Area Manager's Inspection (AMI) Prep</td>
-                                <td>Rooms 112/114 &bull; 1430</td>
-                                <td>Mandatory uniform check and personnel briefing.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Nov 19, 2026</strong></td>
-                                <td>Raiders Physical Fitness Meet</td>
-                                <td>Mesa Ridge Athletic Fields &bull; 0800</td>
-                                <td>Inter-service physical conditioning showcase.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Dec 04, 2026</strong></td>
-                                <td>Color Guard Community Presentation</td>
-                                <td>Mesa Ridge Auditorium &bull; 1800</td>
-                                <td>Presentation of colors for district assembly.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Dec 15, 2026</strong></td>
-                                <td>Semester Pass-in-Review Ceremony</td>
-                                <td>Main Gymnasium &bull; 1300</td>
-                                <td>Formal inspection and awards presentation.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 12, 2026 &bull; 1430</div>
+                            <h3>Area Manager's Inspection (AMI) Prep</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Rooms 112/114</div>
+                            <p class="event-desc">Mandatory uniform check and personnel briefing.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261112T143000/20261112T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 19, 2026 &bull; 0800</div>
+                            <h3>Raiders Physical Fitness Meet</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Mesa Ridge Athletic Fields</div>
+                            <p class="event-desc">Inter-service physical conditioning showcase.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raiders+Physical+Fitness+Meet&dates=20261119T080000/20261119T120000&details=Inter-service+physical+conditioning+showcase.&location=Mesa+Ridge+Athletic+Fields" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Dec 04, 2026 &bull; 1800</div>
+                            <h3>Color Guard Community Presentation</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Mesa Ridge Auditorium</div>
+                            <p class="event-desc">Presentation of colors for district assembly.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Color+Guard+Community+Presentation&dates=20261204T180000/20261204T200000&details=Presentation+of+colors+for+district+assembly.&location=Mesa+Ridge+Auditorium" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Dec 15, 2026 &bull; 1300</div>
+                            <h3>Semester Pass-in-Review Ceremony</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Main Gymnasium</div>
+                            <p class="event-desc">Formal inspection and awards presentation.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Semester+Pass-in-Review+Ceremony&dates=20261215T130000/20261215T150000&details=Formal+inspection+and+awards+presentation.&location=Main+Gymnasium" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 3. ACADEMICS TAB -->
+        <!-- 3. ACADEMICS & GRADING POLICIES TAB -->
         <div id="academics" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-book-open"></i> Naval Science Curriculum</h2>
                 <p style="margin-bottom: 16px; color: var(--text-muted);">The NJROTC curriculum is structured to build progressive leadership, nautical science expertise, and civic responsibility across four academic years:</p>
-                <div class="grid-2">
+                <div class="grid-2" style="margin-bottom: 24px;">
                     <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 1: Introduction</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Focuses on introduction to the naval service, military law, basic citizenship, leadership foundations, and wellness/fitness conditioning.</p>
@@ -659,61 +766,114 @@
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Practical application of cadet corps management, mentorship, financial responsibility, and advanced ethics.</p>
                     </div>
                 </div>
+
+                <h2><i class="fa-solid fa-clipboard-check"></i> Grading Policies &amp; Standards</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Weight</th>
+                                <th>Description &amp; Expectations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Uniform Inspection</strong></td>
+                                <td>30%</td>
+                                <td>Weekly wear of the prescribed NJROTC uniform. Proper grooming, shoe shine, ribbons, and military bearing are strictly graded.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Physical Training (PT)</strong></td>
+                                <td>25%</td>
+                                <td>Active participation and personal improvement during Thursday/Friday physical conditioning sessions and fitness assessments.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Academics &amp; Coursework</strong></td>
+                                <td>25%</td>
+                                <td>Naval science textbook assignments, quizzes, leadership projects, and classroom participation.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Drill &amp; Ceremonies / Conduct</strong></td>
+                                <td>20%</td>
+                                <td>Participation in drill movements, adherence to unit rules, chain of command respect, and teamwork.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- 4. CHAIN OF COMMAND TAB (LARGE PORTRAITS, EXACTLY 3 PER ROW) -->
+        <!-- 4. CHAIN OF COMMAND TAB (LARGE PORTRAITS WITH SEPARATE INFO BOX BELOW, 3 PER ROW) -->
         <div id="coc" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-sitemap"></i> Grizzly Company Leadership Roster</h2>
                 <div class="grid-3">
-                    <div class="coc-card">
+                    <!-- 1 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CO.png" alt="Company Commander" onerror="this.onerror=null; this.src='CO.PNG';">
                         </div>
-                        <h3>LCDR Tristan Biber</h3>
-                        <p class="rank-title">Cadet Company Commander</p>
-                        <p class="desc">Overall command, discipline, and execution of company operations.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ LCDR Tristan Biber</h3>
+                            <p class="rank-title">Cadet Company Commander</p>
+                            <p class="desc">Overall command, discipline, and execution of company operations.</p>
+                        </div>
                     </div>
-                    <div class="coc-card">
+                    <!-- 2 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="XO.png" alt="Executive Officer" onerror="this.onerror=null; this.src='XO.PNG';">
                         </div>
-                        <h3>Lt. Ontivaros</h3>
-                        <p class="rank-title">Executive Officer (XO)</p>
-                        <p class="desc">Staff coordination, internal administration, and operational readiness.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ Lt. Ontivaros</h3>
+                            <p class="rank-title">Executive Officer (XO)</p>
+                            <p class="desc">Staff coordination, internal administration, and operational readiness.</p>
+                        </div>
                     </div>
-                    <div class="coc-card">
+                    <!-- 3 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="OPS.png" alt="Operations Officer" onerror="this.onerror=null; this.src='OPS.PNG';">
                         </div>
-                        <h3>LTJG Jordan Amposen-Johnson</h3>
-                        <p class="rank-title">Operations Officer</p>
-                        <p class="desc">Training schedules, event planning, and drill execution.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ LTJG Jordan Amposen-Johnson</h3>
+                            <p class="rank-title">Operations Officer</p>
+                            <p class="desc">Training schedules, event planning, and drill execution.</p>
+                        </div>
                     </div>
-                    <div class="coc-card">
+                    <!-- 4 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="ADMIN.png" alt="Admin Officer" onerror="this.onerror=null; this.src='ADMIN.PNG';">
                         </div>
-                        <h3>Ensign Bailey</h3>
-                        <p class="rank-title">Admin Officer</p>
-                        <p class="desc">Personnel records, correspondence, and administrative tracking.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ Ensign Bailey</h3>
+                            <p class="rank-title">Admin Officer</p>
+                            <p class="desc">Personnel records, correspondence, and administrative tracking.</p>
+                        </div>
                     </div>
-                    <div class="coc-card">
+                    <!-- 5 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="SUPPO.png" alt="Supply Officer" onerror="this.onerror=null; this.src='SUPPO.PNG';">
                         </div>
-                        <h3>Ensign Ward</h3>
-                        <p class="rank-title">Supply Officer</p>
-                        <p class="desc">Uniform inventory, equipment management, and logistics.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ Ensign Ward</h3>
+                            <p class="rank-title">Supply Officer</p>
+                            <p class="desc">Uniform inventory, equipment management, and logistics.</p>
+                        </div>
                     </div>
-                    <div class="coc-card">
+                    <!-- 6 -->
+                    <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CMC.png" alt="Senior Enlisted Leader" onerror="this.onerror=null; this.src='CMC.PNG';">
                         </div>
-                        <h3>SCPO Sofia Childers</h3>
-                        <p class="rank-title">Senior Enlisted Leader / CMC</p>
-                        <p class="desc">Enlisted morale, standards enforcement, and cadet mentorship.</p>
+                        <div class="coc-info-box">
+                            <h3>c/ SCPO Sofia Childers</h3>
+                            <p class="rank-title">Senior Enlisted Leader / CMC</p>
+                            <p class="desc">Enlisted morale, standards enforcement, and cadet mentorship.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -758,20 +918,20 @@
                     <div class="gallery-item"><img src="_dsc2181.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2181.png')"></div>
                     <div class="gallery-item"><img src="IMG_0407.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_0407.png')"></div>
                     <div class="gallery-item"><img src="IMG_2777.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2777.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2787.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2787.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2813.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2813.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2831.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2831.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2787.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2787.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2813.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2813.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2831.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2831.png')"></div>
                     <div class="gallery-item"><img src="IMG_2894.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2894.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2900.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2900.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2912.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2912.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2916.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2916.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2918.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2918.PNG')"></div>
+                    <div class="gallery-item"><img src="IMG_2900.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2900.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2912.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2912.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2916.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2916.png')"></div>
+                    <div class="gallery-item"><img src="IMG_2918.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2918.png')"></div>
                     <div class="gallery-item"><img src="IMG_5851.JPG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_5851.JPG')"></div>
                     <div class="gallery-item"><img src="IMG_5858.JPG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_5858.JPG')"></div>
-                    <div class="gallery-item"><img src="IMG_6577.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6577.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6587.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6587.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6589.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6589.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6596.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_6596.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6577.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6577.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6587.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6587.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6589.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6589.png')"></div>
+                    <div class="gallery-item"><img src="IMG_6596.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6596.png')"></div>
                 </div>
             </div>
         </div>

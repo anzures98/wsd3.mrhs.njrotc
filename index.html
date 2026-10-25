@@ -218,10 +218,11 @@
             gap: 20px;
         }
 
+        /* STRICT 3-PER-ROW GRID FOR CHAIN OF COMMAND */
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
         }
 
         /* TABLES */
@@ -278,20 +279,20 @@
             font-weight: 600;
         }
 
-        /* LEADERSHIP / COC CARDS */
+        /* LEADERSHIP / COC CARDS WITH LARGE PORTRAITS */
         .coc-card {
             background-color: #ffffff;
             border-radius: 0px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             text-align: center;
-            padding: 20px;
+            padding: 24px;
         }
 
         .coc-img-container {
-            width: 100px;
-            height: 120px;
-            margin: 0 auto 15px auto;
+            width: 180px;
+            height: 220px;
+            margin: 0 auto 18px auto;
             border-radius: 0px;
             overflow: hidden;
             background-color: var(--navy-main);
@@ -308,13 +309,13 @@
         }
 
         .coc-card h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--navy-main);
             margin-bottom: 4px;
         }
 
         .coc-card p.rank-title {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 8px;
@@ -388,6 +389,18 @@
         }
 
         /* RESPONSIVE MEDIA QUERIES FOR MOBILES & TABLETS */
+        @media screen and (max-width: 950px) {
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media screen and (max-width: 850px) {
             header {
                 padding: 12px 16px;
@@ -649,7 +662,7 @@
             </div>
         </div>
 
-        <!-- 4. CHAIN OF COMMAND TAB -->
+        <!-- 4. CHAIN OF COMMAND TAB (LARGE PORTRAITS, EXACTLY 3 PER ROW) -->
         <div id="coc" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-sitemap"></i> Grizzly Company Leadership Roster</h2>

@@ -4,17 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grizzly Company | Mesa Ridge High School NJROTC</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./Untitled%20design%20%2818%29.png">
+  <link rel="apple-touch-icon" href="./Untitled%20design%20%2818%29.png">
+
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    // Robust Image Fallback Mechanism (Defined in HEAD to catch fast initial loads)
+    function handleImgError(imgElement, type, titleLabel) {
+      // Check if there are remaining fallbacks in data attribute
+      const fallbacks = imgElement.getAttribute('data-fallbacks');
+      if (fallbacks) {
+        const fallbackArray = fallbacks.split('|');
+        if (fallbackArray.length > 0) {
+          const nextSrc = fallbackArray.shift();
+          imgElement.setAttribute('data-fallbacks', fallbackArray.join('|'));
+          imgElement.src = nextSrc;
+          return;
+        }
+      }
+
+      // If all fallbacks fail, replace parent container with clean SVG/icon card
+      const parent = imgElement.parentElement;
+      if (!parent) return;
+
+      if (type === 'portrait') {
+        parent.innerHTML = `
+          <div class="img-fallback-box">
+            <i class="fa-solid fa-user-tie"></i>
+            <span style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em;">${titleLabel} PORTRAIT</span>
+          </div>
+        `;
+      } else if (type === 'gallery') {
+        parent.innerHTML = `
+          <div class="img-fallback-box">
+            <i class="fa-solid fa-camera-retro"></i>
+            <span style="font-size: 0.75rem; font-weight: 700;">${titleLabel}</span>
+          </div>
+        `;
+      } else if (type === 'icon') {
+        imgElement.style.display = 'none';
+      }
+    }
+
+    // Navigation Tab Switcher
+    function switchTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      const tabs = document.querySelectorAll('.nav-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
+
+      event.currentTarget.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 
   <style>
     :root {
       --navy-dark: #0b1d3a;
       --navy-main: #102a56;
       --navy-accent: #1e40af;
+      --navy-gold: #f59e0b;
+      --navy-gold-hover: #d97706;
+      --navy-gold-light: #fef3c7;
       --text-dark: #0f172a;
       --text-muted: #475569;
-      --bg-light: #f1f5f9;
+      --bg-light: #f8fafc;
       --white: #ffffff;
       --border-color: #cbd5e1;
     }
@@ -37,7 +102,7 @@
       background-color: var(--navy-dark);
       color: var(--white);
       padding: 1.25rem 2rem;
-      border-bottom: 3px solid var(--navy-accent);
+      border-bottom: 4px solid var(--navy-gold);
     }
 
     .header-container {
@@ -49,7 +114,7 @@
       gap: 1.5rem;
     }
 
-    .header-branding {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -71,17 +136,53 @@
 
     .header-titles p {
       font-size: 0.875rem;
-      color: #94a3b8;
+      color: #cbd5e1;
       font-weight: 500;
     }
 
-    /* Navigation Bar */
+    /* Top Right Instructor Quick Contact (Unboxed & Right-Aligned) */
+    .header-contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .header-contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      color: #cbd5e1;
+    }
+
+    .header-contact-item i {
+      color: var(--navy-gold);
+      width: 14px;
+      text-align: center;
+    }
+
+    .header-contact-item a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .header-contact-item a:hover {
+      color: var(--navy-gold);
+      text-decoration: underline;
+    }
+
+    /* Sticky Navigation Bar */
     nav {
       background-color: var(--navy-main);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 2px solid var(--navy-gold);
     }
 
     .nav-container {
@@ -109,20 +210,28 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
       border-bottom: 3px solid transparent;
       border-radius: 0;
     }
 
+    .nav-tab i {
+      transition: color 0.2s ease;
+    }
+
     .nav-tab:hover {
-      color: var(--white);
-      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--navy-gold);
+      background-color: rgba(245, 158, 11, 0.08);
     }
 
     .nav-tab.active {
-      color: var(--white);
-      border-bottom-color: #60a5fa;
-      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-bottom-color: var(--navy-gold);
+      background-color: rgba(245, 158, 11, 0.15);
+    }
+
+    .nav-tab.active i {
+      color: var(--navy-gold);
     }
 
     /* Main Container */
@@ -141,19 +250,38 @@
       display: block;
     }
 
-    /* Titles & Sections */
+    /* Section Titles */
     .section-title {
       font-size: 1.35rem;
       font-weight: 700;
       color: var(--navy-dark);
       margin-bottom: 1.25rem;
       padding-bottom: 0.4rem;
-      border-bottom: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--navy-main);
       display: flex;
       align-items: center;
       gap: 0.6rem;
       text-transform: uppercase;
       letter-spacing: -0.01em;
+    }
+
+    .section-title i {
+      color: var(--navy-main);
+    }
+
+    /* Grids */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .grid-2 {
@@ -163,19 +291,51 @@
       margin-bottom: 1.5rem;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Square Clean Cards */
+    /* Cards */
     .card {
       background: var(--white);
       border: 1px solid var(--border-color);
       border-radius: 0;
       padding: 1.25rem;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-main) 100%);
+      color: var(--white);
+      border: 1px solid var(--navy-main);
+      border-left: 5px solid var(--navy-gold);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--navy-main);
+      padding: 1.25rem;
+      text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .stat-card:hover {
+      border-top-color: var(--navy-gold);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
     }
 
     /* Leadership Cards */
@@ -186,13 +346,28 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: border-color 0.2s ease;
+    }
+
+    .leadership-card:hover {
+      border-color: var(--navy-main);
+    }
+
+    .leadership-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3/4;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
     .leadership-img {
       width: 100%;
-      aspect-ratio: 3/4;
+      height: 100%;
       object-fit: cover;
-      background-color: var(--navy-dark);
     }
 
     .leadership-info {
@@ -236,6 +411,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      border-bottom: 2px solid var(--navy-gold);
     }
 
     tr:nth-child(even) {
@@ -246,7 +422,7 @@
     .event-card {
       background: var(--white);
       border: 1px solid var(--border-color);
-      border-left: 4px solid var(--navy-dark);
+      border-left: 4px solid var(--navy-main);
       border-radius: 0;
       padding: 1.1rem;
       margin-bottom: 1rem;
@@ -254,6 +430,11 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 0.85rem;
+      transition: border-left-color 0.2s ease;
+    }
+
+    .event-card:hover {
+      border-left-color: var(--navy-gold);
     }
 
     .event-info h3 {
@@ -287,10 +468,14 @@
       font-size: 0.8rem;
       font-weight: 600;
       align-self: flex-start;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
     }
 
     .btn-cal:hover {
-      background-color: var(--navy-accent);
+      background-color: var(--navy-gold);
+      color: var(--navy-dark);
+      border-color: var(--navy-gold-hover);
     }
 
     /* Google Map Box */
@@ -320,15 +505,20 @@
       border-radius: 0;
       font-size: 0.725rem;
       font-weight: 700;
-      background-color: #e2e8f0;
-      color: var(--text-dark);
+      background-color: var(--navy-dark);
+      color: var(--white);
       text-transform: uppercase;
+    }
+
+    .badge-gold {
+      background-color: var(--navy-gold);
+      color: var(--navy-dark);
     }
 
     /* Gallery */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1rem;
     }
 
@@ -338,12 +528,50 @@
       overflow: hidden;
       aspect-ratio: 4/3;
       background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s ease;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--navy-gold);
     }
 
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    /* Custom Fallback Box */
+    .img-fallback-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #0b1d3a;
+      color: #94a3b8;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .img-fallback-box i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--navy-gold);
+    }
+
+    /* Quick Action Cards Accent */
+    .card-accent-left {
+      border-left: 4px solid var(--navy-main);
+      transition: border-left-color 0.2s ease;
+    }
+
+    .card-accent-left:hover {
+      border-left-color: var(--navy-gold);
     }
 
     /* Footer */
@@ -354,20 +582,33 @@
       padding: 1.75rem 1.25rem;
       font-size: 0.85rem;
       margin-top: 3rem;
-      border-top: 1px solid var(--border-color);
+      border-top: 3px solid var(--navy-gold);
     }
 
     footer p {
       margin-bottom: 0.35rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .header-container {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
+        gap: 1rem;
       }
-      .header-branding {
+      .header-contact-right {
+        width: 100%;
+        text-align: left;
+        align-items: flex-start;
+      }
+      .header-contact-item {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-left {
         flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -377,12 +618,33 @@
   <!-- Header -->
   <header>
     <div class="header-container">
-      <div class="header-branding">
-        <img src="./Untitled%20design%20%2818%29.png" alt="NJROTC Seal" class="header-logo" onerror="this.style.display='none'">
-        <img src="./bear%20%281%29.png" alt="Mesa Ridge Bear" class="header-logo" onerror="this.style.display='none'">
+      <!-- Left Branding with Logos -->
+      <div class="header-left">
+        <img src="./Untitled%20design%20%2818%29.png" alt="NJROTC Seal" class="header-logo" 
+             data-fallbacks="./Untitled design (18).png|./logo.png"
+             onerror="handleImgError(this, 'icon', 'NJROTC')">
+        <img src="./bear%20%281%29.png" alt="Mesa Ridge Bear" class="header-logo" 
+             data-fallbacks="./bear (1).png|./bear.png"
+             onerror="handleImgError(this, 'icon', 'Bear')">
         <div class="header-titles">
           <h1>Grizzly Company</h1>
           <p>Mesa Ridge High School NJROTC • Colorado Springs, CO</p>
+        </div>
+      </div>
+
+      <!-- Top Right Instructor Contact Info (Right-Aligned, Unboxed) -->
+      <div class="header-contact-right">
+        <div class="header-contact-item">
+          <span><strong>SNSI:</strong> LCDR Tidwell — <a href="mailto:tidwellc@wsd3.org">tidwellc@wsd3.org</a></span>
+          <i class="fa-solid fa-user-tie"></i>
+        </div>
+        <div class="header-contact-item">
+          <span><strong>NSI:</strong> SCPO Pearson — <a href="mailto:pearsonandrew5@wsd3.org">pearsonandrew5@wsd3.org</a></span>
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <div class="header-contact-item">
+          <span>Rooms 112 & 114 | Main Office: (719) 391-3600</span>
+          <i class="fa-solid fa-location-dot"></i>
         </div>
       </div>
     </div>
@@ -406,26 +668,133 @@
 
     <!-- TAB 1: OVERVIEW -->
     <div id="overview" class="tab-content active">
-      <h2 class="section-title"><i class="fa-solid fa-compass"></i> Unit Overview & Schedule</h2>
       
+      <!-- Mission Banner -->
+      <div class="hero-banner">
+        <span class="badge badge-gold" style="margin-bottom: 0.5rem;">Unit Mission</span>
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Honor • Courage • Commitment</h2>
+        <p style="font-size: 0.95rem; color: #cbd5e1; max-width: 900px; line-height: 1.6;">
+          The mission of Mesa Ridge High School NJROTC Grizzly Company is to instill in students the values of citizenship, service to the United States, personal responsibility, and a sense of accomplishment. We mold tomorrow's leaders through discipline, teamwork, and academic excellence.
+        </p>
+      </div>
+
+      <!-- Quick Stats Grid -->
+      <div class="grid-4">
+        <div class="stat-card">
+          <div class="stat-number">120+</div>
+          <div class="stat-label">Active Cadets</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1,200+</div>
+          <div class="stat-label">Community Service Hrs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">15</div>
+          <div class="stat-label">Annual Competitions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Graduation Rate</div>
+        </div>
+      </div>
+
+      <!-- Plan of the Week (POW) Directives -->
+      <h2 class="section-title"><i class="fa-solid fa-clipboard-list"></i> Plan of the Week (POW) Directives</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%;">Day</th>
+              <th style="width: 25%;">Uniform / Attire</th>
+              <th style="width: 35%;">Activity & Training</th>
+              <th style="width: 25%;">Required Gear</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Monday</strong></td>
+              <td>Civilian / School Attire</td>
+              <td>Academics / Classroom Leadership Lecture</td>
+              <td>Naval Science Manual, Notebook</td>
+            </tr>
+            <tr>
+              <td><strong>Tuesday</strong></td>
+              <td>Service Khakis (Navy)</td>
+              <td>Personnel Inspection & Drill Practice</td>
+              <td>Clean Inspection Shirt, Shined Shoes</td>
+            </tr>
+            <tr>
+              <td><strong>Wednesday</strong></td>
+              <td>Issued Navy PT Gear</td>
+              <td>Physical Fitness Assessment & Conditioning</td>
+              <td>Navy PT Shirt, Shorts, Running Shoes</td>
+            </tr>
+            <tr>
+              <td><strong>Thursday</strong></td>
+              <td>Issued Navy PT Gear / NWU</td>
+              <td>Team Drill & Team Fitness Training</td>
+              <td>Water Bottle, Proper Athletics Gear</td>
+            </tr>
+            <tr>
+              <td><strong>Friday</strong></td>
+              <td>Service Khakis / NWU Type III</td>
+              <td>Chain of Command Inspection & Knowledge Check</td>
+              <td>Cadet Orders & PQS Logbook</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="grid-2">
+        
+        <!-- Schedule Standards -->
         <div class="card">
-          <h3 style="color: var(--navy-dark); margin-bottom: 0.75rem; font-weight:700;"><i class="fa-solid fa-clock"></i> Weekly Schedule Standards</h3>
-          <ul style="list-style: none; line-height: 1.8; font-size:0.9rem;">
-            <li><strong>Morning Drill:</strong> Every Morning (0600–0710)</li>
-            <li><strong>Uniform Inspection:</strong> Every White Day & Friday (Service Khakis / NWU Type III)</li>
-            <li><strong>In-Class PT:</strong> Every Wednesday & Thursday (Navy PT Gear)</li>
-            <li><strong>Raiders Practice:</strong> Black Days (1500–1700)</li>
+          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-clock"></i> Daily Training Schedule</h3>
+          <ul style="list-style: none; line-height: 1.9; font-size: 0.9rem;">
+            <li style="border-bottom: 1px solid #f1f5f9; padding-bottom: 0.4rem;">
+              <strong>Morning Drill:</strong> 0600–0710 (Mon–Fri)
+            </li>
+            <li style="border-bottom: 1px solid #f1f5f9; padding-bottom: 0.4rem; margin-top: 0.4rem;">
+              <strong>Academic Class Hours:</strong> 0730–1445 (Regular School Hours)
+            </li>
+            <li style="border-bottom: 1px solid #f1f5f9; padding-bottom: 0.4rem; margin-top: 0.4rem;">
+              <strong>After-School Athletics/Teams:</strong> 1500–1630 (Mon–Thu)
+            </li>
+            <li style="margin-top: 0.4rem;">
+              <strong>Raiders Conditioning:</strong> Black Days (1500–1700)
+            </li>
           </ul>
         </div>
 
+        <!-- Cadet Standard Operating Principles -->
         <div class="card">
-          <h3 style="color: var(--navy-dark); margin-bottom: 0.75rem; font-weight:700;"><i class="fa-solid fa-bullhorn"></i> Plan of the Week</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Cadets must maintain uniform readiness and bring required physical training gear on designated PT days. Attendance at morning drill practices is mandatory for competition team members.
-          </p>
+          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-shield-cat"></i> Cadet Core Operating Principles</h3>
+          <ul style="list-style-type: square; padding-left: 1.25rem; font-size: 0.875rem; color: var(--text-dark); line-height: 1.8;">
+            <li>Grooming standards must be strictly maintained per Navy regulations on inspection days.</li>
+            <li>Cadets are expected to render proper military courtesy and salutes to cadet officers and instructors.</li>
+            <li>PQS (Personnel Qualification Standards) sign-offs must be completed prior to promotion boards.</li>
+            <li>Unexcused absences from team practices affect competition team roster eligibility.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Quick Action Cards -->
+      <div class="grid-3">
+        <div class="card card-accent-left">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--navy-dark);"><i class="fa-solid fa-user-graduate" style="color: var(--navy-main);"></i> Academic Support</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">Tutoring available every Tuesday & Thursday after school in Room 112.</p>
+        </div>
+        <div class="card card-accent-left">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--navy-dark);"><i class="fa-solid fa-shirt" style="color: var(--navy-main);"></i> Uniform Standards</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">Review correct ribbon placements and shoe shine guides prior to Tuesday inspection.</p>
+        </div>
+        <div class="card card-accent-left">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--navy-dark);"><i class="fa-solid fa-hands-holding-circle" style="color: var(--navy-main);"></i> Community Service</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">Sign up on the main bulletin board in Room 114 for upcoming color guard details.</p>
         </div>
       </div>
+
     </div>
 
     <!-- TAB 2: UPCOMING EVENTS -->
@@ -545,7 +914,7 @@
       <div class="grid-2">
         
         <div class="card">
-          <span class="badge" style="background-color: var(--navy-dark); color: var(--white);">NS-1</span>
+          <span class="badge">NS-1</span>
           <h3 style="margin: 0.4rem 0; color: var(--navy-dark); font-weight:700;">Introduction to NJROTC</h3>
           <p style="font-size: 0.875rem; color: var(--text-muted);">
             Foundations of Government, Navy Ships & Aviation, Military Customs, Drill, Fitness, First Aid.
@@ -553,7 +922,7 @@
         </div>
 
         <div class="card">
-          <span class="badge" style="background-color: var(--navy-dark); color: var(--white);">NS-2</span>
+          <span class="badge">NS-2</span>
           <h3 style="margin: 0.4rem 0; color: var(--navy-dark); font-weight:700;">Naval Leadership & Nautical Sciences</h3>
           <p style="font-size: 0.875rem; color: var(--text-muted);">
             Maritime Geography, Oceanography, Meteorology, Physics of Flight, Electricity & Electronics.
@@ -561,7 +930,7 @@
         </div>
 
         <div class="card">
-          <span class="badge" style="background-color: var(--navy-dark); color: var(--white);">NS-3</span>
+          <span class="badge">NS-3</span>
           <h3 style="margin: 0.4rem 0; color: var(--navy-dark); font-weight:700;">Naval Knowledge & Skills</h3>
           <p style="font-size: 0.875rem; color: var(--text-muted);">
             Sea Power, Naval Operations, Communications, Ship Construction, Navigation, Seamanship.
@@ -569,7 +938,7 @@
         </div>
 
         <div class="card">
-          <span class="badge" style="background-color: var(--navy-dark); color: var(--white);">NS-4</span>
+          <span class="badge">NS-4</span>
           <h3 style="margin: 0.4rem 0; color: var(--navy-dark); font-weight:700;">Seminars in Practical Leadership</h3>
           <p style="font-size: 0.875rem; color: var(--text-muted);">
             Cultural Awareness, SAT/ACT Prep, Suicide Prevention, Advanced Leadership.
@@ -601,7 +970,11 @@
       <div class="grid-3">
         
         <div class="leadership-card">
-          <img src="./CO.PNG" alt="Commanding Officer" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./co.png" alt="Commanding Officer" class="leadership-img"
+                 data-fallbacks="./co.png|./co.jpg"
+                 onerror="handleImgError(this, 'portrait', 'CO')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Commanding Officer</span>
             <h4>c/LCDR Tristan Biber</h4>
@@ -609,7 +982,11 @@
         </div>
 
         <div class="leadership-card">
-          <img src="./XO.PNG" alt="Executive Officer" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./xo.png" alt="Executive Officer" class="leadership-img"
+                 data-fallbacks="./xo.png|./xo.jpg"
+                 onerror="handleImgError(this, 'portrait', 'XO')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Executive Officer</span>
             <h4>c/Lt. Ontivaros</h4>
@@ -617,7 +994,11 @@
         </div>
 
         <div class="leadership-card">
-          <img src="./OPS.PNG" alt="Operations Officer" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./ops.png" alt="Operations Officer" class="leadership-img"
+                 data-fallbacks="./ops.png|./ops.jpg"
+                 onerror="handleImgError(this, 'portrait', 'OPS')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Operations Officer</span>
             <h4>c/LTJG Jordan Amposen-Johnson</h4>
@@ -625,7 +1006,11 @@
         </div>
 
         <div class="leadership-card">
-          <img src="./ADMIN.PNG" alt="Admin Officer" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./admin.png" alt="Admin Officer" class="leadership-img"
+                 data-fallbacks="./admin.png|./admin.jpg"
+                 onerror="handleImgError(this, 'portrait', 'ADMIN')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Admin Officer</span>
             <h4>c/ENS Bailey</h4>
@@ -633,7 +1018,11 @@
         </div>
 
         <div class="leadership-card">
-          <img src="./SUPPO.PNG" alt="Supply Officer" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./suppo.png" alt="Supply Officer" class="leadership-img"
+                 data-fallbacks="./suppo.png|./suppo.jpg"
+                 onerror="handleImgError(this, 'portrait', 'SUPPO')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Supply Officer</span>
             <h4>c/ENS Ward</h4>
@@ -641,7 +1030,11 @@
         </div>
 
         <div class="leadership-card">
-          <img src="./CMC.PNG" alt="Senior Enlisted Leader" class="leadership-img">
+          <div class="leadership-img-wrap">
+            <img src="./cmc.png" alt="Senior Enlisted Leader" class="leadership-img"
+                 data-fallbacks="./cmc.png|./cmc.jpg"
+                 onerror="handleImgError(this, 'portrait', 'CMC')">
+          </div>
           <div class="leadership-info">
             <span class="badge">Senior Enlisted Leader</span>
             <h4>c/SCPO Sofia Childers</h4>
@@ -674,12 +1067,36 @@
     <div id="gallery" class="tab-content">
       <h2 class="section-title"><i class="fa-solid fa-image"></i> Unit Gallery</h2>
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="./_dsc2807.png" alt="Color Guard Detail"></div>
-        <div class="gallery-item"><img src="./_dsc2827.png" alt="Color Guard Ceremony"></div>
-        <div class="gallery-item"><img src="./_dsc2789.png" alt="Color Guard Field Presentation"></div>
-        <div class="gallery-item"><img src="./_dsc2823.png" alt="Tunnel Walkout"></div>
-        <div class="gallery-item"><img src="./_dsc2173.png" alt="Company Staging"></div>
-        <div class="gallery-item"><img src="./_dsc2181.png" alt="Physical Training"></div>
+        <div class="gallery-item">
+          <img src="./_dsc2807.png" alt="Color Guard Detail"
+               data-fallbacks="./_dsc2807.png|./_dsc2807.jpg"
+               onerror="handleImgError(this, 'gallery', 'Color Guard')">
+        </div>
+        <div class="gallery-item">
+          <img src="./_dsc2827.png" alt="Color Guard Ceremony"
+               data-fallbacks="./_dsc2827.png|./_dsc2827.jpg"
+               onerror="handleImgError(this, 'gallery', 'Ceremony')">
+        </div>
+        <div class="gallery-item">
+          <img src="./_dsc2789.png" alt="Color Guard Field Presentation"
+               data-fallbacks="./_dsc2789.png|./_dsc2789.jpg"
+               onerror="handleImgError(this, 'gallery', 'Field Event')">
+        </div>
+        <div class="gallery-item">
+          <img src="./_dsc2823.png" alt="Tunnel Walkout"
+               data-fallbacks="./_dsc2823.png|./_dsc2823.jpg"
+               onerror="handleImgError(this, 'gallery', 'Tunnel Walkout')">
+        </div>
+        <div class="gallery-item">
+          <img src="./_dsc2173.png" alt="Company Staging"
+               data-fallbacks="./_dsc2173.png|./_dsc2173.jpg"
+               onerror="handleImgError(this, 'gallery', 'Company Staging')">
+        </div>
+        <div class="gallery-item">
+          <img src="./_dsc2181.png" alt="Physical Training"
+               data-fallbacks="./_dsc2181.png|./_dsc2181.jpg"
+               onerror="handleImgError(this, 'gallery', 'Physical Training')">
+        </div>
       </div>
     </div>
 
@@ -688,32 +1105,29 @@
       <h2 class="section-title"><i class="fa-solid fa-location-dot"></i> Contact Information & Location</h2>
       
       <div class="grid-2">
-        <div class="card">
-          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-building"></i> Mesa Ridge High School</h3>
+        <div class="card card-accent-left">
+          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-building" style="color: var(--navy-main);"></i> Mesa Ridge High School</h3>
           <p style="font-size: 0.9rem;"><strong>Address:</strong><br>6070 Mesa Ridge Parkway<br>Colorado Springs, CO 80911</p>
           <br>
           <p style="font-size: 0.9rem;"><strong>Main Phone:</strong> (719) 391-3600</p>
-          <p style="font-size: 0.9rem;"><strong>Secondary Line:</strong> (719) 391-3683</p>
+          <p style="font-size: 0.9rem;"><strong>NJROTC Office:</strong> Rooms 112 & 114</p>
           <br>
-          <p style="font-size: 0.9rem;"><strong>Rooms:</strong> 112 & 114 (NJROTC Building)</p>
+          <p style="font-size: 0.9rem;"><strong>Senior Naval Science Instructor:</strong><br>LCDR Tidwell — <a href="mailto:tidwellc@wsd3.org" style="color: var(--navy-accent); font-weight: 600;">tidwellc@wsd3.org</a></p>
+          <br>
+          <p style="font-size: 0.9rem;"><strong>Naval Science Instructor:</strong><br>SCPO Pearson — <a href="mailto:pearsonandrew5@wsd3.org" style="color: var(--navy-accent); font-weight: 600;">pearsonandrew5@wsd3.org</a></p>
         </div>
 
         <div class="card">
-          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-envelope"></i> Naval Science Instructors</h3>
-          <p style="font-size: 0.9rem;"><strong>LCDR Tidwell (SNSI):</strong><br><a href="mailto:tidwellc@wsd3.org" style="color: var(--navy-accent);">tidwellc@wsd3.org</a></p>
-          <br>
-          <p style="font-size: 0.9rem;"><strong>SCPO Pearson (NSI):</strong><br><a href="mailto:pearsonandrew5@wsd3.org" style="color: var(--navy-accent);">pearsonandrew5@wsd3.org</a></p>
+          <h3 style="color: var(--navy-dark); margin-bottom: 0.85rem; font-weight:700;"><i class="fa-solid fa-map-location-dot"></i> Campus Location Map</h3>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.824987019842!2d-104.7073286235129!3d38.74415897175659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87134f590bb5985b%3A0x8ddf31ad912a7a50!2sMesa%20Ridge%20High%20School!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
         </div>
-      </div>
-
-      <h3 class="section-title" style="font-size: 1.15rem; margin-top: 1.5rem;"><i class="fa-solid fa-map"></i> Google Maps Location</h3>
-      <div class="map-container">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.222718742721!2d-104.7088194235282!3d38.73562425624838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87134375b4dc157b%3A0x6e7e163d0fbfa9a!2sMesa%20Ridge%20High%20School!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
       </div>
     </div>
 
@@ -721,31 +1135,10 @@
 
   <!-- Footer -->
   <footer>
-    <p><strong>Grizzly Company • Mesa Ridge High School NJROTC</strong></p>
-    <p>6070 Mesa Ridge Parkway, Colorado Springs, CO 80911 • (719) 391-3600</p>
-    <p style="font-size: 0.75rem; margin-top: 0.4rem; color: #64748b;">Not an official publication of the U.S. Navy or Department of Defense.</p>
+    <p><strong>Mesa Ridge High School NJROTC • Grizzly Company</strong></p>
+    <p>6070 Mesa Ridge Parkway, Colorado Springs, CO 80911</p>
+    <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">Official Unit Web Portal • Widefield School District 3</p>
   </footer>
 
-  <!-- JavaScript -->
-  <script>
-    function switchTab(tabId) {
-      const contents = document.querySelectorAll('.tab-content');
-      contents.forEach(content => content.classList.remove('active'));
-
-      const tabs = document.querySelectorAll('.nav-tab');
-      tabs.forEach(tab => tab.classList.remove('active'));
-
-      const targetContent = document.getElementById(tabId);
-      if (targetContent) {
-        targetContent.classList.add('active');
-      }
-
-      if (window.event && window.event.currentTarget) {
-        window.event.currentTarget.classList.add('active');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
 </body>
 </html>

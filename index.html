@@ -8,56 +8,55 @@
     <link rel="icon" href="Untitled design (18).png" type="image/png">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts for clean, professional military/academic typography -->
+    <!-- Google Fonts: Inter for UI and JetBrains Mono for a clean, non-AI technical edge -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #ffffff;
-            --bg-card: #f8fafc;
-            --text-main: #0a1f3a;
+            --bg-body: #f4f6f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
             --text-muted: #475569;
             --border-color: #cbd5e1;
+            --navy-dark: #071628;
             --navy-main: #0a1f3a;
-            --navy-light: #16325c;
-            --accent-blue: #2563eb;
-            --accent-hover: #1d4ed8;
-            --light-blue-hover: #e0f2fe;
+            --navy-light: #1e3a8a;
+            --accent-blue: #1d4ed8;
+            --light-blue-hover: #eff6ff;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.5;
             -webkit-text-size-adjust: 100%;
         }
 
-        /* HEADER - LARGER LOGOS AND TEXT */
+        /* HEADER */
         header {
-            background-color: var(--navy-main);
+            background-color: var(--navy-dark);
             color: #ffffff;
-            border-bottom: 2px solid var(--navy-light);
-            padding: 20px 28px;
+            border-bottom: 3px solid var(--navy-light);
+            padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
-            position: relative;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
 
         .header-logos {
@@ -67,28 +66,30 @@
         }
 
         .header-logos img {
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             object-fit: contain;
             border-radius: 0px;
         }
 
         .header-titles h1 {
-            font-size: 1.75rem;
-            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.85rem;
+            font-weight: 700;
             letter-spacing: 0.5px;
             color: #ffffff;
         }
 
         .header-titles p {
-            font-size: 0.95rem;
-            color: #cbd5e1;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            font-weight: 500;
         }
 
         /* TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
         .header-right {
-            font-size: 0.95rem;
-            color: #f8fafc;
+            font-size: 0.9rem;
+            color: #e2e8f0;
             text-align: right;
             display: flex;
             flex-direction: column;
@@ -104,7 +105,7 @@
 
         .header-right i {
             color: #60a5fa;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .header-right .instructor-name {
@@ -113,8 +114,10 @@
         }
 
         .header-right a {
-            color: #60a5fa;
+            color: #93c5fd;
             text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
         }
 
         .header-right a:hover {
@@ -140,47 +143,46 @@
 
         /* NAVIGATION BAR */
         nav {
-            background-color: #f1f5f9;
+            background-color: var(--navy-main);
             border-bottom: 2px solid var(--border-color);
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            padding: 0 16px;
-            transition: max-height 0.3s ease, opacity 0.3s ease;
+            padding: 0 24px;
         }
 
         .nav-tab {
             background: none;
             border: none;
-            color: var(--text-muted);
-            padding: 14px 18px;
+            color: #cbd5e1;
+            padding: 16px 20px;
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             border-bottom: 3px solid transparent;
             border-radius: 0px;
         }
 
         .nav-tab:hover {
-            color: var(--navy-main);
-            background-color: var(--light-blue-hover);
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .nav-tab.active {
-            color: var(--navy-main);
-            background-color: #ffffff;
-            border-bottom-color: var(--accent-blue);
+            color: #ffffff;
+            background-color: var(--navy-light);
+            border-bottom-color: #60a5fa;
         }
 
         /* MAIN CONTENT CONTAINER */
         main {
             max-width: 1200px;
-            margin: 24px auto;
-            padding: 0 20px;
+            margin: 32px auto;
+            padding: 0 24px;
         }
 
         .tab-content {
@@ -196,29 +198,29 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 0px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
         .card h2 {
             font-size: 1.25rem;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             color: var(--navy-main);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 700;
         }
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
-        /* STRICT 3-PER-ROW GRID FOR CHAIN OF COMMAND */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -241,7 +243,7 @@
         }
 
         th, td {
-            padding: 12px;
+            padding: 14px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
@@ -250,13 +252,16 @@
             background-color: var(--navy-main);
             color: #ffffff;
             font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         tr:hover {
             background-color: var(--light-blue-hover);
         }
 
-        /* EVENTS CARDS GRID (SQUARE/RECTANGLE CARDS WITH ADD TO CALENDAR) */
+        /* EVENTS CARDS GRID */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -273,24 +278,25 @@
             flex-direction: column;
             justify-content: space-between;
             gap: 16px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            transition: border-color 0.15s ease;
         }
 
         .event-card:hover {
             border-color: var(--accent-blue);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .event-info h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--navy-main);
             margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .event-date {
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--accent-blue);
             margin-bottom: 4px;
             display: flex;
@@ -319,65 +325,65 @@
             gap: 8px;
             background-color: var(--navy-main);
             color: #ffffff;
-            padding: 8px 14px;
+            padding: 10px 14px;
             font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 0px;
             border: 1px solid var(--navy-main);
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.15s ease;
             cursor: pointer;
             text-align: center;
             width: 100%;
         }
 
         .add-cal-btn:hover {
-            background-color: var(--light-blue-hover);
-            color: var(--navy-main);
-            border-color: var(--accent-blue);
+            background-color: var(--navy-light);
         }
 
         /* STATS BADGES */
         .stat-box {
             background-color: #ffffff;
-            padding: 18px;
+            padding: 20px;
             border-radius: 0px;
             text-align: center;
             border: 1px solid var(--border-color);
         }
 
         .stat-box h3 {
-            font-size: 1.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
             color: var(--navy-main);
             margin-bottom: 4px;
+            font-weight: 700;
         }
 
         .stat-box p {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
+            letter-spacing: 0.75px;
+            font-weight: 700;
         }
 
-        /* LEADERSHIP / COC WRAPPER (LARGE PORTRAIT + SEPARATE INFO BOX BELOW) */
+        /* CHAIN OF COMMAND LAYOUT */
         .coc-item-wrapper {
             display: flex;
             flex-direction: column;
             width: 100%;
+            border: 1px solid var(--border-color);
+            background-color: #ffffff;
         }
 
         .coc-img-container {
             width: 100%;
-            height: 280px;
-            border-radius: 0px;
-            overflow: hidden;
-            background-color: var(--navy-main);
-            border: 1px solid var(--border-color);
-            border-bottom: none;
+            height: 300px;
+            background-color: var(--navy-dark);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .coc-img-container img {
@@ -387,25 +393,25 @@
         }
 
         .coc-info-box {
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 0px;
-            text-align: center;
             padding: 20px;
-            width: 100%;
+            text-align: center;
+            background-color: #ffffff;
         }
 
         .coc-info-box h3 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--navy-main);
             margin-bottom: 4px;
+            font-weight: 700;
         }
 
         .coc-info-box p.rank-title {
-            font-size: 0.88rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
             color: var(--accent-blue);
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .coc-info-box p.desc {
@@ -436,11 +442,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         /* FALLBACK IMAGE BOX */
@@ -451,7 +457,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: #f1f5f9;
+            background: #e2e8f0;
             color: var(--text-muted);
             font-size: 0.75rem;
             text-align: center;
@@ -461,21 +467,22 @@
 
         .img-fallback i {
             font-size: 1.5rem;
-            color: var(--border-color);
+            color: #94a3b8;
         }
 
         /* FOOTER */
         footer {
             text-align: center;
-            padding: 24px;
-            color: #ffffff;
-            font-size: 0.82rem;
+            padding: 28px;
+            color: #94a3b8;
+            font-size: 0.85rem;
             border-top: 2px solid var(--border-color);
-            background-color: var(--navy-main);
-            margin-top: 40px;
+            background-color: var(--navy-dark);
+            margin-top: 48px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* RESPONSIVE MEDIA QUERIES FOR MOBILES & TABLETS */
+        /* RESPONSIVE MEDIA QUERIES */
         @media screen and (max-width: 950px) {
             .grid-3 {
                 grid-template-columns: repeat(2, 1fr);
@@ -490,12 +497,12 @@
 
         @media screen and (max-width: 850px) {
             header {
-                padding: 16px 20px;
+                padding: 18px 20px;
             }
 
             .header-logos img {
-                width: 48px;
-                height: 48px;
+                width: 52px;
+                height: 52px;
             }
 
             .header-titles h1 {
@@ -506,12 +513,9 @@
                 font-size: 0.85rem;
                 text-align: left;
                 width: 100%;
-                margin-top: 6px;
-                padding-top: 6px;
+                margin-top: 8px;
+                padding-top: 8px;
                 border-top: 1px solid rgba(255, 255, 255, 0.15);
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
             }
 
             .header-right div {
@@ -537,28 +541,23 @@
 
             .nav-tab {
                 width: 100%;
-                padding: 12px 16px;
+                padding: 14px 20px;
                 border-bottom: 1px solid var(--border-color);
                 border-left: 3px solid transparent;
             }
 
             .nav-tab.active {
                 border-bottom-color: var(--border-color);
-                border-left-color: var(--accent-blue);
+                border-left-color: #60a5fa;
             }
 
             main {
-                margin: 16px auto;
-                padding: 0 12px;
+                margin: 20px auto;
+                padding: 0 16px;
             }
 
             .card {
-                padding: 18px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 10px;
+                padding: 20px;
             }
         }
     </style>
@@ -603,6 +602,7 @@
         <button class="nav-tab" onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
         <button class="nav-tab" onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
         <button class="nav-tab" onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Teams</button>
+        <button class="nav-tab" onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
         <button class="nav-tab" onclick="switchTab(event, 'gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
         <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
     </nav>
@@ -617,7 +617,7 @@
                 <p>Mesa Ridge High School NJROTC develops informed and responsible citizens dedicated to character growth, leadership excellence, and service to our community and nation. Operating in Rooms 112 and 114, our unit upholds the highest traditions of naval leadership, teamwork, and scholastic dedication.</p>
             </div>
 
-            <div class="grid-3" style="margin-bottom: 24px;">
+            <div class="grid-3" style="margin-bottom: 28px;">
                 <div class="stat-box">
                     <h3>100+</h3>
                     <p>Active Cadets</p>
@@ -687,7 +687,7 @@
             </div>
         </div>
 
-        <!-- 2. EVENTS TAB (CARDS WITH ADD TO CALENDAR) -->
+        <!-- 2. EVENTS TAB -->
         <div id="events" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-calendar-days"></i> Upcoming Unit Events</h2>
@@ -748,21 +748,21 @@
             <div class="card">
                 <h2><i class="fa-solid fa-book-open"></i> Naval Science Curriculum</h2>
                 <p style="margin-bottom: 16px; color: var(--text-muted);">The NJROTC curriculum is structured to build progressive leadership, nautical science expertise, and civic responsibility across four academic years:</p>
-                <div class="grid-2" style="margin-bottom: 24px;">
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 1: Introduction</h3>
+                <div class="grid-2" style="margin-bottom: 28px;">
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 1: Introduction</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Focuses on introduction to the naval service, military law, basic citizenship, leadership foundations, and wellness/fitness conditioning.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 2: Maritime History</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 2: Maritime History</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Covers maritime history, naval heritage, leadership theory, communication skills, and introduction to navigation and seamanship.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 3: Leadership &amp; Strategies</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 3: Leadership &amp; Strategies</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Emphasizes advanced naval leadership, naval operations, meteorology, astronomy, physics, and practical command responsibility.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 4: Senior Management</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 4: Senior Management</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Practical application of cadet corps management, mentorship, financial responsibility, and advanced ethics.</p>
                     </div>
                 </div>
@@ -804,7 +804,7 @@
             </div>
         </div>
 
-        <!-- 4. CHAIN OF COMMAND TAB (LARGE PORTRAITS WITH SEPARATE INFO BOX BELOW, 3 PER ROW) -->
+        <!-- 4. CHAIN OF COMMAND TAB -->
         <div id="coc" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-sitemap"></i> Grizzly Company Leadership Roster</h2>
@@ -884,27 +884,60 @@
             <div class="card">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Competitive &amp; Specialized Teams</h2>
                 <div class="grid-2">
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">High-endurance physical conditioning team focusing on obstacle courses, rope bridges, ruck marches, and strength competitions.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Precision presentation of the American and Navy flags at school athletic events, community ceremonies, and official functions.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Exhibition and regulation armed and unarmed drill squads showcasing synchronized movements and military bearing.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Air rifle safety, precision marksmanship training, and postal rifle competitions governed by strict safety standards.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 6. GALLERY TAB -->
+        <!-- 6. KNOWLEDGE HUB TAB -->
+        <div id="knowledge" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub &amp; Rank Chart</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Reference materials for cadet ranks, rates, general orders, and core leadership study guides.</p>
+                <div class="grid-2">
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-medal"></i> NJROTC Cadet Ranks</h3>
+                        <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--text-muted);">
+                            <li><strong>Cadet Commander (c/LCDR)</strong> - Company Commander</li>
+                            <li><strong>Cadet Lieutenant Commander</strong></li>
+                            <li><strong>Cadet Lieutenant (c/LT)</strong></li>
+                            <li><strong>Cadet Lieutenant Junior Grade (c/LTJG)</strong></li>
+                            <li><strong>Cadet Ensign (c/ENS)</strong></li>
+                            <li><strong>Cadet Master Chief Petty Officer (c/MCPO)</strong></li>
+                            <li><strong>Cadet Senior Chief Petty Officer (c/SCPO)</strong></li>
+                            <li><strong>Cadet Chief Petty Officer (c/CPO)</strong></li>
+                        </ul>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-list-check"></i> General Orders of a Sentry</h3>
+                        <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--text-muted);">
+                            <li>To take charge of this post and all government property in view.</li>
+                            <li>To walk my post in a military manner, keeping always on the alert and observing everything that takes place within sight or hearing.</li>
+                            <li>To report all violations of orders I am instructed to enforce.</li>
+                            <li>To repeat all calls from posts more distant from the guardhouse than my own.</li>
+                            <li>To quit my post only when properly relieved.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. GALLERY TAB -->
         <div id="gallery" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-images"></i> Unit Photo Gallery</h2>
@@ -936,7 +969,7 @@
             </div>
         </div>
 
-        <!-- 7. CONTACT & LOCATION TAB -->
+        <!-- 8. CONTACT & LOCATION TAB -->
         <div id="contact" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</h2>

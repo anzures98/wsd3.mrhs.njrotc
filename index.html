@@ -19,16 +19,16 @@
         }
 
         :root {
-            --navy-dark: #071628;
+            --bg-body: #ffffff;
+            --bg-card: #f8fafc;
+            --text-main: #0a1f3a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
             --navy-main: #0a1f3a;
             --navy-light: #16325c;
-            --navy-hover: #1e4278;
-            --navy-accent: #2c5282;
-            --text-light: #ffffff;
-            --text-muted: #cbd5e1;
-            --border-color: #233854;
-            --bg-body: #050e18;
-            --bg-card: #0a1f3a;
+            --accent-blue: #2563eb;
+            --accent-hover: #1d4ed8;
+            --light-blue-hover: #e0f2fe;
         }
 
         * {
@@ -40,7 +40,7 @@
 
         body {
             background-color: var(--bg-body);
-            color: var(--text-light);
+            color: var(--text-main);
             line-height: 1.6;
             -webkit-text-size-adjust: 100%;
         }
@@ -49,7 +49,7 @@
         header {
             background-color: var(--navy-main);
             color: #ffffff;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--navy-light);
             padding: 14px 24px;
             display: flex;
             justify-content: space-between;
@@ -75,7 +75,7 @@
             width: 44px;
             height: 44px;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 0px;
         }
 
         .header-titles h1 {
@@ -87,7 +87,7 @@
 
         .header-titles p {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: #cbd5e1;
         }
 
         /* TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
@@ -134,13 +134,18 @@
             color: #ffffff;
             font-size: 1.2rem;
             padding: 8px 12px;
-            border-radius: 4px;
+            border-radius: 0px;
             cursor: pointer;
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--light-blue-hover);
+            color: var(--navy-main);
         }
 
         /* NAVIGATION BAR */
         nav {
-            background-color: var(--navy-dark);
+            background-color: #f1f5f9;
             border-bottom: 2px solid var(--border-color);
             display: flex;
             overflow-x: auto;
@@ -162,17 +167,18 @@
             gap: 8px;
             transition: all 0.2s ease;
             border-bottom: 3px solid transparent;
+            border-radius: 0px;
         }
 
         .nav-tab:hover {
-            color: var(--text-light);
-            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--navy-main);
+            background-color: var(--light-blue-hover);
         }
 
         .nav-tab.active {
-            color: #ffffff;
-            background-color: var(--navy-light);
-            border-bottom-color: #3b82f6;
+            color: var(--navy-main);
+            background-color: #ffffff;
+            border-bottom-color: var(--accent-blue);
         }
 
         /* MAIN CONTENT CONTAINER */
@@ -194,15 +200,16 @@
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 0px;
             padding: 24px;
             margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .card h2 {
             font-size: 1.25rem;
             margin-bottom: 16px;
-            color: #ffffff;
+            color: var(--navy-main);
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
             display: flex;
@@ -244,27 +251,27 @@
         }
 
         th {
-            background-color: var(--navy-light);
+            background-color: var(--navy-main);
             color: #ffffff;
             font-weight: 600;
         }
 
         tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
+            background-color: var(--light-blue-hover);
         }
 
         /* STATS BADGES */
         .stat-box {
-            background-color: var(--navy-light);
+            background-color: #ffffff;
             padding: 18px;
-            border-radius: 4px;
+            border-radius: 0px;
             text-align: center;
             border: 1px solid var(--border-color);
         }
 
         .stat-box h3 {
             font-size: 1.8rem;
-            color: #ffffff;
+            color: var(--navy-main);
             margin-bottom: 4px;
         }
 
@@ -278,8 +285,8 @@
 
         /* LEADERSHIP / COC CARDS */
         .coc-card {
-            background-color: var(--navy-light);
-            border-radius: 4px;
+            background-color: #ffffff;
+            border-radius: 0px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             text-align: center;
@@ -290,9 +297,9 @@
             width: 100px;
             height: 120px;
             margin: 0 auto 15px auto;
-            border-radius: 4px;
+            border-radius: 0px;
             overflow: hidden;
-            background-color: var(--navy-dark);
+            background-color: var(--navy-main);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
@@ -307,13 +314,13 @@
 
         .coc-card h3 {
             font-size: 1.1rem;
-            color: #ffffff;
+            color: var(--navy-main);
             margin-bottom: 4px;
         }
 
         .coc-card p.rank-title {
             font-size: 0.85rem;
-            color: #60a5fa;
+            color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 8px;
         }
@@ -331,8 +338,8 @@
         }
 
         .gallery-item {
-            background-color: var(--navy-light);
-            border-radius: 4px;
+            background-color: #ffffff;
+            border-radius: 0px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             aspect-ratio: 4/3;
@@ -361,7 +368,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: var(--navy-dark);
+            background: #f1f5f9;
             color: var(--text-muted);
             font-size: 0.75rem;
             text-align: center;
@@ -378,7 +385,7 @@
         footer {
             text-align: center;
             padding: 24px;
-            color: var(--text-muted);
+            color: #ffffff;
             font-size: 0.82rem;
             border-top: 2px solid var(--border-color);
             background-color: var(--navy-main);
@@ -433,7 +440,7 @@
 
             .nav-tab.active {
                 border-bottom-color: var(--border-color);
-                border-left-color: #3b82f6;
+                border-left-color: var(--accent-blue);
             }
 
             main {
@@ -566,7 +573,7 @@
 
                 <div class="card" style="margin-bottom: 0;">
                     <h2><i class="fa-solid fa-bullseye"></i> Core Principles</h2>
-                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-light);">
+                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-main);">
                         <li><strong>Honor:</strong> Integrity, ethical conduct, and accountability in every action.</li>
                         <li><strong>Courage:</strong> Moral strength to stand up for what is right and face adversity with resilience.</li>
                         <li><strong>Commitment:</strong> Dedication to unit cohesion, academic excellence, and mutual support.</li>
@@ -627,20 +634,20 @@
                 <h2><i class="fa-solid fa-book-open"></i> Naval Science Curriculum</h2>
                 <p style="margin-bottom: 16px; color: var(--text-muted);">The NJROTC curriculum is structured to build progressive leadership, nautical science expertise, and civic responsibility across four academic years:</p>
                 <div class="grid-2">
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 1: Introduction</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 1: Introduction</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Focuses on introduction to the naval service, military law, basic citizenship, leadership foundations, and wellness/fitness conditioning.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 2: Maritime History</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 2: Maritime History</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Covers maritime history, naval heritage, leadership theory, communication skills, and introduction to navigation and seamanship.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 3: Leadership &amp; Strategies</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 3: Leadership &amp; Strategies</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Emphasizes advanced naval leadership, naval operations, meteorology, astronomy, physics, and practical command responsibility.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #60a5fa; margin-bottom: 8px;">Naval Science 4: Senior Management</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px;">Naval Science 4: Senior Management</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Practical application of cadet corps management, mentorship, financial responsibility, and advanced ethics.</p>
                     </div>
                 </div>
@@ -709,20 +716,20 @@
             <div class="card">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Competitive &amp; Specialized Teams</h2>
                 <div class="grid-2">
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">High-endurance physical conditioning team focusing on obstacle courses, rope bridges, ruck marches, and strength competitions.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Precision presentation of the American and Navy flags at school athletic events, community ceremonies, and official functions.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Exhibition and regulation armed and unarmed drill squads showcasing synchronized movements and military bearing.</p>
                     </div>
-                    <div style="background: var(--navy-light); padding: 18px; border-radius: 4px; border: 1px solid var(--border-color);">
-                        <h3 style="color: #ffffff; margin-bottom: 6px;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
+                    <div style="background: #ffffff; padding: 18px; border-radius: 0px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 6px;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Air rifle safety, precision marksmanship training, and postal rifle competitions governed by strict safety standards.</p>
                     </div>
                 </div>
@@ -768,9 +775,9 @@
                 <div class="grid-2">
                     <div>
                         <p style="margin-bottom: 14px;"><strong>Mesa Ridge High School NJROTC</strong><br>Grizzly Company Headquarters<br>Rooms 112 &amp; 114<br>Colorado Springs, CO</p>
-                        <p style="margin-bottom: 14px;"><strong>Naval Science Instructors:</strong><br>LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org" style="color:#60a5fa;">tidwellc@wsd3.org</a><br>SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org" style="color:#60a5fa;">pearsonandrew5@wsd3.org</a></p>
+                        <p style="margin-bottom: 14px;"><strong>Naval Science Instructors:</strong><br>LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org" style="color:var(--accent-blue);">tidwellc@wsd3.org</a><br>SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org" style="color:var(--accent-blue);">pearsonandrew5@wsd3.org</a></p>
                     </div>
-                    <div style="background: var(--navy-light); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
+                    <div style="background: #f1f5f9; border-radius: 0px; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
                         <iframe 
                             width="100%" 
                             height="100%" 

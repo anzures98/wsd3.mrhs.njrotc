@@ -32,6 +32,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            border-radius: 0 !important;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -71,7 +72,6 @@
             width: 68px;
             height: 68px;
             object-fit: contain;
-            border-radius: 0px;
         }
 
         .header-titles h1 {
@@ -134,7 +134,6 @@
             color: #ffffff;
             font-size: 1.2rem;
             padding: 8px 12px;
-            border-radius: 0px;
             cursor: pointer;
         }
 
@@ -166,7 +165,6 @@
             gap: 8px;
             transition: all 0.15s ease;
             border-bottom: 3px solid transparent;
-            border-radius: 0px;
         }
 
         .nav-tab:hover {
@@ -199,7 +197,6 @@
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 0px;
             padding: 28px;
             margin-bottom: 28px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -263,73 +260,88 @@
             background-color: var(--light-blue-hover);
         }
 
-        /* EVENTS CARDS GRID & NEW MATCHING EVENT CARD STYLING */
-        .events-stack {
-            display: flex;
-            flex-direction: column;
+        /* EVENTS CARDS GRID (Square Grid Layout Restored) */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             margin-top: 10px;
         }
 
-        .event-card-custom {
-            background-color: var(--navy-dark);
-            border: 1px solid var(--navy-light);
-            border-radius: 6px;
-            padding: 24px;
+        .event-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            gap: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            transition: border-color 0.15s ease;
         }
 
-        .event-card-info h3 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.15rem;
-            color: var(--accent-gold);
+        .event-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .event-info h3 {
+            font-size: 1.05rem;
+            color: var(--navy-main);
             margin-bottom: 6px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
-        .event-card-info p {
-            font-size: 0.95rem;
-            color: #e2e8f0;
-            font-weight: 500;
+        .event-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .add-cal-btn-custom {
+        .event-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .add-cal-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: transparent;
-            color: var(--accent-gold);
-            padding: 10px 18px;
+            background-color: var(--navy-main);
+            color: #ffffff;
+            padding: 10px 14px;
             font-size: 0.85rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 4px;
-            border: 1px solid var(--accent-gold);
-            transition: all 0.2s ease;
+            border: 1px solid var(--navy-main);
+            transition: background-color 0.15s ease;
             cursor: pointer;
             text-align: center;
-            white-space: nowrap;
-            letter-spacing: 0.5px;
+            width: 100%;
         }
 
-        .add-cal-btn-custom:hover {
-            background-color: var(--accent-gold);
-            color: var(--navy-dark);
+        .add-cal-btn:hover {
+            background-color: var(--navy-light);
         }
 
         /* STATS BADGES */
         .stat-box {
             background-color: #ffffff;
             padding: 20px;
-            border-radius: 0px;
             text-align: center;
             border: 1px solid var(--border-color);
         }
@@ -412,7 +424,6 @@
 
         .gallery-item {
             background-color: #ffffff;
-            border-radius: 0px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             aspect-ratio: 4/3;
@@ -602,13 +613,13 @@
                 <p>Mesa Ridge High School NJROTC develops informed and responsible citizens dedicated to character growth, leadership excellence, and service to our community and nation. Operating in Rooms 112 and 114, our unit upholds the highest traditions of naval leadership, teamwork, and scholastic dedication.</p>
             </div>
 
-            <!-- OUR MISSION SECTION MATCHING SCREENSHOT -->
+            <!-- OUR MISSION SECTION -->
             <div class="card" style="background-color: var(--navy-dark); border-color: var(--navy-light); text-align: center; padding: 36px 20px;">
                 <h2 style="color: var(--accent-gold); justify-content: center; border-bottom: none; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 24px;">OUR MISSION</h2>
-                <div style="background-color: #e2e8f0; border: 1px solid var(--border-color); border-radius: 0px; width: 100%; max-height: 420px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <div style="background-color: #e2e8f0; border: 1px solid var(--border-color); width: 100%; max-height: 420px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
                     <img src="IMG_5858.JPG" alt="Grizzly Company Mission" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImgError(this, 'IMG_5858.JPG')">
                 </div>
-                <div style="background-color: var(--navy-main); border: 1px solid var(--border-color); border-radius: 0px; padding: 24px; color: var(--accent-gold); font-style: italic; font-size: 1.05rem; line-height: 1.6;">
+                <div style="background-color: var(--navy-main); border: 1px solid var(--border-color); padding: 24px; color: var(--accent-gold); font-style: italic; font-size: 1.05rem; line-height: 1.6;">
                     "To instill in each cadet an awareness of their responsibilities as United States citizens, to develop strong moral character, and to build skills for personal growth and leadership."
                 </div>
             </div>
@@ -687,48 +698,52 @@
         <div id="events" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-calendar-days"></i> Upcoming Unit Events</h2>
-                <div class="events-stack">
-                    <!-- AMI Prep Event -->
-                    <div class="event-card-custom">
-                        <div class="event-card-info">
-                            <h3>AREA MANAGER'S INSPECTION (AMI) PREP</h3>
-                            <p>Wed, Nov 18 &bull; 1430–1600</p>
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 18, 2026 &bull; 1430</div>
+                            <h3>Area Manager's Inspection (AMI) Prep</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Rooms 112/114</div>
+                            <p class="event-desc">Mandatory uniform check and personnel briefing.</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261118T143000/20261118T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn-custom">
-                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261118T143000/20261118T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
                         </a>
                     </div>
 
-                    <!-- Spring Inspection Event -->
-                    <div class="event-card-custom">
-                        <div class="event-card-info">
-                            <h3>SPRING INSPECTION</h3>
-                            <p>Fri, May 15 &bull; 0800–1200</p>
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> May 15, 2027 &bull; 0800</div>
+                            <h3>Spring Inspection</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> NJROTC Building &amp; Drill Deck</div>
+                            <p class="event-desc">Spring Inspection Event.</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Spring+Inspection&dates=20260515T080000/20260515T120000&details=Spring+Inspection+Event.&location=NJROTC+Building+%26+Drill+Deck" target="_blank" class="add-cal-btn-custom">
-                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Spring+Inspection&dates=20270515T080000/20270515T120000&details=Spring+Inspection+Event.&location=NJROTC+Building+%26+Drill+Deck" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
                         </a>
                     </div>
 
-                    <!-- Awards Ceremony Event -->
-                    <div class="event-card-custom">
-                        <div class="event-card-info">
-                            <h3>AWARDS CEREMONY</h3>
-                            <p>Fri, May 22 &bull; 1800–2000</p>
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> May 22, 2027 &bull; 1800</div>
+                            <h3>Awards Ceremony</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> School Auditorium</div>
+                            <p class="event-desc">Annual Awards Ceremony.</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Awards+Ceremony&dates=20260522T180000/20260522T200000&details=Annual+Awards+Ceremony.&location=School+Auditorium" target="_blank" class="add-cal-btn-custom">
-                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Awards+Ceremony&dates=20270522T180000/20270522T200000&details=Annual+Awards+Ceremony.&location=School+Auditorium" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
                         </a>
                     </div>
 
-                    <!-- End of Year Picnic Event -->
-                    <div class="event-card-custom">
-                        <div class="event-card-info">
-                            <h3>END OF YEAR PICNIC</h3>
-                            <p>Fri, Jun 5 &bull; 1100–1400</p>
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Jun 05, 2027 &bull; 1100</div>
+                            <h3>End of Year Picnic</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Memorial Park Pavilion</div>
+                            <p class="event-desc">End of Year Picnic.</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=End+of+Year+Picnic&dates=20260605T110000/20260605T140000&details=End+of+Year+Picnic.&location=Memorial+Park+Pavilion" target="_blank" class="add-cal-btn-custom">
-                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=End+of+Year+Picnic&dates=20270605T110000/20270605T140000&details=End+of+Year+Picnic.&location=Memorial+Park+Pavilion" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
                         </a>
                     </div>
                 </div>
@@ -741,54 +756,57 @@
                 <h2><i class="fa-solid fa-book-open"></i> Naval Science Curriculum</h2>
                 <p style="margin-bottom: 16px; color: var(--text-muted);">The NJROTC curriculum is structured to build progressive leadership, nautical science expertise, and civic responsibility across four academic years:</p>
                 <div class="grid-2" style="margin-bottom: 28px;">
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 1: Introduction</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Focuses on introduction to the naval service, military law, basic citizenship, leadership foundations, and wellness/fitness conditioning.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 2: Maritime History</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Covers maritime history, naval heritage, leadership theory, communication skills, and introduction to navigation and seamanship.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 3: Leadership &amp; Strategies</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Emphasizes advanced naval leadership, naval operations, meteorology, astronomy, physics, and practical command responsibility.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;">Naval Science 4: Senior Management</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Practical application of cadet corps management, mentorship, financial responsibility, and advanced ethics.</p>
                     </div>
                 </div>
 
-                <h2><i class="fa-solid fa-clipboard-check"></i> Grading Policies &amp; Standards</h2>
+                <h2><i class="fa-solid fa-clipboard-check"></i> Grade Breakdown</h2>
                 <div class="table-container">
                     <table>
                         <thead>
                             <tr>
                                 <th>Category</th>
                                 <th>Weight</th>
-                                <th>Description &amp; Expectations</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Uniform Inspection</strong></td>
-                                <td>30%</td>
-                                <td>Weekly wear of the prescribed NJROTC uniform. Proper grooming, shoe shine, ribbons, and military bearing are strictly graded.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Physical Training (PT)</strong></td>
+                                <td><strong>Uniforms</strong></td>
                                 <td>25%</td>
-                                <td>Active participation and personal improvement during Thursday/Friday physical conditioning sessions and fitness assessments.</td>
                             </tr>
                             <tr>
-                                <td><strong>Academics &amp; Coursework</strong></td>
+                                <td><strong>Knowledge</strong></td>
                                 <td>25%</td>
-                                <td>Naval science textbook assignments, quizzes, leadership projects, and classroom participation.</td>
                             </tr>
                             <tr>
-                                <td><strong>Drill &amp; Ceremonies / Conduct</strong></td>
+                                <td><strong>Fitness</strong></td>
                                 <td>20%</td>
-                                <td>Participation in drill movements, adherence to unit rules, chain of command respect, and teamwork.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Drill</strong></td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PQS</strong></td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semester Exam</strong></td>
+                                <td>10% of overall</td>
                             </tr>
                         </tbody>
                     </table>
@@ -982,19 +1000,19 @@
             <div class="card">
                 <h2><i class="fa-solid fa-users-rectangle"></i> Competitive &amp; Specialized Teams</h2>
                 <div class="grid-2">
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-person-running"></i> Raiders Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">High-endurance physical conditioning team focusing on obstacle courses, rope bridges, ruck marches, and strength competitions.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-flag"></i> Color Guard</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Precision presentation of the American and Navy flags at school athletic events, community ceremonies, and official functions.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-medal"></i> Drill Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Exhibition and regulation armed and unarmed drill squads showcasing synchronized movements and military bearing.</p>
                     </div>
-                    <div style="background: #ffffff; padding: 20px; border-radius: 0px; border: 1px solid var(--border-color);">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
                         <h3 style="color: var(--navy-main); margin-bottom: 6px; font-weight: 700;"><i class="fa-solid fa-bullseye"></i> Marksmanship Team</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted);">Air rifle safety, precision marksmanship training, and postal rifle competitions governed by strict safety standards.</p>
                     </div>
@@ -1213,7 +1231,7 @@
                         <p style="margin-bottom: 14px;"><strong>Mesa Ridge High School NJROTC</strong><br>Grizzly Company Headquarters<br>Rooms 112 &amp; 114<br>Colorado Springs, CO</p>
                         <p style="margin-bottom: 14px;"><strong>Naval Science Instructors:</strong><br>LCDR Tidwell: <a href="mailto:tidwellc@wsd3.org" style="color:var(--accent-blue);">tidwellc@wsd3.org</a><br>SCPO Pearson: <a href="mailto:pearsonandrew5@wsd3.org" style="color:var(--accent-blue);">pearsonandrew5@wsd3.org</a></p>
                     </div>
-                    <div style="background: #f1f5f9; border-radius: 0px; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
+                    <div style="background: #f1f5f9; overflow: hidden; border: 1px solid var(--border-color); min-height: 250px;">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3708.6313534190313!2d-104.71295352364828!3d38.721974957035144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x871341d48745cfa9%3A0x93fbb2ba48470323!2sMesa%20Ridge%20High%20School!5e1!3m2!1sen!2sus!4v1792951803949!5m2!1sen!2sus" width="100%" height="100%" style="border:0; min-height: 250px;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
                 </div>

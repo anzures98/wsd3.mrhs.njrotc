@@ -263,84 +263,66 @@
             background-color: var(--light-blue-hover);
         }
 
-        /* EVENTS CARDS GRID */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        /* EVENTS CARDS GRID & NEW MATCHING EVENT CARD STYLING */
+        .events-stack {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
             margin-top: 10px;
         }
 
-        .event-card {
-            background-color: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 0px;
-            padding: 20px;
+        .event-card-custom {
+            background-color: var(--navy-dark);
+            border: 1px solid var(--navy-light);
+            border-radius: 6px;
+            padding: 24px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
-            gap: 16px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-            transition: border-color 0.15s ease;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .event-card:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .event-info h3 {
-            font-size: 1.05rem;
-            color: var(--navy-main);
+        .event-card-info h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            color: var(--accent-gold);
             margin-bottom: 6px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .event-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .event-card-info p {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            font-weight: 500;
         }
 
-        .event-location {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .event-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .add-cal-btn {
+        .add-cal-btn-custom {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: var(--navy-main);
-            color: #ffffff;
-            padding: 10px 14px;
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 10px 18px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 0px;
-            border: 1px solid var(--navy-main);
-            transition: background-color 0.15s ease;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+            transition: all 0.2s ease;
             cursor: pointer;
             text-align: center;
-            width: 100%;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
         }
 
-        .add-cal-btn:hover {
-            background-color: var(--navy-light);
+        .add-cal-btn-custom:hover {
+            background-color: var(--accent-gold);
+            color: var(--navy-dark);
         }
 
         /* STATS BADGES */
@@ -705,52 +687,48 @@
         <div id="events" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-calendar-days"></i> Upcoming Unit Events</h2>
-                <div class="events-grid">
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 18, 2026 &bull; 1430</div>
-                            <h3>Area Manager's Inspection (AMI) Prep</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Rooms 112/114</div>
-                            <p class="event-desc">Mandatory uniform check and personnel briefing.</p>
+                <div class="events-stack">
+                    <!-- AMI Prep Event -->
+                    <div class="event-card-custom">
+                        <div class="event-card-info">
+                            <h3>AREA MANAGER'S INSPECTION (AMI) PREP</h3>
+                            <p>Wed, Nov 18 &bull; 1430–1600</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261118T143000/20261118T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261118T143000/20261118T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn-custom">
+                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
                         </a>
                     </div>
 
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 19, 2026 &bull; 0800</div>
-                            <h3>Raiders Physical Fitness Meet</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Mesa Ridge Athletic Fields</div>
-                            <p class="event-desc">Inter-service physical conditioning showcase.</p>
+                    <!-- Spring Inspection Event -->
+                    <div class="event-card-custom">
+                        <div class="event-card-info">
+                            <h3>SPRING INSPECTION</h3>
+                            <p>Fri, May 15 &bull; 0800–1200</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raiders+Physical+Fitness+Meet&dates=20261119T080000/20261119T120000&details=Inter-service+physical+conditioning+showcase.&location=Mesa+Ridge+Athletic+Fields" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Spring+Inspection&dates=20260515T080000/20260515T120000&details=Spring+Inspection+Event.&location=NJROTC+Building+%26+Drill+Deck" target="_blank" class="add-cal-btn-custom">
+                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
                         </a>
                     </div>
 
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Dec 04, 2026 &bull; 1800</div>
-                            <h3>Color Guard Community Presentation</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Mesa Ridge Auditorium</div>
-                            <p class="event-desc">Presentation of colors for district assembly.</p>
+                    <!-- Awards Ceremony Event -->
+                    <div class="event-card-custom">
+                        <div class="event-card-info">
+                            <h3>AWARDS CEREMONY</h3>
+                            <p>Fri, May 22 &bull; 1800–2000</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Color+Guard+Community+Presentation&dates=20261204T180000/20261204T200000&details=Presentation+of+colors+for+district+assembly.&location=Mesa+Ridge+Auditorium" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Awards+Ceremony&dates=20260522T180000/20260522T200000&details=Annual+Awards+Ceremony.&location=School+Auditorium" target="_blank" class="add-cal-btn-custom">
+                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
                         </a>
                     </div>
 
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Dec 15, 2026 &bull; 1300</div>
-                            <h3>Semester Pass-in-Review Ceremony</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Main Gymnasium</div>
-                            <p class="event-desc">Formal inspection and awards presentation.</p>
+                    <!-- End of Year Picnic Event -->
+                    <div class="event-card-custom">
+                        <div class="event-card-info">
+                            <h3>END OF YEAR PICNIC</h3>
+                            <p>Fri, Jun 5 &bull; 1100–1400</p>
                         </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Semester+Pass-in-Review+Ceremony&dates=20261215T130000/20261215T150000&details=Formal+inspection+and+awards+presentation.&location=Main+Gymnasium" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=End+of+Year+Picnic&dates=20260605T110000/20260605T140000&details=End+of+Year+Picnic.&location=Memorial+Park+Pavilion" target="_blank" class="add-cal-btn-custom">
+                            <i class="fa-solid fa-calendar-plus"></i> ADD TO GOOGLE CALENDAR
                         </a>
                     </div>
                 </div>

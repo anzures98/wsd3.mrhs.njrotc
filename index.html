@@ -616,71 +616,71 @@
             }
 
             .card h2 {
-                font-size: 1.1rem;
-            }
-
-            .grid-3, .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .coc-img-container {
-                height: 240px;
-            }
-
-            footer {
-                margin-top: 24px;
-                padding: 20px 12px;
-            }
+            font-size: 1.25rem;
+            margin-bottom: 18px;
+            color: var(--navy-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
         }
-    </style>
-</head>
-<body>
 
-    <!-- -------------------------------------------------------------
-         MOBILE STICKY TOP BAR (VISIBLE <= 850px)
-         ------------------------------------------------------------- -->
-    <div class="mobile-top-bar">
-        <div class="mobile-brand">
-            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
-            <div class="mobile-brand-text">
-                <h1>GRIZZLY COMPANY</h1>
-                <p>Mesa Ridge High School NJROTC</p>
-            </div>
-        </div>
-        <button class="bottom-action-item" style="flex: initial; padding: 6px 10px; color: #ffffff;" onclick="openDrawer()" aria-label="Open Menu">
-            <i class="fa-solid fa-bars" style="font-size: 1.2rem;"></i>
-        </button>
-    </div>
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
 
-    <!-- -------------------------------------------------------------
-         MOBILE SLIDE-OUT DRAWER MENU
-         ------------------------------------------------------------- -->
-    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-    <div class="mobile-drawer" id="mobileDrawer">
-        <div class="drawer-header">
-            <h3><i class="fa-solid fa-compass"></i> Unit Navigation</h3>
-            <button class="drawer-close-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="drawer-menu">
-            <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
-            <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
-            <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
-            <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
-            <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
-            <button class="drawer-item" onclick="switchTabMobile('teams')"><i class="fa-solid fa-users"></i> Teams</button>
-            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
-            <button class="drawer-item" onclick="switchTabMobile('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
-            <button class="drawer-item" onclick="switchTabMobile('contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
-        </div>
-    </div>
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
 
-    <!-- -------------------------------------------------------------
-         MOBILE STICKY BOTTOM ACTION BAR (VISIBLE <= 850px)
-         ------------------------------------------------------------- -->
-    <div class="mobile-bottom-bar">
-        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
-            <i class="fa-solid fa-house"></i>
+        /* TABLES */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 480px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        th {
+            background-color: var(--navy-main);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: var(--light-blue-hover);
+        }
+
+        /* EVENTS CARDS GRID */
             <span>Home</span>
         </button>
         <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">

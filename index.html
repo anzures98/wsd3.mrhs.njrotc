@@ -252,6 +252,103 @@
             display: none;
             width: 100%;
         }
+
+        /* -------------------------------------------------------------
+           MOBILE DRAWER OVERLAY & SIDE PANEL
+           ------------------------------------------------------------- */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .drawer-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--navy-dark);
+            border-left: 2px solid var(--navy-light);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.25s ease;
+            box-shadow: -4px 0 12px rgba(0,0,0,0.4);
+        }
+
+        .mobile-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 20px;
+            background-color: var(--navy-main);
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #ffffff;
+        }
+
+        .drawer-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .drawer-close-btn {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .drawer-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .drawer-menu {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 10px 0;
+        }
+
+        .drawer-item {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.15s ease;
+        }
+
+        .drawer-item:hover, .drawer-item.active {
+            background-color: var(--navy-light);
+            color: #ffffff;
+        }
+
         /* MAIN CONTENT CONTAINER */
         main {
             width: 100%;
@@ -539,6 +636,70 @@
     </style>
 </head>
 <body>
+
+    <!-- -------------------------------------------------------------
+         MOBILE STICKY TOP BAR (VISIBLE <= 850px)
+         ------------------------------------------------------------- -->
+    <div class="mobile-top-bar">
+        <div class="mobile-brand">
+            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
+            <div class="mobile-brand-text">
+                <h1>GRIZZLY COMPANY</h1>
+                <p>Mesa Ridge High School NJROTC</p>
+            </div>
+        </div>
+        <button class="bottom-action-item" style="flex: initial; padding: 6px 10px; color: #ffffff;" onclick="openDrawer()" aria-label="Open Menu">
+            <i class="fa-solid fa-bars" style="font-size: 1.2rem;"></i>
+        </button>
+    </div>
+
+    <!-- -------------------------------------------------------------
+         MOBILE SLIDE-OUT DRAWER MENU
+         ------------------------------------------------------------- -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-compass"></i> Unit Navigation</h3>
+            <button class="drawer-close-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="drawer-menu">
+            <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
+            <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
+            <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
+            <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
+            <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+            <button class="drawer-item" onclick="switchTabMobile('teams')"><i class="fa-solid fa-users"></i> Teams</button>
+            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
+            <button class="drawer-item" onclick="switchTabMobile('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
+            <button class="drawer-item" onclick="switchTabMobile('contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
+        </div>
+    </div>
+
+    <!-- -------------------------------------------------------------
+         MOBILE STICKY BOTTOM ACTION BAR (VISIBLE <= 850px)
+         ------------------------------------------------------------- -->
+    <div class="mobile-bottom-bar">
+        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Events</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-coc" onclick="switchTabMobile('coc')">
+            <i class="fa-solid fa-sitemap"></i>
+            <span>Cmd</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-knowledge" onclick="switchTabMobile('knowledge')">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Knowledge</span>
+        </button>
+        <button class="bottom-action-item" onclick="openDrawer()">
+            <i class="fa-solid fa-bars"></i>
+            <span>Menu</span>
+        </button>
+    </div>
 
     <!-- -------------------------------------------------------------
          DESKTOP HEADER & NAV (VISIBLE > 850px)

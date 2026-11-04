@@ -616,27 +616,21 @@
             }
 
             .card h2 {
-            font-size: 1.25rem;
-            margin-bottom: 18px;
-            color: var(--navy-main);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-        }
+                font-size: 1.1rem;
+                margin-bottom: 14px;
+            }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* TABLES */
@@ -681,6 +675,125 @@
         }
 
         /* EVENTS CARDS GRID */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .event-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            transition: border-color 0.15s ease;
+        }
+
+        .event-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .event-info h3 {
+            font-size: 1.05rem;
+            color: var(--navy-main);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .event-date {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .add-cal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--navy-main);
+            color: #ffffff;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--navy-main);
+            transition: background-color 0.15s ease;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .add-cal-btn:hover {
+            background-color: var(--navy-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- -------------------------------------------------------------
+         MOBILE TOP BAR & DRAWER OVERLAY (VISIBLE <= 850px)
+         ------------------------------------------------------------- -->
+    <div class="mobile-top-bar">
+        <div class="mobile-brand">
+            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'JROTC')">
+            <div class="mobile-brand-text">
+                <h1>GRIZZLY COMPANY</h1>
+                <p>Mesa Ridge NJROTC</p>
+            </div>
+        </div>
+        <button class="drawer-close-btn" onclick="openDrawer()" style="color: #ffffff; font-size: 1.2rem;">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Drawer Overlay & Side Panel -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <h3>UNIT NAVIGATION</h3>
+            <button class="drawer-close-btn" onclick="closeDrawer()">&times;</button>
+        </div>
+        <div class="drawer-menu">
+            <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
+            <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
+            <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
+            <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
+            <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+            <button class="drawer-item" onclick="switchTabMobile('teams')"><i class="fa-solid fa-users"></i> Teams</button>
+            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
+            <button class="drawer-item" onclick="switchTabMobile('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
+            <button class="drawer-item" onclick="switchTabMobile('contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Action Bar -->
+    <div class="mobile-bottom-bar">
+        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
+            <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </button>
         <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">

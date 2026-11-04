@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grizzly Company | Mesa Ridge High School NJROTC</title>
-    <!-- Favicon pointing directly to root asset -->
+    <!-- Favicon -->
     <link rel="icon" href="Untitled design (18).png" type="image/png">
-    <!-- FontAwesome for icons -->
+    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Clean System Font Stack (No AI Monospace / Foreign Web Fonts) -->
+    
     <style>
         :root {
             --bg-body: #f4f6f9;
@@ -25,6 +25,7 @@
             --accent-gold: #fbbf24;
         }
 
+        /* Pure Square Enforcement across all elements */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -38,9 +39,12 @@
             color: var(--text-main);
             line-height: 1.5;
             -webkit-text-size-adjust: 100%;
+            padding-bottom: 0px;
         }
 
-        /* HEADER */
+        /* -------------------------------------------------------------
+           DESKTOP HEADER & TOP NAVIGATION
+           ------------------------------------------------------------- */
         header {
             background-color: var(--navy-dark);
             color: #ffffff;
@@ -84,7 +88,6 @@
             font-weight: 500;
         }
 
-        /* TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS */
         .header-right {
             font-size: 0.9rem;
             color: #e2e8f0;
@@ -121,24 +124,8 @@
             text-decoration: underline;
         }
 
-        /* HAMBURGER MENU BUTTON (Hidden on Desktop) */
-        .mobile-menu-btn {
-            display: none;
-            background: var(--navy-light);
-            border: 1px solid var(--border-color);
-            color: #ffffff;
-            font-size: 1.2rem;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-
-        .mobile-menu-btn:hover {
-            background-color: var(--light-blue-hover);
-            color: var(--navy-main);
-        }
-
-        /* NAVIGATION BAR */
-        nav {
+        /* Desktop Nav Bar */
+        nav.desktop-nav {
             background-color: var(--navy-main);
             border-bottom: 2px solid var(--border-color);
             display: flex;
@@ -173,7 +160,111 @@
             border-bottom-color: #60a5fa;
         }
 
-        /* MAIN CONTENT CONTAINER */
+        /* -------------------------------------------------------------
+           MOBILE SPECIFIC UI COMPONENTS (BOTTOM BAR + DRAWER)
+           ------------------------------------------------------------- */
+        .mobile-top-bar {
+            display: none;
+        }
+
+        .mobile-bottom-bar {
+            display: none;
+        }
+
+        .mobile-drawer-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(7, 22, 40, 0.7);
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .mobile-drawer-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--navy-dark);
+            border-left: 2px solid var(--navy-light);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.25s ease;
+            box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+        }
+
+        .mobile-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 20px;
+            background-color: var(--navy-main);
+            border-bottom: 1px solid var(--navy-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #ffffff;
+        }
+
+        .drawer-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .drawer-close-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .drawer-body {
+            padding: 12px 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .drawer-item {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .drawer-item:hover, .drawer-item.active {
+            background-color: var(--navy-main);
+            color: #ffffff;
+            border-left-color: var(--accent-gold);
+        }
+
+        /* -------------------------------------------------------------
+           MAIN CONTENT & CONTAINER
+           ------------------------------------------------------------- */
         main {
             max-width: 1200px;
             margin: 32px auto;
@@ -255,7 +346,7 @@
             background-color: var(--light-blue-hover);
         }
 
-        /* EVENTS CARDS GRID */
+        /* EVENTS GRID (White background, square cards) */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -468,89 +559,133 @@
             margin-top: 48px;
         }
 
-        /* RESPONSIVE MEDIA QUERIES */
-        @media screen and (max-width: 950px) {
-            .grid-3 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 650px) {
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* -------------------------------------------------------------
+           RESPONSIVE OVERHAUL (MOBILE SCREEN OVERWRITE <= 850px)
+           ------------------------------------------------------------- */
         @media screen and (max-width: 850px) {
-            header {
-                padding: 18px 20px;
+            body {
+                padding-bottom: 64px; /* Clearance for bottom action bar */
             }
 
-            .header-logos img {
-                width: 52px;
-                height: 52px;
+            /* Hide Desktop Header & Top Nav on Mobile */
+            header, nav.desktop-nav {
+                display: none;
             }
 
-            .header-titles h1 {
-                font-size: 1.4rem;
+            /* Display Mobile Top Bar */
+            .mobile-top-bar {
+                display: flex;
+                position: sticky;
+                top: 0;
+                z-index: 9990;
+                background-color: var(--navy-dark);
+                border-bottom: 2px solid var(--navy-light);
+                padding: 12px 16px;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             }
 
-            .header-right {
-                font-size: 0.85rem;
-                text-align: left;
+            .mobile-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .mobile-brand img {
+                width: 36px;
+                height: 36px;
+                object-fit: contain;
+            }
+
+            .mobile-brand-text h1 {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #ffffff;
+                line-height: 1.1;
+            }
+
+            .mobile-brand-text p {
+                font-size: 0.72rem;
+                color: #94a3b8;
+            }
+
+            /* Display Mobile Bottom Action Bar */
+            .mobile-bottom-bar {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
                 width: 100%;
-                margin-top: 8px;
-                padding-top: 8px;
-                border-top: 1px solid rgba(255, 255, 255, 0.15);
+                height: 60px;
+                background-color: var(--navy-dark);
+                border-top: 2px solid var(--navy-light);
+                z-index: 9995;
+                justify-content: space-around;
+                align-items: center;
             }
 
-            .header-right div {
-                justify-content: flex-start;
-            }
-
-            .mobile-menu-btn {
-                display: inline-flex;
+            .bottom-action-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                height: 100%;
+                background: none;
+                border: none;
+                color: #94a3b8;
+                font-size: 0.72rem;
+                font-weight: 600;
+                gap: 3px;
+                cursor: pointer;
             }
 
-            nav {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 0;
+            .bottom-action-item i {
+                font-size: 1.1rem;
             }
 
-            nav.mobile-open {
-                display: flex;
+            .bottom-action-item.active {
+                color: var(--accent-gold);
+                background-color: rgba(255, 255, 255, 0.05);
             }
 
-            .nav-tab {
-                width: 100%;
-                padding: 14px 20px;
-                border-bottom: 1px solid var(--border-color);
-                border-left: 3px solid transparent;
-            }
-
-            .nav-tab.active {
-                border-bottom-color: var(--border-color);
-                border-left-color: #60a5fa;
-            }
-
+            /* Layout refinements on mobile */
             main {
-                margin: 20px auto;
-                padding: 0 16px;
+                margin: 16px auto;
+                padding: 0 12px;
             }
 
             .card {
-                padding: 20px;
+                padding: 18px;
+                margin-bottom: 18px;
+            }
+
+            .card h2 {
+                font-size: 1.1rem;
+            }
+
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .coc-img-container {
+                height: 240px;
+            }
+
+            footer {
+                margin-top: 24px;
+                padding: 20px 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- -------------------------------------------------------------
+         DESKTOP HEADER & NAV (VISIBLE > 850px)
+         ------------------------------------------------------------- -->
     <header>
         <div class="header-left">
             <div class="header-logos">
@@ -562,13 +697,7 @@
                 <p>Mesa Ridge High School NJROTC &bull; Colorado Springs, CO</p>
             </div>
         </div>
-        
-        <!-- MOBILE 3-LINE MENU TOGGLE BUTTON -->
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
 
-        <!-- TOP-RIGHT INSTRUCTOR CONTACTS WITH ICONS -->
         <div class="header-right">
             <div>
                 <i class="fa-solid fa-envelope"></i>
@@ -581,8 +710,7 @@
         </div>
     </header>
 
-    <!-- NAVIGATION TABS WITH ICONS -->
-    <nav id="mainNav">
+    <nav class="desktop-nav">
         <button class="nav-tab active" onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview</button>
         <button class="nav-tab" onclick="switchTab(event, 'events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
         <button class="nav-tab" onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
@@ -594,7 +722,71 @@
         <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
     </nav>
 
-    <!-- MAIN CONTAINER -->
+    <!-- -------------------------------------------------------------
+         MOBILE HEADER, BOTTOM BAR & DRAWER MENU (VISIBLE <= 850px)
+         ------------------------------------------------------------- -->
+    <div class="mobile-top-bar">
+        <div class="mobile-brand">
+            <img src="Untitled design (18).png" alt="NJROTC Logo" onerror="handleImgError(this, 'NJROTC')">
+            <div class="mobile-brand-text">
+                <h1>GRIZZLY COMPANY</h1>
+                <p>MRHS NJROTC</p>
+            </div>
+        </div>
+        <a href="mailto:tidwellc@wsd3.org" style="color: var(--accent-gold); font-size: 1.1rem; text-decoration: none;" aria-label="Contact Instructors">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Mobile Slide-Out Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+    <!-- Mobile Slide-Out Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <h3>UNIT NAVIGATION</h3>
+            <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Close Navigation Menu">&times;</button>
+        </div>
+        <div class="drawer-body">
+            <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
+            <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
+            <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
+            <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
+            <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+            <button class="drawer-item" onclick="switchTabMobile('teams')"><i class="fa-solid fa-users"></i> Teams</button>
+            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
+            <button class="drawer-item" onclick="switchTabMobile('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
+            <button class="drawer-item" onclick="switchTabMobile('contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Action / Nav Bar -->
+    <div class="mobile-bottom-bar">
+        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Events</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-coc" onclick="switchTabMobile('coc')">
+            <i class="fa-solid fa-sitemap"></i>
+            <span>Cmd</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-knowledge" onclick="switchTabMobile('knowledge')">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Knowledge</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-menu" onclick="openDrawer()">
+            <i class="fa-solid fa-bars"></i>
+            <span>Menu</span>
+        </button>
+    </div>
+
+    <!-- -------------------------------------------------------------
+         MAIN CONTENT AREA
+         ------------------------------------------------------------- -->
     <main>
 
         <!-- 1. OVERVIEW TAB -->
@@ -605,12 +797,12 @@
             </div>
 
             <!-- OUR MISSION SECTION -->
-            <div class="card" style="background-color: var(--navy-dark); border-color: var(--navy-light); text-align: center; padding: 36px 20px;">
-                <h2 style="color: var(--accent-gold); justify-content: center; border-bottom: none; font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 24px;">OUR MISSION</h2>
-                <div style="background-color: #e2e8f0; border: 1px solid var(--border-color); width: 100%; max-height: 420px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+            <div class="card" style="background-color: var(--navy-dark); border-color: var(--navy-light); text-align: center; padding: 28px 16px;">
+                <h2 style="color: var(--accent-gold); justify-content: center; border-bottom: none; font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 20px;">OUR MISSION</h2>
+                <div style="background-color: #e2e8f0; border: 1px solid var(--border-color); width: 100%; max-height: 400px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
                     <img src="IMG_5858.JPG" alt="Grizzly Company Mission" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImgError(this, 'IMG_5858.JPG')">
                 </div>
-                <div style="background-color: var(--navy-main); border: 1px solid var(--border-color); padding: 24px; color: var(--accent-gold); font-style: italic; font-size: 1.05rem; line-height: 1.6;">
+                <div style="background-color: var(--navy-main); border: 1px solid var(--border-color); padding: 20px; color: var(--accent-gold); font-style: italic; font-size: 1rem; line-height: 1.5;">
                     "To instill in each cadet an awareness of their responsibilities as United States citizens, to develop strong moral character, and to build skills for personal growth and leadership."
                 </div>
             </div>
@@ -810,9 +1002,8 @@
             <div class="card">
                 <h2><i class="fa-solid fa-sitemap"></i> Grizzly Company Leadership Roster</h2>
                 
-                <!-- INSTRUCTORS (SNSI & NSI) SECTION -->
+                <!-- INSTRUCTORS SECTION -->
                 <div class="grid-2" style="margin-bottom: 28px;">
-                    <!-- SNSI Box -->
                     <div class="coc-item-wrapper" style="background-color: var(--navy-main); border-color: var(--navy-light);">
                         <div class="coc-img-container" style="background-color: var(--navy-dark);">
                             <div class="img-fallback" style="background: var(--navy-dark); color: #94a3b8;">
@@ -827,7 +1018,6 @@
                         </div>
                     </div>
 
-                    <!-- NSI Box -->
                     <div class="coc-item-wrapper" style="background-color: var(--navy-main); border-color: var(--navy-light);">
                         <div class="coc-img-container" style="background-color: var(--navy-dark);">
                             <div class="img-fallback" style="background: var(--navy-dark); color: #94a3b8;">
@@ -844,7 +1034,6 @@
                 </div>
 
                 <div class="grid-3">
-                    <!-- 1 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CO.png" alt="Company Commander" onerror="this.onerror=null; this.src='CO.PNG';">
@@ -855,7 +1044,6 @@
                             <p class="desc">Overall command, discipline, and execution of company operations.</p>
                         </div>
                     </div>
-                    <!-- 2 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="XO.png" alt="Executive Officer" onerror="this.onerror=null; this.src='XO.PNG';">
@@ -866,7 +1054,6 @@
                             <p class="desc">Staff coordination, internal administration, and operational readiness.</p>
                         </div>
                     </div>
-                    <!-- 3 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="OPS.png" alt="Operations Officer" onerror="this.onerror=null; this.src='OPS.PNG';">
@@ -877,7 +1064,6 @@
                             <p class="desc">Training schedules, event planning, and drill execution.</p>
                         </div>
                     </div>
-                    <!-- 4 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="ADMIN.png" alt="Admin Officer" onerror="this.onerror=null; this.src='ADMIN.PNG';">
@@ -888,7 +1074,6 @@
                             <p class="desc">Personnel records, correspondence, and administrative tracking.</p>
                         </div>
                     </div>
-                    <!-- 5 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="SUPPO.png" alt="Supply Officer" onerror="this.onerror=null; this.src='SUPPO.PNG';">
@@ -899,7 +1084,6 @@
                             <p class="desc">Uniform inventory, equipment management, and logistics.</p>
                         </div>
                     </div>
-                    <!-- 6 -->
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CMC.png" alt="Senior Enlisted Leader" onerror="this.onerror=null; this.src='CMC.PNG';">
@@ -919,67 +1103,58 @@
             <div class="card">
                 <h2><i class="fa-solid fa-users-gear"></i> Grizzly Company Lower Staff Roster</h2>
                 <div class="grid-3">
-                    <!-- Education Officer (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Education Officer (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Training Officer (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Training Officer (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Public Affairs Officer 1 -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Public Affairs Officer (2)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Public Affairs Officer 2 -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Public Affairs Officer (2)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Fundraising Officer (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Fundraising Officer (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Armory Officer (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Armory Officer (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Drill Team Commander (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Drill Team Commander (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Color Guard Team Leader (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Color Guard Team Leader (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
-                    <!-- Academic Team Captain (1) -->
                     <div class="coc-item-wrapper">
-                        <div class="coc-info-box" style="padding: 28px 20px;">
+                        <div class="coc-info-box" style="padding: 24px 16px;">
                             <h3>Academic Team Captain (1)</h3>
-                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assesed</p>
+                            <p class="rank-title" style="color: var(--tba-red); margin-top: 8px;">T.B.A. - Not Assessed</p>
                         </div>
                     </div>
                 </div>
@@ -1015,7 +1190,7 @@
         <div id="knowledge" class="tab-content">
             <div class="card">
                 <h2><i class="fa-solid fa-graduation-cap"></i> NJROTC Cadet Rank Chart &amp; Pay Grades</h2>
-                <p style="margin-bottom: 16px; color: var(--text-muted);">Complete listing of cadet officer and enlisted ranks, abbreviations, military pay grades (E1–E9 and O1–O5), and insignia descriptions:</p>
+                <p style="margin-bottom: 16px; color: var(--text-muted);">Complete listing of cadet officer and enlisted ranks, abbreviations, military pay grades (E1–E9 and O1–O6), and insignia descriptions:</p>
                 <div class="table-container" style="margin-bottom: 32px;">
                     <table>
                         <thead>
@@ -1236,7 +1411,7 @@
         <p>&copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.</p>
     </footer>
 
-    <!-- SCRIPT HANDLING TABS, MOBILE HAMBURGER MENU & IMAGE FALLBACKS -->
+    <!-- SCRIPT HANDLING TABS, DRAWER & FALLBACKS -->
     <script>
         function switchTab(evt, tabId) {
             const contents = document.querySelectorAll('.tab-content');
@@ -1246,18 +1421,48 @@
             tabs.forEach(t => t.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
-            evt.currentTarget.classList.add('active');
-
-            // Automatically close mobile menu upon selecting a tab on smaller screens
-            const nav = document.getElementById('mainNav');
-            if (window.innerWidth <= 850) {
-                nav.classList.remove('mobile-open');
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function toggleMobileMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('mobile-open');
+        function switchTabMobile(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+
+            // Sync Bottom Nav item active state
+            const bottomItems = document.querySelectorAll('.bottom-action-item');
+            bottomItems.forEach(b => b.classList.remove('active'));
+
+            const targetBottomBtn = document.getElementById('bnav-' + tabId);
+            if (targetBottomBtn) {
+                targetBottomBtn.classList.add('active');
+            }
+
+            // Sync Drawer item active state
+            const drawerItems = document.querySelectorAll('.drawer-item');
+            drawerItems.forEach(d => {
+                d.classList.remove('active');
+                if (d.getAttribute('onclick') && d.getAttribute('onclick').includes(tabId)) {
+                    d.classList.add('active');
+                }
+            });
+
+            closeDrawer();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openDrawer() {
+            document.getElementById('mobileDrawer').classList.add('open');
+            document.getElementById('drawerOverlay').classList.add('open');
+        }
+
+        function closeDrawer() {
+            document.getElementById('mobileDrawer').classList.remove('open');
+            document.getElementById('drawerOverlay').classList.remove('open');
         }
 
         function handleImgError(imgElement, name) {

@@ -621,15 +621,15 @@
             }
 
             .grid-3 {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
 
             .grid-2 {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
 
             .events-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
         }
 
@@ -1096,7 +1096,7 @@
                     </div>
                 </div>
 
-                <div class="grid-3">
+                <div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CO.png" alt="Company Commander" onerror="this.onerror=null; this.src='CO.PNG';">

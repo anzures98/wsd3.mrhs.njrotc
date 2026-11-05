@@ -376,6 +376,30 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 18px;
+            color: var(--navy-main);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
         /* STATS BADGES */
         .stat-box {
             background-color: #ffffff;
@@ -780,6 +804,7 @@
         <div class="drawer-menu">
             <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
             <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
+            <button class="drawer-item" onclick="switchTabMobile('donations')"><i class="fa-solid fa-hand-holding-dollar"></i> Donations &amp; Payments</button>
             <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
             <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
             <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
@@ -800,13 +825,13 @@
             <i class="fa-solid fa-calendar-days"></i>
             <span>Events</span>
         </button>
+        <button class="bottom-action-item" id="bnav-donations" onclick="switchTabMobile('donations')">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <span>Donate</span>
+        </button>
         <button class="bottom-action-item" id="bnav-coc" onclick="switchTabMobile('coc')">
             <i class="fa-solid fa-sitemap"></i>
             <span>Cmd</span>
-        </button>
-        <button class="bottom-action-item" id="bnav-knowledge" onclick="switchTabMobile('knowledge')">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Knowledge</span>
         </button>
         <button class="bottom-action-item" onclick="openDrawer()">
             <i class="fa-solid fa-bars"></i>
@@ -844,6 +869,7 @@
     <nav class="desktop-nav">
         <button class="nav-tab active" onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview</button>
         <button class="nav-tab" onclick="switchTab(event, 'events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
+        <button class="nav-tab" onclick="switchTab(event, 'donations')"><i class="fa-solid fa-hand-holding-dollar"></i> Donations &amp; Payments</button>
         <button class="nav-tab" onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
         <button class="nav-tab" onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
         <button class="nav-tab" onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
@@ -996,6 +1022,56 @@
             </div>
         </div>
 
+        <!-- DONATIONS & PAYMENTS TAB -->
+        <div id="donations" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-hand-holding-dollar"></i> Support Grizzly Company Cadets</h2>
+                <p style="margin-bottom: 20px;">Your contributions directly empower our cadet corps by helping fund vital unit activities, competition travel, specialized gear, social traditions, and leadership opportunities that make NJROTC an unforgettable experience!</p>
+                
+                <div class="grid-2" style="margin-bottom: 28px;">
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-champagne-glasses" style="color: var(--accent-gold);"></i> Military Ball &amp; Social Events</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Helps offset ticket costs for our annual formal Military Ball, dining-ins, picnics, and cadet recognition ceremonies so every cadet can attend.</p>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: var(--accent-gold);"></i> Team Competitions &amp; Travel</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Funds transportation, lodging, and registration fees for our Drill, Raiders, Color Guard, Academic, and Marksmanship competition teams.</p>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-shirt" style="color: var(--accent-gold);"></i> Uniforms &amp; Equipment Maintenance</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Assists in purchasing replacement uniform parts, drill rifles, color guard gear, marksmanship supplies, and unit PT gear.</p>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-gold);"></i> Leadership &amp; Orientation Camps</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Provides scholarships for cadets attending summer Leadership Academy (LA), Basic Leadership Training (BLT), and STEM camps.</p>
+                    </div>
+                </div>
+
+                <!-- Step-by-Step Payment Instructions Card -->
+                <div style="background-color: var(--navy-dark); border: 1px solid var(--navy-light); padding: 24px; color: #ffffff; margin-bottom: 28px;">
+                    <h3 style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-circle-info"></i> How to Pay Fees or Make a Donation</h3>
+                    <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 20px;">Please follow the guide below when using the Widefield School District RevTrak payment portal:</p>
+                    
+                    <div style="width: 100%; border: 1px solid var(--border-color); overflow: hidden; background: #ffffff; margin-bottom: 20px;">
+                        <img src="Donation Tutorial (1).jpg" alt="RevTrak Donation Tutorial Guide" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'Donation Tutorial Guide Image')">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #e2e8f0;">
+                        <p><strong>1. Select Item:</strong> Ensure <em>MRHS ROTC FEES</em> is selected on the left panel.</p>
+                        <p><strong>2. Enter Amount:</strong> Input your desired fee or donation dollar amount in the Amount box.</p>
+                        <p><strong>3. Provide Cadet Details:</strong> Enter your cadet's First &amp; Last Name, Grade, and reason (e.g., <em>Military Ball, Donation, Equipment Fee</em>).</p>
+                        <p><strong>4. Add to Cart:</strong> Click <em>ADD TO CART</em> and proceed to checkout.</p>
+                    </div>
+
+                    <div style="margin-top: 24px; text-align: center;">
+                        <a href="https://widefield.revtrak.net/high-school-payments/Mesa-Ridge-High-School-Fees/MRHS-ROTC/#/v/MRHS-ROTC-Fees" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background-color: var(--accent-gold); color: var(--navy-dark); padding: 14px 28px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open RevTrak Payment Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 3. ACADEMICS & GRADING POLICIES TAB -->
         <div id="academics" class="tab-content">
             <div class="card">
@@ -1096,7 +1172,7 @@
                     </div>
                 </div>
 
-                <div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+                <div class="grid-3">
                     <div class="coc-item-wrapper">
                         <div class="coc-img-container">
                             <img src="CO.png" alt="Company Commander" onerror="this.onerror=null; this.src='CO.PNG';">

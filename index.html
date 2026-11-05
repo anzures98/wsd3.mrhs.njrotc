@@ -67,15 +67,23 @@
         // Global cloud save helper
         window.saveAlbumToCloud = async function(albumDoc) {
             if (!auth.currentUser) return;
-            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
-            await setDoc(docRef, albumDoc);
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
+                await setDoc(docRef, albumDoc);
+            } catch(e) {
+                console.error("Failed to save to cloud:", e);
+            }
         };
 
         // Global cloud delete helper
         window.deleteAlbumFromCloud = async function(albumId) {
             if (!auth.currentUser) return;
-            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumId);
-            await deleteDoc(docRef);
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumId);
+                await deleteDoc(docRef);
+            } catch(e) {
+                console.error("Failed to delete from cloud:", e);
+            }
         };
 
         initCloudSync();
@@ -191,7 +199,7 @@
                     <div class="gallery-grid">
                         ${(album.images || []).map(imgData => `
                             <div class="gallery-item">
-                                <img src="${imgData}" alt="${album.name} Photo">
+                                <img src="${imgData}" alt="${album.name} Photo" onerror="handleImgError(this, 'Photo')">
                             </div>
                         `).join('')}
                     </div>
@@ -212,7 +220,7 @@
             document.getElementById('opsDropModal').style.display = 'none';
         }
 
-        // Helper function to compress images so they safely fit within localStorage limits
+        // Optimized Image Compressor (ensures payload remains light & cloud compatible)
         function compressImage(file, maxWidth, maxHeight, quality, callback) {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -272,11 +280,14 @@
             let loadedCount = 0;
             const imageDataArray = [];
 
-            imageFiles.forEach(file => {
-                compressImage(file, 800, 800, 0.6, function(compressedData) {
+            // Limit single batch to 12 compressed photos max per folder to prevent document overflow
+            const fileBatch = imageFiles.slice(0, 12);
+
+            fileBatch.forEach(file => {
+                compressImage(file, 600, 600, 0.5, function(compressedData) {
                     imageDataArray.push(compressedData);
                     loadedCount++;
-                    if (loadedCount === imageFiles.length) {
+                    if (loadedCount === fileBatch.length) {
                         const newAlbum = {
                             id: 'album_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
                             name: folderName,
@@ -297,7 +308,7 @@
 
                         renderGallery();
                         closeOpsModal();
-                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be visible across all devices.`);
+                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be saved and visible across all devices.`);
                     }
                 });
             });
@@ -370,9 +381,7 @@
             padding-bottom: 0px;
         }
 
-        /* -------------------------------------------------------------
-           DESKTOP HEADER & TOP NAVIGATION
-           ------------------------------------------------------------- */
+        /* DESKTOP HEADER & TOP NAVIGATION */
         header {
             width: 100%;
             background-color: var(--navy-dark);
@@ -490,9 +499,7 @@
             border-bottom-color: #60a5fa;
         }
 
-        /* -------------------------------------------------------------
-           MOBILE SPECIFIC UI COMPONENTS (BOTTOM BAR + DRAWER)
-           ------------------------------------------------------------- */
+        /* MOBILE SPECIFIC UI COMPONENTS */
         .mobile-top-bar {
             display: none;
             width: 100%;
@@ -503,9 +510,6 @@
             width: 100%;
         }
 
-        /* -------------------------------------------------------------
-           MOBILE DRAWER OVERLAY & SIDE PANEL
-           ------------------------------------------------------------- */
         .drawer-overlay {
             display: none;
             position: fixed;
@@ -787,20 +791,16 @@
             margin-top: 48px;
         }
 
-        /* -------------------------------------------------------------
-           RESPONSIVE OVERHAUL (MOBILE SCREEN OVERWRITE <= 850px)
-           ------------------------------------------------------------- */
+        /* RESPONSIVE OVERHAUL (MOBILE SCREEN OVERWRITE <= 850px) */
         @media screen and (max-width: 850px) {
             body {
-                padding-bottom: 64px; /* Clearance for bottom action bar */
+                padding-bottom: 64px;
             }
 
-            /* Hide Desktop Header & Top Nav on Mobile */
             header, nav.desktop-nav {
                 display: none;
             }
 
-            /* Display Mobile Top Bar */
             .mobile-top-bar {
                 display: flex;
                 position: sticky;
@@ -838,7 +838,6 @@
                 color: #94a3b8;
             }
 
-            /* Display Mobile Bottom Action Bar */
             .mobile-bottom-bar {
                 display: flex;
                 position: fixed;
@@ -878,7 +877,6 @@
                 background-color: rgba(255, 255, 255, 0.05);
             }
 
-            /* Layout refinements on mobile */
             main {
                 margin: 16px auto;
                 padding: 0 12px;
@@ -1028,9 +1026,7 @@
 </head>
 <body>
 
-    <!-- -------------------------------------------------------------
-         MOBILE TOP BAR & DRAWER OVERLAY (VISIBLE <= 850px)
-         ------------------------------------------------------------- -->
+    <!-- MOBILE TOP BAR & DRAWER OVERLAY -->
     <div class="mobile-top-bar">
         <div class="mobile-brand">
             <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'JROTC')">
@@ -1089,9 +1085,7 @@
         </button>
     </div>
 
-    <!-- -------------------------------------------------------------
-         DESKTOP HEADER & NAV (VISIBLE > 850px)
-         ------------------------------------------------------------- -->
+    <!-- DESKTOP HEADER & NAV -->
     <header>
         <div class="header-left">
             <div class="header-logos">
@@ -1129,9 +1123,7 @@
         <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
     </nav>
 
-    <!-- -------------------------------------------------------------
-         MAIN CONTENT AREA
-         ------------------------------------------------------------- -->
+    <!-- MAIN CONTENT AREA -->
     <main>
 
         <!-- 1. OVERVIEW TAB -->

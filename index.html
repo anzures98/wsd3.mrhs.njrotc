@@ -9,6 +9,78 @@
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- FIREBASE CLOUD STORAGE INTEGRATION -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase handles
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'grizzly-company-app';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "AIzaSyDemoKeyOnly",
+            authDomain: "demo.firebaseapp.com",
+            projectId: "demo-project",
+            storageBucket: "demo.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:demo"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // Initialize Authentication & Firestore Realtime Listener
+        async function initCloudSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const userCred = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = userCred.user;
+                } else {
+                    const userCred = await signInAnonymously(auth);
+                    currentUser = userCred.user;
+                }
+
+                if (!currentUser) return;
+
+                // Listen in real-time to public gallery collection
+                const galleryCol = collection(db, 'artifacts', appId, 'public', 'data', 'gallery_albums');
+                onSnapshot(galleryCol, (snapshot) => {
+                    window.galleryAlbums = [];
+                    snapshot.forEach((docSnap) => {
+                        window.galleryAlbums.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    // Sort albums newest first
+                    window.galleryAlbums.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                    renderGallery();
+                }, (error) => {
+                    console.error("Firestore Error:", error);
+                });
+
+            } catch (err) {
+                console.warn("Cloud Auth/Sync Warning:", err);
+            }
+        }
+
+        // Global cloud save helper
+        window.saveAlbumToCloud = async function(albumDoc) {
+            if (!auth.currentUser) return;
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
+            await setDoc(docRef, albumDoc);
+        };
+
+        // Global cloud delete helper
+        window.deleteAlbumFromCloud = async function(albumId) {
+            if (!auth.currentUser) return;
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumId);
+            await deleteDoc(docRef);
+        };
+
+        initCloudSync();
+    </script>
+
     <!-- GLOBAL FUNCTIONS PRE-LOADED IN HEAD TO PREVENT EARLY ONERROR/REFERENCEERRORS -->
     <script>
         function handleImgError(imgElement, name) {
@@ -86,13 +158,15 @@
         /* -------------------------------------------------------------
            DYNAMIC GALLERY & FILE DROP SYSTEM
            ------------------------------------------------------------- */
-        let galleryAlbums = JSON.parse(localStorage.getItem('grizzly_gallery_albums') || '[]');
+        window.galleryAlbums = JSON.parse(localStorage.getItem('grizzly_gallery_albums') || '[]');
 
         function renderGallery() {
             const container = document.getElementById('galleryAlbumsContainer');
             if (!container) return;
 
-            if (galleryAlbums.length === 0) {
+            const albums = window.galleryAlbums || [];
+
+            if (albums.length === 0) {
                 container.innerHTML = `
                     <div style="text-align: center; padding: 40px; border: 2px dashed var(--border-color); color: var(--text-muted);">
                         <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; color: var(--navy-light);"></i>
@@ -103,19 +177,19 @@
                 return;
             }
 
-            container.innerHTML = galleryAlbums.map((album, albumIndex) => `
+            container.innerHTML = albums.map((album, albumIndex) => `
                 <div style="margin-bottom: 32px; background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 16px;">
                         <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-folder" style="color: var(--accent-gold);"></i> ${album.name}
-                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">(${album.images.length} photos)</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">(${album.images ? album.images.length : 0} photos)</span>
                         </h3>
-                        <button onclick="deleteAlbum(${albumIndex})" style="background: none; border: none; color: var(--tba-red); cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                        <button onclick="deleteAlbum('${album.id || albumIndex}')" style="background: none; border: none; color: var(--tba-red); cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 4px;">
                             <i class="fa-solid fa-lock"></i> Delete (Ops Only)
                         </button>
                     </div>
                     <div class="gallery-grid">
-                        ${album.images.map(imgData => `
+                        ${(album.images || []).map(imgData => `
                             <div class="gallery-item">
                                 <img src="${imgData}" alt="${album.name} Photo">
                             </div>
@@ -199,34 +273,54 @@
             const imageDataArray = [];
 
             imageFiles.forEach(file => {
-                compressImage(file, 1200, 1200, 0.7, function(compressedData) {
+                compressImage(file, 800, 800, 0.6, function(compressedData) {
                     imageDataArray.push(compressedData);
                     loadedCount++;
                     if (loadedCount === imageFiles.length) {
-                        galleryAlbums.unshift({
+                        const newAlbum = {
+                            id: 'album_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
                             name: folderName,
-                            images: imageDataArray
-                        });
+                            images: imageDataArray,
+                            createdAt: Date.now()
+                        };
+
+                        // Local state update
+                        window.galleryAlbums.unshift(newAlbum);
                         try {
-                            localStorage.setItem('grizzly_gallery_albums', JSON.stringify(galleryAlbums));
-                        } catch (err) {
-                            console.warn("Storage quota limit reached.");
+                            localStorage.setItem('grizzly_gallery_albums', JSON.stringify(window.galleryAlbums));
+                        } catch (err) {}
+
+                        // Cloud database save
+                        if (window.saveAlbumToCloud) {
+                            window.saveAlbumToCloud(newAlbum);
                         }
+
                         renderGallery();
                         closeOpsModal();
-                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos!`);
+                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be visible across all devices.`);
                     }
                 });
             });
         }
 
-        function deleteAlbum(index) {
+        function deleteAlbum(albumIdOrIndex) {
             const passcode = prompt("Operations Authorization Required:\nEnter Key Code to delete this album:");
             if (passcode === "1317") {
-                if (confirm(`Are you sure you want to delete "${galleryAlbums[index].name}"?`)) {
-                    galleryAlbums.splice(index, 1);
+                const targetAlbum = window.galleryAlbums.find(a => a.id === albumIdOrIndex) || window.galleryAlbums[albumIdOrIndex];
+                const albumName = targetAlbum ? targetAlbum.name : "this album";
+
+                if (confirm(`Are you sure you want to delete "${albumName}"?`)) {
+                    if (typeof albumIdOrIndex === 'string' && albumIdOrIndex.startsWith('album_')) {
+                        if (window.deleteAlbumFromCloud) {
+                            window.deleteAlbumFromCloud(albumIdOrIndex);
+                        }
+                        window.galleryAlbums = window.galleryAlbums.filter(a => a.id !== albumIdOrIndex);
+                    } else {
+                        window.galleryAlbums.splice(albumIdOrIndex, 1);
+                    }
+
                     try {
-                        localStorage.setItem('grizzly_gallery_albums', JSON.stringify(galleryAlbums));
+                        localStorage.setItem('grizzly_gallery_albums', JSON.stringify(window.galleryAlbums));
                     } catch(e) {}
                     renderGallery();
                 }

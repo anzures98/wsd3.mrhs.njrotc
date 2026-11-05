@@ -82,6 +82,126 @@
                 overlay.classList.remove('open');
             }
         }
+
+        /* -------------------------------------------------------------
+           DYNAMIC GALLERY & FILE DROP SYSTEM
+           ------------------------------------------------------------- */
+        let galleryAlbums = JSON.parse(localStorage.getItem('grizzly_gallery_albums') || '[]');
+
+        function renderGallery() {
+            const container = document.getElementById('galleryAlbumsContainer');
+            if (!container) return;
+
+            if (galleryAlbums.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; border: 2px dashed var(--border-color); color: var(--text-muted);">
+                        <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; color: var(--navy-light);"></i>
+                        <p style="font-size: 1rem; font-weight: 600;">No Gallery Folders Uploaded Yet</p>
+                        <p style="font-size: 0.85rem; margin-top: 4px;">Ops Officers can click <strong>"Ops File Drop"</strong> above to upload media folders.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = galleryAlbums.map((album, albumIndex) => `
+                <div style="margin-bottom: 32px; background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 16px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-folder" style="color: var(--accent-gold);"></i> ${album.name}
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">(${album.images.length} photos)</span>
+                        </h3>
+                        <button onclick="deleteAlbum(${albumIndex})" style="background: none; border: none; color: var(--tba-red); cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </div>
+                    <div class="gallery-grid">
+                        ${album.images.map(imgData => `
+                            <div class="gallery-item">
+                                <img src="${imgData}" alt="${album.name} Photo">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function unlockOpsDrop() {
+            const passcode = prompt("Enter Operations Department Key Code:");
+            if (passcode === "1317") {
+                document.getElementById('opsDropModal').style.display = 'block';
+            } else if (passcode !== null) {
+                alert("Incorrect Key Code. Access Denied.");
+            }
+        }
+
+        function closeOpsModal() {
+            document.getElementById('opsDropModal').style.display = 'none';
+        }
+
+        function handleFolderUpload(files) {
+            if (!files || files.length === 0) return;
+
+            let folderName = "Uploaded Album (" + new Date().toLocaleDateString() + ")";
+            const imageFiles = [];
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    imageFiles.push(file);
+                    // Extract folder name from relative path if available
+                    if (file.webkitRelativePath) {
+                        const pathParts = file.webkitRelativePath.split('/');
+                        if (pathParts.length > 1) {
+                            folderName = pathParts[0];
+                        }
+                    }
+                }
+            }
+
+            if (imageFiles.length === 0) {
+                alert("No valid image files found in the dropped selection.");
+                return;
+            }
+
+            let loadedCount = 0;
+            const imageDataArray = [];
+
+            imageFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageDataArray.push(e.target.result);
+                    loadedCount++;
+                    if (loadedCount === imageFiles.length) {
+                        // Check if album name exists, or append
+                        galleryAlbums.unshift({
+                            name: folderName,
+                            images: imageDataArray
+                        });
+                        try {
+                            localStorage.setItem('grizzly_gallery_albums', JSON.stringify(galleryAlbums));
+                        } catch (err) {
+                            console.warn("Storage quota exceeded, displayed in-session.");
+                        }
+                        renderGallery();
+                        closeOpsModal();
+                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos!`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function deleteAlbum(index) {
+            if (confirm(`Are you sure you want to delete "${galleryAlbums[index].name}"?`)) {
+                galleryAlbums.splice(index, 1);
+                localStorage.setItem('grizzly_gallery_albums', JSON.stringify(galleryAlbums));
+                renderGallery();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderGallery();
+        });
     </script>
 
     <style>
@@ -1053,7 +1173,7 @@
                     <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 20px;">Please follow the guide below when using the Widefield School District RevTrak payment portal:</p>
                     
                     <div style="width: 100%; border: 1px solid var(--border-color); overflow: hidden; background: #ffffff; margin-bottom: 20px;">
-                        <img src="Donation Tutorial (1).png" alt="RevTrak Donation Tutorial Guide" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'Donation Tutorial (1).png')">
+                        <img src="Donation Tutorial (1).jpg" alt="RevTrak Donation Tutorial Guide" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'Donation Tutorial (1).jpg')">
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #e2e8f0;">
@@ -1498,31 +1618,48 @@
         <!-- 8. GALLERY TAB -->
         <div id="gallery" class="tab-content">
             <div class="card">
-                <h2><i class="fa-solid fa-images"></i> Unit Photo Gallery</h2>
-                <p style="margin-bottom: 16px; color: var(--text-muted);">Action shots, training sessions, and events capturing Grizzly Company cadets in action.</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item"><img src="_dsc2807.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2807.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2827.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2827.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2789.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2789.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2823.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2823.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2173.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2173.png')"></div>
-                    <div class="gallery-item"><img src="_dsc2181.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2181.png')"></div>
-                    <div class="gallery-item"><img src="IMG_0407.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_0407.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2777.png" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2777.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2787.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2787.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2813.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2813.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2831.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2831.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2894.PNG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_2894.PNG')"></div>
-                    <div class="gallery-item"><img src="IMG_2900.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2900.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2912.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2912.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2916.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2916.png')"></div>
-                    <div class="gallery-item"><img src="IMG_2918.PNG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc2918.png')"></div>
-                    <div class="gallery-item"><img src="IMG_5851.JPG" alt="Gallery Photo" onerror="handleImgError(this, 'IMG_5851.JPG')"></div>
-                    <div class="gallery-item"><img src="IMG_5858.JPG" alt="Gallery Photo" onerror="handleImgError(this, '_dsc5858.JPG')"></div>
-                    <div class="gallery-item"><img src="IMG_6577.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6577.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6587.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6587.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6589.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6589.png')"></div>
-                    <div class="gallery-item"><img src="IMG_6596.png" alt="Gallery Photo" onerror="handleImgError(this, '_dsc6596.png')"></div>
+                <div style="border-bottom: 2px solid var(--border-color); padding-bottom: 12px; margin-bottom: 18px;">
+                    <h2 style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
+                        <i class="fa-solid fa-images"></i> Dynamic Unit Gallery
+                    </h2>
+                </div>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">
+                    Operations Department event photo albums and media drops.
+                </p>
+
+                <!-- Dynamic Albums Container -->
+                <div id="galleryAlbumsContainer"></div>
+            </div>
+        </div>
+
+        <!-- OPS FILE DROP MODAL -->
+        <div id="opsDropModal" style="display: none; position: fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.7); z-index: 10000; padding: 20px; box-sizing: border-box;">
+            <div style="max-width: 550px; margin: 60px auto; background: #ffffff; border: 2px solid var(--navy-light); padding: 28px; position: relative;">
+                <button onclick="closeOpsModal()" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                <h3 style="color: var(--navy-main); margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-folder-plus" style="color: var(--accent-blue);"></i> Operations Folder Drop
+                </h3>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                    Drop or choose a folder containing event photos. A section will automatically be created in the gallery using the folder's name.
+                </p>
+
+                <!-- Drop Target -->
+                <div id="dropZone" 
+                     ondragover="event.preventDefault(); this.style.borderColor='var(--accent-blue)';" 
+                     ondragleave="this.style.borderColor='var(--border-color)';" 
+                     ondrop="event.preventDefault(); this.style.borderColor='var(--border-color)'; handleFolderUpload(event.dataTransfer.files);"
+                     style="border: 2px dashed var(--border-color); padding: 36px 20px; text-align: center; background: var(--bg-body); cursor: pointer; margin-bottom: 20px;"
+                     onclick="document.getElementById('folderInput').click();">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.8rem; color: var(--navy-light); margin-bottom: 12px;"></i>
+                    <p style="font-size: 0.95rem; font-weight: 700; color: var(--navy-main);">Drag &amp; Drop Folder Here</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">or click to select folder/files</p>
+                </div>
+
+                <!-- Hidden Input for Directory selection -->
+                <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="handleFolderUpload(this.files)">
+
+                <div style="text-align: right;">
+                    <button onclick="closeOpsModal()" style="background-color: var(--text-muted); color: #ffffff; border: none; padding: 8px 16px; font-weight: 600; cursor: pointer;">Cancel</button>
                 </div>
             </div>
         </div>
@@ -1547,7 +1684,12 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.</p>
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <button onclick="unlockOpsDrop()" style="background: transparent; color: #64748b; border: 1px solid #334155; padding: 6px 12px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;" onmouseover="this.style.color='#ffffff'; this.style.borderColor='#60a5fa';" onmouseout="this.style.color='#64748b'; this.style.borderColor='#334155';">
+                <i class="fa-solid fa-key" style="font-size: 0.7rem; color: var(--accent-gold);"></i> Ops File Drop
+            </button>
+            <p style="margin: 0;">&copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.</p>
+        </div>
     </footer>
 
 </body>

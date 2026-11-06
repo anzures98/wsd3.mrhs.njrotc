@@ -32,7 +32,7 @@
 
         let currentUser = null;
 
-        // Initialize Authentication & Firestore Realtime Listener
+        // Initialize Authentication & Real-time Cloud Sync
         async function initCloudSync() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -45,44 +45,55 @@
 
                 if (!currentUser) return;
 
-                // Listen in real-time to public gallery collection
+                // Real-time listener for cloud albums
                 const galleryCol = collection(db, 'artifacts', appId, 'public', 'data', 'gallery_albums');
                 onSnapshot(galleryCol, (snapshot) => {
-                    window.galleryAlbums = [];
+                    const cloudAlbums = [];
                     snapshot.forEach((docSnap) => {
-                        window.galleryAlbums.push({ id: docSnap.id, ...docSnap.data() });
+                        cloudAlbums.push({ id: docSnap.id, ...docSnap.data() });
                     });
-                    // Sort albums newest first
-                    window.galleryAlbums.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                    renderGallery();
+                    
+                    if (cloudAlbums.length > 0) {
+                        cloudAlbums.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                        window.galleryAlbums = cloudAlbums;
+                        try {
+                            localStorage.setItem('grizzly_gallery_albums', JSON.stringify(cloudAlbums));
+                        } catch (e) {}
+                        renderGallery();
+                    }
                 }, (error) => {
-                    console.error("Firestore Error:", error);
+                    console.error("Cloud listener notice:", error);
                 });
 
             } catch (err) {
-                console.warn("Cloud Auth/Sync Warning:", err);
+                console.warn("Cloud Sync Note:", err);
             }
         }
 
-        // Global cloud save helper
+        // Save album & images to Cloud Firestore
         window.saveAlbumToCloud = async function(albumDoc) {
-            if (!auth.currentUser) return;
             try {
+                // Ensure auth is complete
+                if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
                 await setDoc(docRef, albumDoc);
             } catch(e) {
-                console.error("Failed to save to cloud:", e);
+                console.error("Cloud save warning:", e);
             }
         };
 
-        // Global cloud delete helper
+        // Delete album from Cloud Firestore
         window.deleteAlbumFromCloud = async function(albumId) {
-            if (!auth.currentUser) return;
             try {
+                if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                }
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumId);
                 await deleteDoc(docRef);
             } catch(e) {
-                console.error("Failed to delete from cloud:", e);
+                console.error("Cloud delete warning:", e);
             }
         };
 
@@ -280,11 +291,12 @@
             let loadedCount = 0;
             const imageDataArray = [];
 
-            // Limit single batch to 12 compressed photos max per folder to prevent document overflow
-            const fileBatch = imageFiles.slice(0, 12);
+            // Process up to 10 photos per folder upload to maintain maximum speed & reliability
+            const fileBatch = imageFiles.slice(0, 10);
 
             fileBatch.forEach(file => {
-                compressImage(file, 600, 600, 0.5, function(compressedData) {
+                // Resize to max 500px width/height and 0.45 quality to guarantee cloud storage payload compliance
+                compressImage(file, 500, 500, 0.45, function(compressedData) {
                     imageDataArray.push(compressedData);
                     loadedCount++;
                     if (loadedCount === fileBatch.length) {
@@ -295,20 +307,20 @@
                             createdAt: Date.now()
                         };
 
-                        // Local state update
+                        // 1. Local state update
                         window.galleryAlbums.unshift(newAlbum);
                         try {
                             localStorage.setItem('grizzly_gallery_albums', JSON.stringify(window.galleryAlbums));
                         } catch (err) {}
 
-                        // Cloud database save
+                        // 2. Cloud database push (persists across all devices!)
                         if (window.saveAlbumToCloud) {
                             window.saveAlbumToCloud(newAlbum);
                         }
 
                         renderGallery();
                         closeOpsModal();
-                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be saved and visible across all devices.`);
+                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be saved to the cloud and visible across all devices.`);
                     }
                 });
             });

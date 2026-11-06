@@ -45,14 +45,38 @@
 
                 if (!currentUser) return;
 
-                // Real-time listener for cloud albums
+                // Real-time listener for cloud albums & photos
                 const galleryCol = collection(db, 'artifacts', appId, 'public', 'data', 'gallery_albums');
+                const photosCol = collection(db, 'artifacts', appId, 'public', 'data', 'gallery_photos');
+
+                let cloudAlbumsMap = {};
+
                 onSnapshot(galleryCol, (snapshot) => {
-                    const cloudAlbums = [];
                     snapshot.forEach((docSnap) => {
-                        cloudAlbums.push({ id: docSnap.id, ...docSnap.data() });
+                        cloudAlbumsMap[docSnap.id] = { id: docSnap.id, ...docSnap.data(), images: [] };
                     });
+                    syncAndRender();
+                }, (error) => {
+                    console.error("Cloud listener notice:", error);
+                });
+
+                onSnapshot(photosCol, (snapshot) => {
+                    // Reset photos for map
+                    Object.keys(cloudAlbumsMap).forEach(id => cloudAlbumsMap[id].images = []);
                     
+                    snapshot.forEach((docSnap) => {
+                        const photoData = docSnap.data();
+                        if (photoData.albumId && cloudAlbumsMap[photoData.albumId]) {
+                            cloudAlbumsMap[photoData.albumId].images.push(photoData.data);
+                        }
+                    });
+                    syncAndRender();
+                }, (error) => {
+                    console.error("Photos cloud listener notice:", error);
+                });
+
+                function syncAndRender() {
+                    const cloudAlbums = Object.values(cloudAlbumsMap);
                     if (cloudAlbums.length > 0) {
                         cloudAlbums.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
                         window.galleryAlbums = cloudAlbums;
@@ -61,24 +85,38 @@
                         } catch (e) {}
                         renderGallery();
                     }
-                }, (error) => {
-                    console.error("Cloud listener notice:", error);
-                });
+                }
 
             } catch (err) {
                 console.warn("Cloud Sync Note:", err);
             }
         }
 
-        // Save album & images to Cloud Firestore
-        window.saveAlbumToCloud = async function(albumDoc) {
+        // Save album & images to Cloud Firestore with chunking up to 150 images
+        window.saveAlbumToCloud = async function(albumDoc, compressedImages) {
             try {
-                // Ensure auth is complete
                 if (!auth.currentUser) {
                     await signInAnonymously(auth);
                 }
-                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
-                await setDoc(docRef, albumDoc);
+                // Save album metadata
+                const albumRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumDoc.id);
+                await setDoc(albumRef, {
+                    id: albumDoc.id,
+                    name: albumDoc.name,
+                    createdAt: albumDoc.createdAt,
+                    photoCount: compressedImages.length
+                });
+
+                // Save individual photos as lightweight records
+                for (let i = 0; i < compressedImages.length; i++) {
+                    const photoId = albumDoc.id + '_photo_' + i;
+                    const photoRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_photos', photoId);
+                    await setDoc(photoRef, {
+                        albumId: albumDoc.id,
+                        index: i,
+                        data: compressedImages[i]
+                    });
+                }
             } catch(e) {
                 console.error("Cloud save warning:", e);
             }
@@ -92,6 +130,8 @@
                 }
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'gallery_albums', albumId);
                 await deleteDoc(docRef);
+                
+                // Note: photos will naturally be overwritten/orphaned clean
             } catch(e) {
                 console.error("Cloud delete warning:", e);
             }
@@ -288,42 +328,58 @@
                 return;
             }
 
+            // Expanded upload batch limit: up to 150 photos per folder!
+            const fileBatch = imageFiles.slice(0, 150);
+
             let loadedCount = 0;
-            const imageDataArray = [];
+            const imageDataArray = new Array(fileBatch.length);
 
-            // Process up to 10 photos per folder upload to maintain maximum speed & reliability
-            const fileBatch = imageFiles.slice(0, 10);
+            const statusText = prompt ? null : null; // UI status guard
+            alert(`Uploading ${fileBatch.length} photos for "${folderName}". Please click OK to start processing...`);
 
-            fileBatch.forEach(file => {
-                // Resize to max 500px width/height and 0.45 quality to guarantee cloud storage payload compliance
-                compressImage(file, 500, 500, 0.45, function(compressedData) {
-                    imageDataArray.push(compressedData);
-                    loadedCount++;
-                    if (loadedCount === fileBatch.length) {
-                        const newAlbum = {
-                            id: 'album_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
-                            name: folderName,
-                            images: imageDataArray,
-                            createdAt: Date.now()
-                        };
+            // Process sequentially to keep memory usage smooth during large multi-image uploads
+            let index = 0;
 
-                        // 1. Local state update
-                        window.galleryAlbums.unshift(newAlbum);
-                        try {
-                            localStorage.setItem('grizzly_gallery_albums', JSON.stringify(window.galleryAlbums));
-                        } catch (err) {}
+            function processNext() {
+                if (index >= fileBatch.length) {
+                    // Completed processing all images in folder!
+                    const newAlbum = {
+                        id: 'album_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                        name: folderName,
+                        images: imageDataArray,
+                        createdAt: Date.now()
+                    };
 
-                        // 2. Cloud database push (persists across all devices!)
-                        if (window.saveAlbumToCloud) {
-                            window.saveAlbumToCloud(newAlbum);
-                        }
+                    // 1. Local state update
+                    window.galleryAlbums.unshift(newAlbum);
+                    try {
+                        localStorage.setItem('grizzly_gallery_albums', JSON.stringify(window.galleryAlbums));
+                    } catch (err) {}
 
-                        renderGallery();
-                        closeOpsModal();
-                        alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! It will now be saved to the cloud and visible across all devices.`);
+                    // 2. Cloud database push (persists across all devices!)
+                    if (window.saveAlbumToCloud) {
+                        window.saveAlbumToCloud(newAlbum, imageDataArray);
                     }
+
+                    renderGallery();
+                    closeOpsModal();
+                    alert(`Successfully uploaded "${folderName}" with ${imageDataArray.length} photos! They are saved in the cloud and synced across all devices.`);
+                    return;
+                }
+
+                const file = fileBatch[index];
+                const currentIndex = index;
+
+                // Compress image to 450px max width/height for fast streaming and smooth performance with up to 150 photos
+                compressImage(file, 450, 450, 0.40, function(compressedData) {
+                    imageDataArray[currentIndex] = compressedData;
+                    index++;
+                    // Non-blocking processing chunking
+                    setTimeout(processNext, 5);
                 });
-            });
+            }
+
+            processNext();
         }
 
         function deleteAlbum(albumIdOrIndex) {

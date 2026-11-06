@@ -1238,7 +1238,91 @@
         <button class="nav-tab" onclick="switchTab(event, 'gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
         <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
     </nav>
-<!-- ... existing code -->
+
+    <main>
+        <!-- OVERVIEW TAB -->
+        <div id="overview" class="tab-content active">
+            <div class="card">
+                <h2><i class="fa-solid fa-compass" style="color: var(--accent-blue);"></i> Welcome to Grizzly Company</h2>
+                <p style="margin-bottom: 16px;">Mesa Ridge High School NJROTC (Navy Junior Reserve Officers Training Corps) develops disciplined, confident leaders committed to honor, courage, and commitment. Cadets participate in drill competitions, community service, leadership academies, and academic events throughout the school year.</p>
+                <div class="grid-3" style="margin-top: 24px;">
+                    <div class="stat-box">
+                        <h3>100+</h3>
+                        <p>Active Cadets</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>1500+</h3>
+                        <p>Community Service Hours</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>5</h3>
+                        <p>Competitive Teams</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h2><i class="fa-solid fa-bullseye" style="color: var(--accent-blue);"></i> Mission Statement</h2>
+                    <p>To instill in students in United States secondary educational institutions the values of citizenship, service to the United States, personal responsibility, and a sense of accomplishment.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-star" style="color: var(--accent-gold);"></i> Core Values</h2>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 8px;"><strong>Honor:</strong> Conduct yourself with honesty, integrity, and ethical standard.</li>
+                        <li style="margin-bottom: 8px;"><strong>Courage:</strong> Do what is right regardless of personal consequence.</li>
+                        <li><strong>Commitment:</strong> Maintain dedication to your unit, school, community, and country.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPCOMING EVENTS TAB -->
+        <div id="events" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-calendar-days" style="color: var(--accent-blue);"></i> Upcoming Unit Events</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">View upcoming drill practices, ceremonies, inspections, and unit events. Click 'Add to Calendar' to save any event to your personal device calendar.</p>
+                
+                <div class="events-grid">
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar-day"></i> Every Tuesday &amp; Thursday</div>
+                            <h3>After-School Drill Practice</h3>
+                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Main Gymnasium / Main Deck</div>
+                            <p class="event-desc">Mandatory practice for Armed, Unarmed, and Color Guard drill team members.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=NJROTC+Drill+Practice&details=After-School+Drill+Practice+for+Mesa+Ridge+NJROTC&location=Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar-day"></i> Monthly Event</div>
+                            <h3>Unit Personnel Inspection (AMI / UPI)</h3>
+                            <div class="event-location"><i class="fa-solid fa-shirt"></i> NJROTC Classroom / Parade Deck</div>
+                            <p class="event-desc">Full Navy Service Uniform inspection. Ribbons, brass, and gig lines inspected.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=NJROTC+Personnel+Inspection&details=Full+Uniform+Inspection&location=Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+
+                    <div class="event-card">
+                        <div class="event-info">
+                            <div class="event-date"><i class="fa-solid fa-calendar-day"></i> Spring Semester</div>
+                            <h3>Annual Military Ball &amp; Dinner</h3>
+                            <div class="event-location"><i class="fa-solid fa-champagne-glasses"></i> Banquet Center</div>
+                            <p class="event-desc">Formal evening dining-in for all cadets and invited guests.</p>
+                        </div>
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=NJROTC+Military+Ball&details=Annual+Military+Ball+Dinner&location=Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- DONATIONS & PAYMENTS TAB -->
         <div id="donations" class="tab-content">
             <!-- UNIT STORE SECTION -->
@@ -1255,7 +1339,7 @@
                             <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$20.00</div>
                             <p style="font-size: 0.82rem; color: var(--text-muted);">Official Grizzly Company NJROTC physical training &amp; spirit t-shirt.</p>
                         </div>
-                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                        <a href="https://widefield.revtrak.net/high-school-payments/Mesa-Ridge-High-School-Fees/MRHS-ROTC/#/v/MRHS-ROTC-Fees" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
                             <i class="fa-solid fa-cart-shopping"></i> Buy T-Shirt ($20.00)
                         </a>
                     </div>
@@ -1268,7 +1352,7 @@
                             <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$50.00</div>
                             <p style="font-size: 0.82rem; color: var(--text-muted);">Admission ticket to the annual Grizzly Company Military Ball &amp; Dinner.</p>
                         </div>
-                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                        <a href="https://widefield.revtrak.net/high-school-payments/Mesa-Ridge-High-School-Fees/MRHS-ROTC/#/v/MRHS-ROTC-Fees" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
                             <i class="fa-solid fa-ticket"></i> Buy Ticket ($50.00)
                         </a>
                     </div>
@@ -1281,43 +1365,21 @@
                             <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$15.00</div>
                             <p style="font-size: 0.82rem; color: var(--text-muted);">Admission &amp; guest pass for the end-of-year Awards Ceremony.</p>
                         </div>
-                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                        <a href="https://widefield.revtrak.net/high-school-payments/Mesa-Ridge-High-School-Fees/MRHS-ROTC/#/v/MRHS-ROTC-Fees" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
                             <i class="fa-solid fa-ticket"></i> Buy Ticket ($15.00)
                         </a>
                     </div>
                 </div>
             </div>
 
+            <!-- PAYMENT GUIDE & DONATIONS -->
             <div class="card">
-                <h2><i class="fa-solid fa-hand-holding-dollar"></i> Support Grizzly Company Cadets</h2>
-                <p style="margin-bottom: 20px;">Your contributions directly empower our cadet corps by helping fund vital unit activities, competition travel, specialized gear, social traditions, and leadership opportunities that make NJROTC an unforgettable experience!</p>
+                <h2><i class="fa-solid fa-circle-info" style="color: var(--accent-blue);"></i> How to Pay Fees, Buy Store Items, or Donate</h2>
+                <p style="margin-bottom: 16px;">Follow these steps when purchasing items or donating using the Widefield School District RevTrak payment portal:</p>
                 
-                <div class="grid-2" style="margin-bottom: 28px;">
-                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-champagne-glasses" style="color: var(--accent-gold);"></i> Military Ball &amp; Social Events</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Helps offset ticket costs for our annual formal Military Ball, dining-ins, picnics, and cadet recognition ceremonies so every cadet can attend.</p>
-                    </div>
-                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-trophy" style="color: var(--accent-gold);"></i> Team Competitions &amp; Travel</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Funds transportation, lodging, and registration fees for our Drill, Raiders, Color Guard, Academic, and Marksmanship competition teams.</p>
-                    </div>
-                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-shirt" style="color: var(--accent-gold);"></i> Uniforms &amp; Equipment Maintenance</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Assists in purchasing replacement uniform parts, drill rifles, color guard gear, marksmanship supplies, and unit PT gear.</p>
-                    </div>
-                    <div style="background: #ffffff; padding: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="color: var(--navy-main); margin-bottom: 8px; font-weight: 700;"><i class="fa-solid fa-graduation-cap" style="color: var(--accent-gold);"></i> Leadership &amp; Orientation Camps</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Provides scholarships for cadets attending summer Leadership Academy (LA), Basic Leadership Training (BLT), and STEM camps.</p>
-                    </div>
-                </div>
-
-                <!-- Step-by-Step Payment Instructions Card -->
-                <div style="background-color: var(--navy-dark); border: 1px solid var(--navy-light); padding: 24px; color: #ffffff; margin-bottom: 28px;">
-                    <h3 style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-circle-info"></i> How to Pay Fees, Buy Store Items, or Make a Donation</h3>
-                    <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 20px;">Please follow the guide below when using the Widefield School District RevTrak payment portal for donations, store items, or event tickets:</p>
-                    
-                    <div style="width: 100%; border: 1px solid var(--border-color); overflow: hidden; background: #ffffff; margin-bottom: 20px; min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                        <img src="Donation Tutorial (1).png" alt="RevTrak Payment Tutorial Guide" style="width: 100%; height: auto; max-width: 100%; display: block;" onerror="if(this.src.endsWith('.png')){this.src='Donation Tutorial (1).jpg';}else if(this.src.endsWith('.jpg')){this.src='Donation Tutorial (1).png';}else{handleImgError(this, 'Payment Tutorial Guide (Donation Tutorial (1).png / .jpg)');}">
+                <div style="background-color: var(--navy-dark); color: #ffffff; padding: 24px; border: 1px solid var(--border-color); margin-bottom: 24px;">
+                    <div style="margin-bottom: 20px; border: 1px solid var(--border-color); min-height: 250px; display: flex; align-items: center; justify-content: center; background: #ffffff;">
+                        <img src="Donation Tutorial (1).png" alt="Donation Tutorial Guide" onerror="this.onerror=null; this.src='Donation Tutorial (1).jpg'; this.onerror=function(){ handleImgError(this, 'Donation Tutorial Guide (Donation Tutorial (1).png/jpg)'); };" style="max-width: 100%; height: auto; display: block;">
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #e2e8f0;">
@@ -1328,11 +1390,282 @@
                     </div>
 
                     <div style="margin-top: 24px; text-align: center;">
-                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" style="display: inline-block; background-color: var(--accent-gold); color: var(--navy-dark); padding: 14px 28px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--accent-gold); transition: all 0.15s ease;">
+                        <a href="https://widefield.revtrak.net/high-school-payments/Mesa-Ridge-High-School-Fees/MRHS-ROTC/#/v/MRHS-ROTC-Fees" target="_blank" style="display: inline-block; background-color: var(--accent-gold); color: var(--navy-dark); padding: 14px 28px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--accent-gold); transition: all 0.15s ease;">
                             <i class="fa-solid fa-arrow-up-right-from-square"></i> Open RevTrak Payment Portal
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-<!-- ... existing code -->
+
+        <!-- ACADEMICS & CURRICULUM TAB -->
+        <div id="academics" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-book-open" style="color: var(--accent-blue);"></i> NJROTC Academics &amp; Naval Science Curriculum</h2>
+                <p style="margin-bottom: 20px;">The NJROTC curriculum combines classroom instruction, practical leadership exercises, physical fitness, and naval history across four years of high school courses.</p>
+                <div class="grid-2">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Naval Science 1 (NS1)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Introduction to NJROTC, citizenship, leadership, drill, uniform wear, customs and courtesies, and basic naval orientation.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Naval Science 2 (NS2)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Maritime history, nautical sciences, oceanography, meteorological study, and intermediate drill leadership.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Naval Science 3 (NS3)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Naval knowledge, sea power, national security, naval weapons, navigation fundamentals, and staff management.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Naval Science 4 (NS4)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Advanced leadership theory, unit command execution, mentorship of junior cadets, and career planning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAIN OF COMMAND TAB -->
+        <div id="coc" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-sitemap" style="color: var(--navy-light);"></i> Senior Staff &amp; Leadership</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Cadet Officers commanding Grizzly Company operations, logistics, administration, and training.</p>
+                <div class="grid-3">
+                    <div class="coc-item-wrapper">
+                        <div class="coc-img-container">
+                            <img src="CO.png" alt="Company Commander" onerror="handleImgError(this, 'c/LCDR')">
+                        </div>
+                        <div class="coc-info-box">
+                            <h3>c/LCDR</h3>
+                            <p class="rank-title">Company Commander (CO)</p>
+                            <p class="desc">Overall command responsibility for Grizzly Company cadet operations.</p>
+                        </div>
+                    </div>
+
+                    <div class="coc-item-wrapper">
+                        <div class="coc-img-container">
+                            <img src="IMG_5858.JPG" alt="Executive Officer" onerror="handleImgError(this, 'c/LT')">
+                        </div>
+                        <div class="coc-info-box">
+                            <h3>c/LT</h3>
+                            <p class="rank-title">Executive Officer (XO)</p>
+                            <p class="desc">Manages staff departments and assists the CO in unit execution.</p>
+                        </div>
+                    </div>
+
+                    <div class="coc-item-wrapper">
+                        <div class="coc-img-container">
+                            <img src="IMG_6589.png" alt="Command Master Chief" onerror="handleImgError(this, 'c/MCPO')">
+                        </div>
+                        <div class="coc-info-box">
+                            <h3>c/MCPO</h3>
+                            <p class="rank-title">Command Master Chief (CMC)</p>
+                            <p class="desc">Senior enlisted cadet advisor on morale, discipline, and training.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOWER STAFF TAB -->
+        <div id="lowerstaff" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-users-gear" style="color: var(--accent-blue);"></i> Lower Staff Officers &amp; Department Heads</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Billet / Department</th>
+                                <th>Cadet In-Charge</th>
+                                <th>Primary Duty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Operations (OPS)</strong></td>
+                                <td>c/LTJG</td>
+                                <td>Schedules unit training, drill practice, and event logistics.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Administrative (ADMIN)</strong></td>
+                                <td>c/ENS</td>
+                                <td>Maintains cadet service records, attendance, and advancement files.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Supply (SUPPO)</strong></td>
+                                <td>c/ENS</td>
+                                <td>Issues and manages uniforms, ribbons, brass, and gear inventory.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Public Affairs (PAO)</strong></td>
+                                <td>c/PO1</td>
+                                <td>Manages unit website, photography, news, and social media.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEAMS TAB -->
+        <div id="teams" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-users" style="color: var(--navy-light);"></i> Competitive Teams</h2>
+                <div class="grid-2">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;"><i class="fa-solid fa-person-military-rifle"></i> Armed &amp; Unarmed Drill Team</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Precision marching, regulation drill routines, and exhibition drill performances in regional competitions.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;"><i class="fa-solid fa-flag"></i> Color Guard Team</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Presents the National Ensign and Navy Flag at school assemblies, games, and community ceremonies.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;"><i class="fa-solid fa-brain"></i> Academic Team</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Competes in nautical science, history, current events, and STEM academic postal meets.</p>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;"><i class="fa-solid fa-dumbbell"></i> Physical Fitness (PT) Team</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Trains for push-ups, plank endurance, and 1.5-mile athletic competitions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KNOWLEDGE HUB TAB -->
+        <div id="knowledge" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-graduation-cap" style="color: var(--accent-gold);"></i> Cadet Knowledge &amp; Study Guide</h2>
+                <div class="grid-2">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Navy Orders to the Sentry</h3>
+                        <ol style="font-size: 0.85rem; color: var(--text-muted); padding-left: 20px; display: flex; flex-direction: column; gap: 4px;">
+                            <li>Take charge of this post and all government property in view.</li>
+                            <li>Walk my post in a military manner, keeping always on the alert...</li>
+                            <li>Report all violations of orders I am instructed to enforce.</li>
+                            <li>Repeat all calls from posts more distant from the guard house than my own.</li>
+                            <li>Quit my post only when properly relieved.</li>
+                        </ol>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Navy Enlisted Rank Structure</h3>
+                        <ul style="font-size: 0.85rem; color: var(--text-muted); list-style: none; padding: 0;">
+                            <li style="margin-bottom: 4px;"><strong>E-1:</strong> Seaman Recruit (SR)</li>
+                            <li style="margin-bottom: 4px;"><strong>E-2:</strong> Seaman Apprentice (SA)</li>
+                            <li style="margin-bottom: 4px;"><strong>E-3:</strong> Seaman (SN)</li>
+                            <li style="margin-bottom: 4px;"><strong>E-4:</strong> Petty Officer Third Class (PO3)</li>
+                            <li style="margin-bottom: 4px;"><strong>E-5:</strong> Petty Officer Second Class (PO2)</li>
+                            <li><strong>E-6:</strong> Petty Officer First Class (PO1)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GALLERY TAB -->
+        <div id="gallery" class="tab-content">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+                    <h2 style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+                        <i class="fa-solid fa-images" style="color: var(--accent-blue);"></i> Unit Photo Albums &amp; Event Media
+                    </h2>
+                    <button onclick="unlockOpsDrop()" style="background: var(--navy-main); color: #ffffff; border: 1px solid var(--navy-main); padding: 8px 14px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-key" style="color: var(--accent-gold);"></i> Ops File Drop
+                    </button>
+                </div>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Click on any event folder box below to view all uploaded photos for that activity.</p>
+                
+                <div id="galleryAlbumsContainer">
+                    <!-- Dynamic Folder Grid Rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT & LOCATION TAB -->
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-location-dot" style="color: var(--navy-light);"></i> Contact &amp; Location Information</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;">Mesa Ridge High School</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px;"><strong>Address:</strong> 6070 Mesa Ridge Pkwy, Colorado Springs, CO 80911</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px;"><strong>School Phone:</strong> (719) 391-3600</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;"><strong>District:</strong> Widefield School District 3</p>
+                        
+                        <h3 style="color: var(--navy-main); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">Instructors Contact</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 4px;"><strong>LCDR Tidwell:</strong> <a href="mailto:tidwellc@wsd3.org" style="color: var(--accent-blue);">tidwellc@wsd3.org</a></p>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);"><strong>SCPO Pearson:</strong> <a href="mailto:pearsonandrew5@wsd3.org" style="color: var(--accent-blue);">pearsonandrew5@wsd3.org</a></p>
+                    </div>
+
+                    <div style="background: var(--navy-dark); color: #ffffff; padding: 20px; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-clock"></i> NJROTC Office Hours</h3>
+                        <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 4px;">Monday – Friday: 0715 – 1530</p>
+                        <p style="font-size: 0.88rem; color: #cbd5e1;">Drill Practices: Tue &amp; Thu 1515 – 1630</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ALBUM VIEW FULLSCREEN MODAL -->
+    <div id="albumViewModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(7, 22, 40, 0.92); z-index: 10000; overflow-y: auto; padding: 24px;">
+        <div style="max-width: 1100px; margin: 0 auto; background: #ffffff; border: 1px solid var(--border-color); padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 14px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="color: var(--navy-main); font-size: 1.3rem; font-weight: 700; display: inline-block;" id="modalAlbumTitle">Album</h2>
+                    <span id="modalAlbumPhotoCount" style="font-size: 0.9rem; color: var(--text-muted); margin-left: 8px;"></span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="deleteCurrentOpenAlbum()" style="background: var(--tba-red); color: #ffffff; border: none; padding: 8px 14px; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
+                        <i class="fa-solid fa-trash"></i> Delete Album
+                    </button>
+                    <button onclick="closeAlbumModal()" style="background: var(--navy-main); color: #ffffff; border: none; padding: 8px 16px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
+                        Close &times;
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="modalAlbumPhotosGrid">
+                <!-- Rendered photos inside open album -->
+            </div>
+        </div>
+    </div>
+
+    <!-- OPS FILE DROP MODAL (PROTECTED BY PASSCODE 1317) -->
+    <div id="opsDropModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(7, 22, 40, 0.85); z-index: 9999; overflow-y: auto; padding: 20px;">
+        <div style="max-width: 600px; margin: 60px auto; background: #ffffff; border: 2px solid var(--navy-main); padding: 28px; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+                <h2 style="color: var(--navy-main); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-folder-plus" style="color: var(--accent-gold);"></i> Operations Folder Drop
+                </h2>
+                <button onclick="closeOpsModal()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                Drag &amp; drop an image folder here (or click choose folder). It will automatically create a new album named after your folder containing up to 150 photos!
+            </p>
+
+            <!-- Drop Zone Input -->
+            <div id="dropZone" style="border: 2px dashed var(--accent-blue); background: var(--light-blue-hover); padding: 36px 20px; text-align: center; cursor: pointer; margin-bottom: 20px;" onclick="document.getElementById('folderInput').click();">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 12px;"></i>
+                <h3 style="color: var(--navy-main); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px;">Drop Folder Here or Click to Select</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Supports selecting an entire folder or up to 150 images</p>
+                <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="handleFolderUpload(this.files)">
+            </div>
+        </div>
+    </div>
+
+    <!-- SINGLE UNIFIED FOOTER -->
+    <footer>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; max-width: 1200px; margin: 0 auto;">
+            <button onclick="unlockOpsDrop()" style="background: transparent; color: #94a3b8; border: 1px solid #334155; padding: 6px 12px; font-size: 0.78rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-key" style="color: var(--accent-gold);"></i> Ops File Drop
+            </button>
+            <div>
+                &copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

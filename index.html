@@ -1166,7 +1166,7 @@
         <div class="drawer-menu">
             <button class="drawer-item active" onclick="switchTabMobile('overview')"><i class="fa-solid fa-house"></i> Overview</button>
             <button class="drawer-item" onclick="switchTabMobile('events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
-            <button class="drawer-item" onclick="switchTabMobile('donations')"><i class="fa-solid fa-hand-holding-dollar"></i> Donations &amp; Payments</button>
+            <button class="drawer-item" onclick="switchTabMobile('donations')"><i class="fa-solid fa-store"></i> Donations, Payments &amp; Store</button>
             <button class="drawer-item" onclick="switchTabMobile('academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
             <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
             <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
@@ -1188,8 +1188,8 @@
             <span>Events</span>
         </button>
         <button class="bottom-action-item" id="bnav-donations" onclick="switchTabMobile('donations')">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
-            <span>Donate</span>
+            <i class="fa-solid fa-store"></i>
+            <span>Store</span>
         </button>
         <button class="bottom-action-item" id="bnav-coc" onclick="switchTabMobile('coc')">
             <i class="fa-solid fa-sitemap"></i>
@@ -1229,7 +1229,7 @@
     <nav class="desktop-nav">
         <button class="nav-tab active" onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview</button>
         <button class="nav-tab" onclick="switchTab(event, 'events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
-        <button class="nav-tab" onclick="switchTab(event, 'donations')"><i class="fa-solid fa-hand-holding-dollar"></i> Donations &amp; Payments</button>
+        <button class="nav-tab" onclick="switchTab(event, 'donations')"><i class="fa-solid fa-store"></i> Donations, Payments &amp; Store</button>
         <button class="nav-tab" onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
         <button class="nav-tab" onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
         <button class="nav-tab" onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
@@ -1238,150 +1238,56 @@
         <button class="nav-tab" onclick="switchTab(event, 'gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
         <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
     </nav>
-
-    <!-- MAIN CONTENT AREA -->
-    <main>
-
-        <!-- 1. OVERVIEW TAB -->
-        <div id="overview" class="tab-content active">
-            <div class="card">
-                <h2><i class="fa-solid fa-flag"></i> Welcome to Grizzly Company</h2>
-                <p>Mesa Ridge High School NJROTC develops informed and responsible citizens dedicated to character growth, leadership excellence, and service to our community and nation. Operating in Rooms 112 and 114, our unit upholds the highest traditions of naval leadership, teamwork, and scholastic dedication.</p>
-            </div>
-
-            <!-- OUR MISSION SECTION -->
-            <div class="card" style="background-color: var(--navy-dark); border-color: var(--navy-light); text-align: center; padding: 28px 16px;">
-                <h2 style="color: var(--accent-gold); justify-content: center; border-bottom: none; font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 20px;">OUR MISSION</h2>
-                <div style="background-color: #e2e8f0; border: 1px solid var(--border-color); width: 100%; max-height: 400px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                    <img src="IMG_5858.JPG" alt="Grizzly Company Mission" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleImgError(this, 'IMG_5858.JPG')">
-                </div>
-                <div style="background-color: var(--navy-main); border: 1px solid var(--border-color); padding: 20px; color: var(--accent-gold); font-style: italic; font-size: 1rem; line-height: 1.5;">
-                    "To instill in each cadet an awareness of their responsibilities as United States citizens, to develop strong moral character, and to build skills for personal growth and leadership."
-                </div>
-            </div>
-
-            <div class="grid-3" style="margin-bottom: 28px;">
-                <div class="stat-box">
-                    <h3>100+</h3>
-                    <p>Active Cadets</p>
-                </div>
-                <div class="stat-box">
-                    <h3>5</h3>
-                    <p>Competition Teams</p>
-                </div>
-                <div class="stat-box">
-                    <h3>Rooms 112/114</h3>
-                    <p>Unit Headquarters</p>
-                </div>
-            </div>
-
-            <div class="grid-2">
-                <div class="card" style="margin-bottom: 0;">
-                    <h2><i class="fa-solid fa-calendar-week"></i> Plan of the Week (POW)</h2>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Day</th>
-                                    <th>Uniform / Attire</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Monday</strong></td>
-                                    <td>Normal Clothes</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Tuesday</strong></td>
-                                    <td>Normal Clothes</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Wednesday</strong></td>
-                                    <td>PT Gear</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Thursday</strong></td>
-                                    <td>PT Gear</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Friday</strong></td>
-                                    <td>Uniform Inspection</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-bottom: 0;">
-                    <h2><i class="fa-solid fa-bullseye"></i> Core Principles</h2>
-                    <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-main);">
-                        <li><strong>Honor:</strong> Integrity, ethical conduct, and accountability in every action.</li>
-                        <li><strong>Courage:</strong> Moral strength to stand up for what is right and face adversity with resilience.</li>
-                        <li><strong>Commitment:</strong> Dedication to unit cohesion, academic excellence, and mutual support.</li>
-                        <li><strong>Discipline:</strong> Strict adherence to military bearing, promptness, and self-control.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. EVENTS TAB -->
-        <div id="events" class="tab-content">
-            <div class="card">
-                <h2><i class="fa-solid fa-calendar-days"></i> Upcoming Unit Events</h2>
-                <div class="events-grid">
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Nov 18, 2026 &bull; 1430</div>
-                            <h3>Area Manager's Inspection (AMI) Prep</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Rooms 112/114</div>
-                            <p class="event-desc">Mandatory uniform check and personnel briefing.</p>
-                        </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Area+Manager%27s+Inspection+%28AMI%29+Prep&dates=20261118T143000/20261118T160000&details=Mandatory+uniform+check+and+personnel+briefing.&location=Rooms+112%2F114+Mesa+Ridge+High+School" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-                        </a>
-                    </div>
-
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> May 15, 2027 &bull; 0800</div>
-                            <h3>Spring Inspection</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> NJROTC Building &amp; Drill Deck</div>
-                            <p class="event-desc">Spring Inspection Event.</p>
-                        </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Spring+Inspection&dates=20270515T080000/20270515T120000&details=Spring+Inspection+Event.&location=NJROTC+Building+%26+Drill+Deck" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-                        </a>
-                    </div>
-
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> May 22, 2027 &bull; 1800</div>
-                            <h3>Awards Ceremony</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> School Auditorium</div>
-                            <p class="event-desc">Annual Awards Ceremony.</p>
-                        </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Awards+Ceremony&dates=20270522T180000/20270522T200000&details=Annual+Awards+Ceremony.&location=School+Auditorium" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-                        </a>
-                    </div>
-
-                    <div class="event-card">
-                        <div class="event-info">
-                            <div class="event-date"><i class="fa-solid fa-calendar"></i> Jun 05, 2027 &bull; 1100</div>
-                            <h3>End of Year Picnic</h3>
-                            <div class="event-location"><i class="fa-solid fa-location-dot"></i> Memorial Park Pavilion</div>
-                            <p class="event-desc">End of Year Picnic.</p>
-                        </div>
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=End+of+Year+Picnic&dates=20270605T110000/20270605T140000&details=End+of+Year+Picnic.&location=Memorial+Park+Pavilion" target="_blank" class="add-cal-btn">
-                            <i class="fa-solid fa-calendar-plus"></i> Add to Calendar
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<!-- ... existing code -->
         <!-- DONATIONS & PAYMENTS TAB -->
         <div id="donations" class="tab-content">
+            <!-- UNIT STORE SECTION -->
+            <div class="card">
+                <h2><i class="fa-solid fa-store" style="color: var(--accent-gold);"></i> Grizzly Company Unit Store</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Purchase official unit gear, event tickets, and program items online through the district payment portal.</p>
+                
+                <div class="grid-3" style="margin-bottom: 28px;">
+                    <!-- Store Item 1 -->
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; text-align: center;">
+                        <div>
+                            <div style="font-size: 2.2rem; color: var(--navy-light); margin-bottom: 8px;"><i class="fa-solid fa-shirt"></i></div>
+                            <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px;">Unit T-Shirt</h3>
+                            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$20.00</div>
+                            <p style="font-size: 0.82rem; color: var(--text-muted);">Official Grizzly Company NJROTC physical training &amp; spirit t-shirt.</p>
+                        </div>
+                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                            <i class="fa-solid fa-cart-shopping"></i> Buy T-Shirt ($20.00)
+                        </a>
+                    </div>
+
+                    <!-- Store Item 2 -->
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; text-align: center;">
+                        <div>
+                            <div style="font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 8px;"><i class="fa-solid fa-champagne-glasses"></i></div>
+                            <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px;">Military Ball Ticket</h3>
+                            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$50.00</div>
+                            <p style="font-size: 0.82rem; color: var(--text-muted);">Admission ticket to the annual Grizzly Company Military Ball &amp; Dinner.</p>
+                        </div>
+                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                            <i class="fa-solid fa-ticket"></i> Buy Ticket ($50.00)
+                        </a>
+                    </div>
+
+                    <!-- Store Item 3 -->
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; text-align: center;">
+                        <div>
+                            <div style="font-size: 2.2rem; color: var(--navy-light); margin-bottom: 8px;"><i class="fa-solid fa-award"></i></div>
+                            <h3 style="color: var(--navy-main); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px;">Awards Night Ticket</h3>
+                            <div style="font-size: 1.3rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 6px;">$15.00</div>
+                            <p style="font-size: 0.82rem; color: var(--text-muted);">Admission &amp; guest pass for the end-of-year Awards Ceremony.</p>
+                        </div>
+                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" class="add-cal-btn" style="background-color: var(--navy-main); border-color: var(--navy-main);">
+                            <i class="fa-solid fa-ticket"></i> Buy Ticket ($15.00)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <h2><i class="fa-solid fa-hand-holding-dollar"></i> Support Grizzly Company Cadets</h2>
                 <p style="margin-bottom: 20px;">Your contributions directly empower our cadet corps by helping fund vital unit activities, competition travel, specialized gear, social traditions, and leadership opportunities that make NJROTC an unforgettable experience!</p>
@@ -1407,12 +1313,26 @@
 
                 <!-- Step-by-Step Payment Instructions Card -->
                 <div style="background-color: var(--navy-dark); border: 1px solid var(--navy-light); padding: 24px; color: #ffffff; margin-bottom: 28px;">
-                    <h3 style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-circle-info"></i> How to Pay Fees or Make a Donation</h3>
-                    <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 20px;">Please follow the guide below when using the Widefield School District RevTrak payment portal:</p>
+                    <h3 style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 12px; font-weight: 700;"><i class="fa-solid fa-circle-info"></i> How to Pay Fees, Buy Store Items, or Make a Donation</h3>
+                    <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 20px;">Please follow the guide below when using the Widefield School District RevTrak payment portal for donations, store items, or event tickets:</p>
                     
                     <div style="width: 100%; border: 1px solid var(--border-color); overflow: hidden; background: #ffffff; margin-bottom: 20px; min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                        <img src="Donation Tutorial (1).png" alt="RevTrak Donation Tutorial Guide" style="width: 100%; height: auto; max-width: 100%; display: block;" onerror="if(this.src.endsWith('.png')){this.src='Donation Tutorial (1).jpg';}else if(this.src.endsWith('.jpg')){this.src='Donation Tutorial (1).png';}else{handleImgError(this, 'Donation Tutorial Guide (Donation Tutorial (1).png / .jpg)');}">
+                        <img src="Donation Tutorial (1).png" alt="RevTrak Payment Tutorial Guide" style="width: 100%; height: auto; max-width: 100%; display: block;" onerror="if(this.src.endsWith('.png')){this.src='Donation Tutorial (1).jpg';}else if(this.src.endsWith('.jpg')){this.src='Donation Tutorial (1).png';}else{handleImgError(this, 'Payment Tutorial Guide (Donation Tutorial (1).png / .jpg)');}">
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: #e2e8f0;">
+                        <div><strong>1. Select Item:</strong> Ensure <em>MRHS ROTC FEES</em> is selected on the left panel of the RevTrak portal.</div>
+                        <div><strong>2. Enter Amount:</strong> Input the required store item dollar amount or your custom donation amount in the <em>Amount</em> box.</div>
+                        <div><strong>3. Provide Cadet &amp; Purchase Details:</strong> Enter your cadet's First &amp; Last Name, Grade, and the <strong>Item Bought or Payment Reason</strong> (e.g., <em>Unit T-Shirt</em>, <em>Military Ball Ticket</em>, <em>Awards Night Ticket</em>, or <em>General Donation</em>).</div>
+                        <div><strong>4. Add to Cart:</strong> Click <em>ADD TO CART</em> and proceed to checkout.</div>
+                    </div>
+
+                    <div style="margin-top: 24px; text-align: center;">
+                        <a href="https://widefield.revtrak.net/high-schools/mesa-ridge-hs/mrhs-rotc-fees/" target="_blank" style="display: inline-block; background-color: var(--accent-gold); color: var(--navy-dark); padding: 14px 28px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--accent-gold); transition: all 0.15s ease;">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open RevTrak Payment Portal
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 <!-- ... existing code -->

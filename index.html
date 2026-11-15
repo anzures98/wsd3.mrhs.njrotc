@@ -624,6 +624,36 @@
             color: #ffffff;
         }
 
+        /* Nested Hover Submenu for Knowledge */
+        .split-sub-item {
+            position: relative;
+            width: 100%;
+        }
+
+        .split-sub-item > button {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .split-sub-dropdown {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            min-width: 240px;
+            background-color: var(--navy-main);
+            border: 1px solid var(--navy-light);
+            border-left: 3px solid var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            flex-direction: column;
+            padding: 6px 0;
+        }
+
+        .split-sub-item:hover .split-sub-dropdown {
+            display: flex;
+        }
+
         /* MOBILE SPECIFIC UI COMPONENTS */
         .mobile-top-bar {
             display: none;
@@ -1181,7 +1211,9 @@
             <button class="drawer-item" onclick="switchTabMobile('coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
             <button class="drawer-item" onclick="switchTabMobile('lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
             <button class="drawer-item" onclick="switchTabMobile('teams')"><i class="fa-solid fa-users"></i> Teams</button>
-            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
+            <button class="drawer-item" onclick="switchTabMobile('knowledge')"><i class="fa-solid fa-list-check"></i> Knowledge (General Orders)</button>
+            <button class="drawer-item" onclick="switchTabMobile('cadet-ranks')"><i class="fa-solid fa-medal"></i> Cadet Rank Chart</button>
+            <button class="drawer-item" onclick="switchTabMobile('usn-usmc-ranks')"><i class="fa-solid fa-anchor"></i> Navy &amp; Marines Ranks</button>
             <button class="drawer-item" onclick="switchTabMobile('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
             <button class="drawer-item" onclick="switchTabMobile('contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
         </div>
@@ -1198,8 +1230,15 @@
                 </button>
                 <div class="split-dropdown">
                     <button onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview &amp; POW</button>
-                    <button onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
-                    <button onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+                    <div class="split-sub-item">
+                        <button onclick="switchTab(event, 'coc')">
+                            <span><i class="fa-solid fa-sitemap"></i> Chain of Command</span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="split-sub-dropdown">
+                            <button onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1216,22 +1255,32 @@
             </div>
         </div>
 
-        <!-- CENTER TWIN LOGOS (MESA + NJROTC) -->
-        <div class="header-center-logos" onclick="switchTab(event, 'overview')" title="Grizzly Company Home">
-            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa Ridge')">
+        <!-- CENTER LOGOS -->
+        <div class="header-center-logos" onclick="switchTab(event, 'overview')">
+            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa')">
             <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
         </div>
 
         <!-- RIGHT NAV GROUP -->
         <div class="nav-group">
             <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'knowledge')">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'academics')">
                     CADET INFO <span class="plus-sign">+</span>
                 </button>
                 <div class="split-dropdown">
-                    <button onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Grading</button>
-                    <button onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Competition Teams</button>
-                    <button onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-graduation-cap"></i> Ranks &amp; General Orders</button>
+                    <button onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
+                    <button onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Teams</button>
+                    <div class="split-sub-item">
+                        <button onclick="switchTab(event, 'knowledge')">
+                            <span><i class="fa-solid fa-list-check"></i> Knowledge</span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="split-sub-dropdown">
+                            <button onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-list-check"></i> 11 General Orders</button>
+                            <button onclick="switchTab(event, 'cadet-ranks')"><i class="fa-solid fa-medal"></i> Cadet Rank Chart</button>
+                            <button onclick="switchTab(event, 'usn-usmc-ranks')"><i class="fa-solid fa-anchor"></i> USN &amp; USMC Ranks</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1693,12 +1742,76 @@
             </div>
         </div>
 
-        <!-- 7. KNOWLEDGE HUB TAB -->
+        <!-- 7. KNOWLEDGE TAB (GENERAL ORDERS) -->
         <div id="knowledge" class="tab-content">
             <div class="card">
-                <h2><i class="fa-solid fa-graduation-cap"></i> NJROTC Cadet Rank Chart &amp; Pay Grades</h2>
-                <p style="margin-bottom: 16px; color: var(--text-muted);">Complete listing of cadet officer and enlisted ranks, abbreviations, military pay grades (E1–E9 and O1–O6), and insignia descriptions:</p>
-                <div class="table-container" style="margin-bottom: 32px;">
+                <h2><i class="fa-solid fa-list-check"></i> The Eleven General Orders to the Sentry</h2>
+                <p style="margin-bottom: 16px; color: var(--text-muted);">Every NJROTC cadet must memorize and be prepared to recite all Eleven General Orders to the Sentry verbatim during uniform inspections and advancement boards:</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Order</th>
+                                <th>General Order Statement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>To take charge of this post and all government property in view.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>To walk my post in a military manner, keeping always on the alert and observing everything that takes place within sight or hearing.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>To report all violations of orders I am instructed to enforce.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>To repeat all calls from posts more distant from the guardhouse than my own.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5</strong></td>
+                                <td>To quit my post only when properly relieved.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6</strong></td>
+                                <td>To receive, obey, and pass on to the sentry who relieves me, all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and all officers and petty officers of the watch only.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7</strong></td>
+                                <td>To talk to no one except in the line of duty.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>8</strong></td>
+                                <td>To give the alarm in case of fire or disorder.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>9</strong></td>
+                                <td>To call the Officer of the Deck in any case not covered by instructions.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10</strong></td>
+                                <td>To salute all officers and all colors and standards not cased.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>11</strong></td>
+                                <td>To be especially watchful at night and, during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7B. NJROTC CADET RANK CHART TAB -->
+        <div id="cadet-ranks" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-medal"></i> NJROTC Cadet Rank Chart &amp; Pay Grades</h2>
+                <p style="margin-bottom: 16px; color: var(--text-muted);">Complete listing of NJROTC cadet officer and enlisted ranks, abbreviations, pay grades (E-1 through E-9 and O-1 through O-6), and collar insignia descriptions:</p>
+                <div class="table-container">
                     <table>
                         <thead>
                             <tr>
@@ -1802,63 +1915,62 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
 
-                <h2><i class="fa-solid fa-list-check"></i> The Eleven General Orders to the Sentry</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width: 80px;">Order</th>
-                                <th>General Order Statement</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>1</strong></td>
-                                <td>To take charge of this post and all government property in view.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>2</strong></td>
-                                <td>To walk my post in a military manner, keeping always on the alert and observing everything that takes place within sight or hearing.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>3</strong></td>
-                                <td>To report all violations of orders I am instructed to enforce.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>4</strong></td>
-                                <td>To repeat all calls from posts more distant from the guardhouse than my own.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>5</strong></td>
-                                <td>To quit my post only when properly relieved.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>6</strong></td>
-                                <td>To receive, obey, and pass on to the sentry who relieves me, all orders from the Commanding Officer, Command Duty Officer, Officer of the Deck, and all officers and petty officers of the watch only.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>7</strong></td>
-                                <td>To talk to no one except in the line of duty.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>8</strong></td>
-                                <td>To give the alarm in case of fire or disorder.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>9</strong></td>
-                                <td>To call the Officer of the Deck in any case not covered by instructions.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>10</strong></td>
-                                <td>To salute all officers and all colors and standards not cased.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>11</strong></td>
-                                <td>To be especially watchful at night and, during the time for challenging, to challenge all persons on or near my post, and to allow no one to pass without proper authority.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- 7C. U.S. NAVY & MARINE CORPS RANKS TAB -->
+        <div id="usn-usmc-ranks" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-anchor"></i> U.S. Navy &amp; U.S. Marine Corps Rank Structures</h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted);">Official Department of the Navy enlisted rates, warrant officer ranks, and commissioned officer rank structures for both the United States Navy and United States Marine Corps:</p>
+
+                <!-- U.S. NAVY SECTION -->
+                <h3 style="color: var(--navy-main); font-size: 1.2rem; font-weight: 700; border-bottom: 2px solid var(--navy-light); padding-bottom: 8px; margin-bottom: 18px;">
+                    <i class="fa-solid fa-ship" style="color: var(--accent-blue);"></i> United States Navy (USN) Ranks
+                </h3>
+
+                <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 36px;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">U.S. Navy Enlisted Rates (E-1 to E-9)</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="navy_enlisted.jpg" alt="U.S. Navy Enlisted Rates" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_enlisted.jpg')">
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">U.S. Navy Warrant Officer Ranks (W-2 to W-5)</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="navy_warrants.png" alt="U.S. Navy Warrant Officer Ranks" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_warrants.png')">
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">U.S. Navy Commissioned Officer Ranks (O-1 to O-11)</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="navy_officers.jpg" alt="U.S. Navy Officer Ranks" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_officers.jpg')">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- U.S. MARINE CORPS SECTION -->
+                <h3 style="color: var(--navy-main); font-size: 1.2rem; font-weight: 700; border-bottom: 2px solid var(--tba-red); padding-bottom: 8px; margin-bottom: 18px;">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--tba-red);"></i> United States Marine Corps (USMC) Ranks
+                </h3>
+
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">USMC Enlisted Rank Structure (E-1 to E-9)</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="marine_enlisted.jpg" alt="USMC Enlisted Rank Structure" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'marine_enlisted.jpg')">
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">USMC Warrant &amp; Commissioned Officer Rank Structure (W-1 to O-10)</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="marine_officers.jpg" alt="USMC Officer Rank Structure" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'marine_officers.jpg')">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2012,15 +2124,79 @@
         </button>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
-            <button onclick="unlockOpsDrop()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: var(--accent-gold); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-key"></i> Ops File Drop
-            </button>
-            <div>&copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.</div>
-        </div>
-    </footer>
+    <!-- CENTERED SPLIT-NAV HEADER (DESKTOP) -->
+    <header class="split-header">
+        <!-- LEFT NAV GROUP -->
+        <div class="nav-group">
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab active" onclick="switchTab(event, 'overview')">
+                    ABOUT <span class="plus-sign">+</span>
+                </button>
+                <div class="split-dropdown">
+                    <button onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview &amp; POW</button>
+                    <div class="split-sub-item">
+                        <button onclick="switchTab(event, 'coc')">
+                            <span><i class="fa-solid fa-sitemap"></i> Chain of Command</span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="split-sub-dropdown">
+                            <button onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-</body>
-</html>
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'events')">
+                    EVENTS
+                </button>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'gallery')">
+                    GALLERY
+                </button>
+            </div>
+        </div>
+
+        <!-- CENTER LOGOS -->
+        <div class="header-center-logos" onclick="switchTab(event, 'overview')">
+            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa')">
+            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
+        </div>
+
+        <!-- RIGHT NAV GROUP -->
+        <div class="nav-group">
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'academics')">
+                    ACADEMICS
+                </button>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'donations')">
+                    DONATIONS &amp; STORE
+                </button>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'knowledge')">
+                    KNOWLEDGE <span class="plus-sign">+</span>
+                </button>
+                <div class="split-dropdown">
+                    <button onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-list-check"></i> 11 General Orders</button>
+                    <button onclick="switchTab(event, 'cadet-ranks')"><i class="fa-solid fa-medal"></i> Cadet Rank Chart</button>
+                    <button onclick="switchTab(event, 'usn-usmc-ranks')"><i class="fa-solid fa-anchor"></i> USN &amp; USMC Ranks</button>
+                </div>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'contact')">
+                    CONTACT
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main>

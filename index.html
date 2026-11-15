@@ -1271,6 +1271,16 @@
                     <button onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
                     <button onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Teams</button>
                     <div class="split-sub-item">
+                        <button onclick="switchTab(event, 'uniforms')">
+                            <span><i class="fa-solid fa-shirt"></i> Uniforms</span>
+                            <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
+                        </button>
+                        <div class="split-sub-dropdown">
+                            <button onclick="switchTab(event, 'uniforms')"><i class="fa-solid fa-shirt"></i> Uniform Regs &amp; Guides</button>
+                            <button onclick="switchTab(event, 'njrotc-rates-ranks')"><i class="fa-solid fa-medal"></i> NJROTC Rates / Ranks</button>
+                        </div>
+                    </div>
+                    <div class="split-sub-item">
                         <button onclick="switchTab(event, 'knowledge')">
                             <span><i class="fa-solid fa-list-check"></i> Knowledge</span>
                             <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
@@ -1549,6 +1559,105 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3B. UNIFORMS & REGULATIONS TAB -->
+        <div id="uniforms" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-shirt"></i> NJROTC Uniform Regulations &amp; Setup Guides</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">
+                    Proper uniform wear and inspection standards are a core component of NJROTC. Use the official diagrams and measurement guides below to correctly place rank insignia, ribbons, name tags, and unit devices on your Navy Service Uniform (NSU) and Service Dress Blues.
+                </p>
+
+                <!-- RIBBON RACK CHECKER TOOL CARD -->
+                <div style="background-color: var(--navy-dark); border: 1px solid var(--navy-light); padding: 20px 24px; margin-bottom: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+                    <div>
+                        <h3 style="color: var(--accent-gold); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-ribbon"></i> NJROTC Ribbon Rack Checker
+                        </h3>
+                        <p style="color: #e2e8f0; font-size: 0.9rem;">
+                            Verify the exact order of precedence, row arrangement, and star attachments for your ribbon rack prior to inspection.
+                        </p>
+                    </div>
+                    <a href="http://kepler.pratt.duke.edu/NJROTC/NJROTC.html" target="_blank" rel="noopener noreferrer" style="background-color: var(--accent-gold); color: var(--navy-dark); padding: 12px 20px; font-weight: 700; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Ribbon Rack Checker
+                    </a>
+                </div>
+
+                <!-- NAVY SERVICE UNIFORM (NSU) SECTION -->
+                <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; border-bottom: 2px solid var(--navy-light); padding-bottom: 8px; margin-bottom: 18px;">
+                    <i class="fa-solid fa-user-tie"></i> Navy Service Uniform (NSU) Regulations
+                </h3>
+
+                <div class="grid-2" style="margin-bottom: 36px;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 10px;">Male NSU Layout &amp; Measurements</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc; margin-bottom: 12px;">
+                            <img src="nsu_male_regs.png" alt="Male NSU Regulations Diagram" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'nsu_male_regs.png')">
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            <strong>Collar Devices:</strong> Center rank/rate or JROTC insignia $1\ 7/8\text{ inches}$ from the collar point, bisecting the angle. <strong>Name Tag:</strong> Centered horizontally on the right pocket, $1/4\text{ inch}$ above the pocket seam. <strong>Ribbons:</strong> Centered horizontally on the left pocket, $1/4\text{ inch}$ above the pocket seam.
+                        </p>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 10px;">Female NSU Layout &amp; Measurements</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc; margin-bottom: 12px;">
+                            <img src="nsu_female_regs.png" alt="Female NSU Regulations Diagram" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'nsu_female_regs.png')">
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">
+                            <strong>Name Tag:</strong> Top aligned with the top button, centered on the seam. <strong>Ribbons:</strong> Up to 3 rows aligned with the top button centered on the seam. <strong>Collar Insignia:</strong> Centered $1\ 7/8\text{ inches}$ from the collar point.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FULL UNIFORM PLACEMENT OVERVIEWS -->
+                <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; border-bottom: 2px solid var(--navy-light); padding-bottom: 8px; margin-bottom: 18px;">
+                    <i class="fa-solid fa-person"></i> Full Uniform Standards &amp; Overviews
+                </h3>
+
+                <div class="grid-2">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 10px;">Male Service Uniform Overview</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="nus_male_regs2.jpg" alt="Male Service Uniform Overview" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'nus_male_regs2.jpg')">
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 10px;">Female Service Uniform Overview</h4>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="nsu_female_regs2.jpg" alt="Female Service Uniform Overview" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'nsu_female_regs2.jpg')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3C. NJROTC RATES & RANKS SUBTAB -->
+        <div id="njrotc-rates-ranks" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-medal"></i> NJROTC Rates &amp; Ranks Insignia Charts</h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted);">
+                    Official NJROTC collar and sleeve insignia charts for cadet officers and enlisted rates.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 28px;">
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h3 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">Cadet Officer Rank Insignia</h3>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="cadet_officer.png" alt="Cadet Officer Insignia Chart" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'cadet_officer.png')">
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
+                        <h3 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">Cadet Enlisted Rate Insignia</h3>
+                        <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
+                            <img src="cadet_enlisted.jpg" alt="Cadet Enlisted Insignia Chart" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'cadet_enlisted.jpg')">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1933,7 +2042,7 @@
                     <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
                         <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">U.S. Navy Enlisted Rates (E-1 to E-9)</h4>
                         <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
-                            <img src="navy_enlisted.png" alt="U.S. Navy Enlisted Rates" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_enlisted.png')">
+                            <img src="navy_enlisted.jpg" alt="U.S. Navy Enlisted Rates" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_enlisted.jpg')">
                         </div>
                     </div>
 
@@ -1947,7 +2056,7 @@
                     <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 16px;">
                         <h4 style="color: var(--navy-main); font-weight: 700; margin-bottom: 12px;">U.S. Navy Commissioned Officer Ranks (O-1 to O-11)</h4>
                         <div style="width: 100%; overflow: hidden; border: 1px solid var(--border-color); background: #f8fafc;">
-                            <img src="navy_officers.png" alt="U.S. Navy Officer Ranks" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_officers.png')">
+                            <img src="navy_officers.jpg" alt="U.S. Navy Officer Ranks" style="width: 100%; height: auto; display: block;" onerror="handleImgError(this, 'navy_officers.jpg')">
                         </div>
                     </div>
                 </div>
@@ -2124,79 +2233,14 @@
         </button>
     </div>
 
-    <!-- CENTERED SPLIT-NAV HEADER (DESKTOP) -->
-    <header class="split-header">
-        <!-- LEFT NAV GROUP -->
-        <div class="nav-group">
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab active" onclick="switchTab(event, 'overview')">
-                    ABOUT <span class="plus-sign">+</span>
-                </button>
-                <div class="split-dropdown">
-                    <button onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview &amp; POW</button>
-                    <div class="split-sub-item">
-                        <button onclick="switchTab(event, 'coc')">
-                            <span><i class="fa-solid fa-sitemap"></i> Chain of Command</span>
-                            <i class="fa-solid fa-chevron-right" style="color: var(--accent-gold); font-size: 0.75rem;"></i>
-                        </button>
-                        <div class="split-sub-dropdown">
-                            <button onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- FOOTER -->
+    <footer>
+        <p style="color: #ffffff; font-weight: 700; margin-bottom: 6px;">Mesa Ridge High School NJROTC — Grizzly Company</p>
+        <p style="margin-bottom: 12px;">6070 Mesa Ridge Pkwy, Colorado Springs, CO 80911 &bull; Rooms 112 &amp; 114</p>
+        <button onclick="unlockOpsDrop()" style="background: none; border: 1px solid var(--navy-light); color: var(--accent-gold); padding: 6px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+            <i class="fa-solid fa-key"></i> Ops File Drop
+        </button>
+    </footer>
 
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'events')">
-                    EVENTS
-                </button>
-            </div>
-
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'gallery')">
-                    GALLERY
-                </button>
-            </div>
-        </div>
-
-        <!-- CENTER LOGOS -->
-        <div class="header-center-logos" onclick="switchTab(event, 'overview')">
-            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa')">
-            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
-        </div>
-
-        <!-- RIGHT NAV GROUP -->
-        <div class="nav-group">
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'academics')">
-                    ACADEMICS
-                </button>
-            </div>
-
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'donations')">
-                    DONATIONS &amp; STORE
-                </button>
-            </div>
-
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'knowledge')">
-                    KNOWLEDGE <span class="plus-sign">+</span>
-                </button>
-                <div class="split-dropdown">
-                    <button onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-list-check"></i> 11 General Orders</button>
-                    <button onclick="switchTab(event, 'cadet-ranks')"><i class="fa-solid fa-medal"></i> Cadet Rank Chart</button>
-                    <button onclick="switchTab(event, 'usn-usmc-ranks')"><i class="fa-solid fa-anchor"></i> USN &amp; USMC Ranks</button>
-                </div>
-            </div>
-
-            <div class="split-nav-item">
-                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'contact')">
-                    CONTACT
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN CONTENT AREA -->
-    <main>
+</body>
+</html>

@@ -474,27 +474,26 @@
 
     <style>
         :root {
-            --bg-body: #f4f6f9;
+            --bg-body: #f1f5f9;
             --bg-card: #ffffff;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-color: #cbd5e1;
             --navy-dark: #071628;
-            --navy-main: #0a1f3a;
+            --navy-main: #0b2239;
             --navy-light: #1e3a8a;
-            --accent-blue: #1d4ed8;
+            --accent-blue: #2563eb;
             --light-blue-hover: #eff6ff;
             --tba-red: #dc2626;
             --accent-gold: #fbbf24;
         }
 
-        /* Pure Square Enforcement across all elements */
+        /* Modern Athletic-Military Aesthetics */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            border-radius: 0 !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         html, body {
@@ -508,122 +507,121 @@
             padding-bottom: 0px;
         }
 
-        /* DESKTOP HEADER & TOP NAVIGATION */
-        header {
+        /* CENTERED SPLIT-NAV HEADER */
+        header.split-header {
             width: 100%;
             background-color: var(--navy-dark);
             color: #ffffff;
             border-bottom: 3px solid var(--navy-light);
-            padding: 24px 32px;
+            padding: 16px 32px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 36px;
+            position: sticky;
+            top: 0;
+            z-index: 9990;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
         }
 
-        .header-left {
+        .nav-group {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 24px;
         }
 
-        .header-logos {
+        .header-center-logos {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            gap: 14px;
+            padding: 0 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        .header-logos img {
-            width: 68px;
-            height: 68px;
+        .header-center-logos:hover {
+            transform: scale(1.04);
+        }
+
+        .header-center-logos img {
+            width: 64px;
+            height: 64px;
             object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.45));
         }
 
-        .header-titles h1 {
-            font-size: 1.85rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #ffffff;
+        .split-nav-item {
+            position: relative;
+            display: inline-block;
         }
 
-        .header-titles p {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .header-right {
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .header-right div {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 8px;
-        }
-
-        .header-right i {
-            color: #60a5fa;
-            font-size: 0.85rem;
-        }
-
-        .header-right .instructor-name {
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .header-right a {
-            color: #93c5fd;
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-
-        .header-right a:hover {
-            text-decoration: underline;
-        }
-
-        /* Desktop Nav Bar */
-        nav.desktop-nav {
-            width: 100%;
-            background-color: var(--navy-main);
-            border-bottom: 2px solid var(--border-color);
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 0 24px;
-        }
-
-        .nav-tab {
+        .split-nav-btn {
             background: none;
             border: none;
-            color: #cbd5e1;
-            padding: 16px 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            color: #f8fafc;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 10px 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.15s ease;
+        }
+
+        .split-nav-btn .plus-sign {
+            color: var(--accent-gold);
+            font-weight: 900;
+            font-size: 0.95rem;
+        }
+
+        .split-nav-btn:hover, .split-nav-btn.active {
+            color: var(--accent-gold);
+        }
+
+        /* Dropdown Menu for Split Header */
+        .split-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background-color: var(--navy-main);
+            border: 1px solid var(--navy-light);
+            border-top: 3px solid var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            flex-direction: column;
+            padding: 6px 0;
+        }
+
+        .split-nav-item:hover .split-dropdown {
+            display: flex;
+        }
+
+        .split-dropdown button {
+            background: none;
+            border: none;
+            color: #e2e8f0;
+            padding: 11px 18px;
+            text-align: left;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.15s ease;
-            border-bottom: 3px solid transparent;
+            gap: 10px;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
-        .nav-tab:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-tab.active {
-            color: #ffffff;
+        .split-dropdown button:hover {
             background-color: var(--navy-light);
-            border-bottom-color: #60a5fa;
+            color: #ffffff;
         }
 
         /* MOBILE SPECIFIC UI COMPONENTS */
@@ -918,13 +916,13 @@
             margin-top: 48px;
         }
 
-        /* RESPONSIVE OVERHAUL (MOBILE SCREEN OVERWRITE <= 850px) */
-        @media screen and (max-width: 850px) {
+        /* RESPONSIVE OVERHAUL (MOBILE SCREEN OVERWRITE <= 980px) */
+        @media screen and (max-width: 980px) {
             body {
                 padding-bottom: 64px;
             }
 
-            header, nav.desktop-nav {
+            header.split-header {
                 display: none;
             }
 
@@ -1156,7 +1154,8 @@
     <!-- MOBILE TOP BAR & DRAWER OVERLAY -->
     <div class="mobile-top-bar">
         <div class="mobile-brand">
-            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'JROTC')">
+            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa')">
+            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
             <div class="mobile-brand-text">
                 <h1>GRIZZLY COMPANY</h1>
                 <p>Mesa Ridge NJROTC</p>
@@ -1189,66 +1188,66 @@
     </div>
 
     <!-- Mobile Bottom Action Bar -->
-    <div class="mobile-bottom-bar">
-        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </button>
-        <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">
-            <i class="fa-solid fa-calendar-days"></i>
-            <span>Events</span>
-        </button>
-        <button class="bottom-action-item" id="bnav-donations" onclick="switchTabMobile('donations')">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
-            <span>Donate</span>
-        </button>
-        <button class="bottom-action-item" id="bnav-coc" onclick="switchTabMobile('coc')">
-            <i class="fa-solid fa-sitemap"></i>
-            <span>Cmd</span>
-        </button>
-        <button class="bottom-action-item" onclick="openDrawer()">
-            <i class="fa-solid fa-bars"></i>
-            <span>Menu</span>
-        </button>
-    </div>
-
-    <!-- DESKTOP HEADER & NAV -->
-    <header>
-        <div class="header-left">
-            <div class="header-logos">
-                <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'Navy JROTC')">
-                <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Grizzly Bear')">
+    <!-- CENTERED SPLIT-NAV HEADER (DESKTOP) -->
+    <header class="split-header">
+        <!-- LEFT NAV GROUP -->
+        <div class="nav-group">
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab active" onclick="switchTab(event, 'overview')">
+                    ABOUT <span class="plus-sign">+</span>
+                </button>
+                <div class="split-dropdown">
+                    <button onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview &amp; POW</button>
+                    <button onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
+                    <button onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
+                </div>
             </div>
-            <div class="header-titles">
-                <h1>GRIZZLY COMPANY</h1>
-                <p>Mesa Ridge High School NJROTC &bull; Colorado Springs, CO</p>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'events')">
+                    EVENTS
+                </button>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'gallery')">
+                    GALLERY
+                </button>
             </div>
         </div>
 
-        <div class="header-right">
-            <div>
-                <i class="fa-solid fa-envelope"></i>
-                <span><span class="instructor-name">LCDR Tidwell:</span> <a href="mailto:tidwellc@wsd3.org">tidwellc@wsd3.org</a></span>
+        <!-- CENTER TWIN LOGOS (MESA + NJROTC) -->
+        <div class="header-center-logos" onclick="switchTab(event, 'overview')" title="Grizzly Company Home">
+            <img src="bear (1).png" alt="Mesa Ridge Grizzly Logo" onerror="handleImgError(this, 'Mesa Ridge')">
+            <img src="Untitled design (18).png" alt="Navy JROTC Emblem" onerror="handleImgError(this, 'NJROTC')">
+        </div>
+
+        <!-- RIGHT NAV GROUP -->
+        <div class="nav-group">
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'knowledge')">
+                    CADET INFO <span class="plus-sign">+</span>
+                </button>
+                <div class="split-dropdown">
+                    <button onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Grading</button>
+                    <button onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Competition Teams</button>
+                    <button onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-graduation-cap"></i> Ranks &amp; General Orders</button>
+                </div>
             </div>
-            <div>
-                <i class="fa-solid fa-envelope"></i>
-                <span><span class="instructor-name">SCPO Pearson:</span> <a href="mailto:pearsonandrew5@wsd3.org">pearsonandrew5@wsd3.org</a></span>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'donations')">
+                    DONATIONS &amp; STORE
+                </button>
+            </div>
+
+            <div class="split-nav-item">
+                <button class="split-nav-btn nav-tab" onclick="switchTab(event, 'contact')">
+                    CONTACT
+                </button>
             </div>
         </div>
     </header>
-
-    <nav class="desktop-nav">
-        <button class="nav-tab active" onclick="switchTab(event, 'overview')"><i class="fa-solid fa-house"></i> Overview</button>
-        <button class="nav-tab" onclick="switchTab(event, 'events')"><i class="fa-solid fa-calendar-days"></i> Upcoming Events</button>
-        <button class="nav-tab" onclick="switchTab(event, 'donations')"><i class="fa-solid fa-hand-holding-dollar"></i> Donations &amp; Payments</button>
-        <button class="nav-tab" onclick="switchTab(event, 'academics')"><i class="fa-solid fa-book"></i> Academics &amp; Curriculum</button>
-        <button class="nav-tab" onclick="switchTab(event, 'coc')"><i class="fa-solid fa-sitemap"></i> Chain of Command</button>
-        <button class="nav-tab" onclick="switchTab(event, 'lowerstaff')"><i class="fa-solid fa-users-gear"></i> Lower Staff</button>
-        <button class="nav-tab" onclick="switchTab(event, 'teams')"><i class="fa-solid fa-users"></i> Teams</button>
-        <button class="nav-tab" onclick="switchTab(event, 'knowledge')"><i class="fa-solid fa-graduation-cap"></i> Knowledge Hub</button>
-        <button class="nav-tab" onclick="switchTab(event, 'gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
-        <button class="nav-tab" onclick="switchTab(event, 'contact')"><i class="fa-solid fa-location-dot"></i> Contact &amp; Location</button>
-    </nav>
 
     <!-- MAIN CONTENT AREA -->
     <main>
@@ -1901,6 +1900,127 @@
             </div>
         </div>
 
-        <!-- OPS FILE DROP MODAL -->
+        <!-- 9. CONTACT & LOCATION TAB -->
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2><i class="fa-solid fa-location-dot"></i> Contact &amp; Unit Location</h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted);">
+                    Have questions about enrolling in NJROTC, upcoming events, booster support, or community Color Guard requests? Reach out to our Naval Science Instructors or visit our unit headquarters at Mesa Ridge High School.
+                </p>
 
-<!-- ... existing code -->
+                <div class="grid-2" style="margin-bottom: 28px;">
+                    <!-- Instructor Contacts Card -->
+                    <div style="background: #ffffff; padding: 24px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 18px;">
+                        <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">
+                            <i class="fa-solid fa-address-book" style="color: var(--accent-blue);"></i> Naval Science Instructors
+                        </h3>
+
+                        <div>
+                            <div style="font-weight: 700; color: var(--navy-main); font-size: 1rem;">LCDR Tidwell, USN (Ret.)</div>
+                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 4px;">Senior Naval Science Instructor (SNSI)</div>
+                            <a href="mailto:tidwellc@wsd3.org" style="color: var(--text-main); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-envelope" style="color: var(--navy-light);"></i> tidwellc@wsd3.org
+                            </a>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 16px;">
+                            <div style="font-weight: 700; color: var(--navy-main); font-size: 1rem;">SCPO Pearson, USN (Ret.)</div>
+                            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 4px;">Naval Science Instructor (NSI)</div>
+                            <a href="mailto:pearsonandrew5@wsd3.org" style="color: var(--text-main); text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-envelope" style="color: var(--navy-light);"></i> pearsonandrew5@wsd3.org
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- School Location & Hours Card -->
+                    <div style="background: #ffffff; padding: 24px; border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+                        <div>
+                            <h3 style="color: var(--navy-main); font-size: 1.15rem; font-weight: 700; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 16px;">
+                                <i class="fa-solid fa-building-columns" style="color: var(--accent-blue);"></i> Unit Headquarters
+                            </h3>
+                            <p style="font-weight: 700; color: var(--navy-main); font-size: 1rem; margin-bottom: 4px;">Mesa Ridge High School — NJROTC</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">
+                                6070 Mesa Ridge Pkwy<br>
+                                Colorado Springs, CO 80911<br>
+                                <strong>Classrooms:</strong> Rooms 112 &amp; 114
+                            </p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem;">
+                                <i class="fa-solid fa-clock" style="color: var(--navy-light);"></i> <strong>School Hours:</strong> Monday – Friday, 0730 – 1530
+                            </p>
+                        </div>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=Mesa+Ridge+High+School+6070+Mesa+Ridge+Pkwy+Colorado+Springs+CO+80911" target="_blank" class="add-cal-btn">
+                            <i class="fa-solid fa-diamond-turn-right"></i> Get Directions on Google Maps
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Embedded Map Frame -->
+                <div style="width: 100%; height: 340px; border: 1px solid var(--border-color); overflow: hidden; background: #e2e8f0;">
+                    <iframe 
+                        title="Mesa Ridge High School Location"
+                        src="https://www.google.com/maps?q=6070+Mesa+Ridge+Pkwy,+Colorado+Springs,+CO+80911&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPS FILE DROP MODAL -->
+        <div id="opsDropModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; padding: 20px; overflow-y: auto;">
+            <div style="max-width: 550px; margin: 60px auto; background: #ffffff; border: 2px solid var(--navy-light); padding: 28px; position: relative;">
+                <button onclick="closeOpsModal()" style="position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                <h3 style="color: var(--navy-main); font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="color: var(--accent-blue);"></i> Operations Media Folder Drop
+                </h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                    Select a folder of photos from your computer to publish an album across all devices.
+                </p>
+
+                <label for="folderInput" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed var(--accent-blue); background: var(--light-blue-hover); padding: 36px 20px; text-align: center; cursor: pointer;">
+                    <i class="fa-solid fa-folder-plus" style="font-size: 2.5rem; color: var(--navy-main); margin-bottom: 12px;"></i>
+                    <span style="font-weight: 700; color: var(--navy-main); font-size: 1rem;">Click to Select a Photo Folder</span>
+                    <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Automatically names the album after your folder</span>
+                    <input type="file" id="folderInput" webkitdirectory directory multiple accept="image/*" style="display: none;" onchange="handleFolderUpload(this.files)">
+                </label>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MOBILE BOTTOM BAR -->
+    <div class="mobile-bottom-bar">
+        <button class="bottom-action-item active" id="bnav-overview" onclick="switchTabMobile('overview')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-events" onclick="switchTabMobile('events')">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>Events</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-gallery" onclick="switchTabMobile('gallery')">
+            <i class="fa-solid fa-images"></i>
+            <span>Gallery</span>
+        </button>
+        <button class="bottom-action-item" id="bnav-contact" onclick="switchTabMobile('contact')">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Contact</span>
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <button onclick="unlockOpsDrop()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: var(--accent-gold); padding: 8px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-key"></i> Ops File Drop
+            </button>
+            <div>&copy; 2026 Mesa Ridge High School NJROTC &bull; Grizzly Company. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>
